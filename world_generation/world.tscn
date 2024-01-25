@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://da33nildxsf6n"]
+
+[ext_resource type="Script" path="res://world_generation/world.gd" id="1_m2roe"]
+[ext_resource type="PackedScene" uid="uid://dles4x7stbjs3" path="res://player_ship.tscn" id="2_ec0ey"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_m2roe")
+
+[node name="PlayerShip" parent="." instance=ExtResource("2_ec0ey")]
+z_index = 10

@@ -1,0 +1,113 @@
+[gd_scene load_steps=2 format=3 uid="uid://dppsonjdlmlsc"]
+
+[ext_resource type="Script" path="res://world_generation/world_gen.gd" id="1_0y1cc"]
+
+[node name="WorldGenScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0y1cc")
+
+[node name="GenerateWorldLabel" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.444444
+anchor_top = 0.179012
+anchor_right = 0.551215
+anchor_bottom = 0.214506
+text = "Generate World"
+metadata/_edit_use_anchors_ = true
+
+[node name="Seeds" type="Node" parent="."]
+
+[node name="AltitudeLabel" type="Label" parent="Seeds"]
+anchors_preset = -1
+anchor_left = 0.318576
+anchor_top = 0.570988
+anchor_right = 0.425347
+anchor_bottom = 0.606481
+text = "Altitude Seed"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TempLabel" type="Label" parent="Seeds"]
+anchors_preset = -1
+anchor_left = 0.318576
+anchor_top = 0.640432
+anchor_right = 0.425347
+anchor_bottom = 0.675926
+text = "Temp Seed"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MoistureLabel" type="Label" parent="Seeds"]
+anchors_preset = -1
+anchor_left = 0.318576
+anchor_top = 0.70679
+anchor_right = 0.425347
+anchor_bottom = 0.742284
+offset_top = -3.05176e-05
+text = "Moisture Seed"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AltitudeSeedText" type="TextEdit" parent="Seeds"]
+anchors_preset = -1
+anchor_left = 0.431424
+anchor_top = 0.560185
+anchor_right = 0.578993
+anchor_bottom = 0.617284
+metadata/_edit_use_anchors_ = true
+
+[node name="TempSeedText" type="TextEdit" parent="Seeds"]
+anchors_preset = -1
+anchor_left = 0.431424
+anchor_top = 0.628086
+anchor_right = 0.578993
+anchor_bottom = 0.685185
+offset_top = -3.05176e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="MoistureSeedText" type="TextEdit" parent="Seeds"]
+anchors_preset = -1
+anchor_left = 0.431424
+anchor_top = 0.695988
+anchor_right = 0.578993
+anchor_bottom = 0.753086
+offset_bottom = -3.05176e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="GenerateButton" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.457465
+anchor_top = 0.78858
+anchor_right = 0.53125
+anchor_bottom = 0.83642
+text = "Generate!"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.457465
+anchor_top = 0.850309
+anchor_right = 0.53125
+anchor_bottom = 0.898149
+text = "Play!"
+metadata/_edit_use_anchors_ = true
+
+[node name="MapTexture" type="TextureRect" parent="."]
+layout_mode = 0
+anchor_left = 0.356771
+anchor_top = 0.237654
+anchor_right = 0.643229
+anchor_bottom = 0.512346
+expand_mode = 1
+stretch_mode = 4
+flip_v = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="GenerateButton" to="." method="_on_generate_button_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

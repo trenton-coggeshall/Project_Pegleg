@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bb67ljlj7b0q"]
+
+[ext_resource type="Texture2D" uid="uid://c53rc2o2fs36w" path="res://world_generation/temp_tiles.png" id="1_ko83n"]
+[ext_resource type="Script" path="res://WorldTiles.gd" id="2_r10he"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h4s2m"]
+texture = ExtResource("1_ko83n")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_71l8i"]
+sources/0 = SubResource("TileSetAtlasSource_h4s2m")
+
+[node name="WorldTiles" type="TileMap"]
+tile_set = SubResource("TileSet_71l8i")
+format = 2
+script = ExtResource("2_r10he")

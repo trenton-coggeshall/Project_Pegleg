@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4tnopin4pf37"]
+
+[ext_resource type="PackedScene" uid="uid://cnkny0dhf3vg8" path="res://world_generation/temp_player.tscn" id="1_84did"]
+[ext_resource type="PackedScene" uid="uid://bb67ljlj7b0q" path="res://world_generation/world_tiles.tscn" id="2_d5fen"]
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="WorldTiles" parent="." instance=ExtResource("2_d5fen")]
+
+[node name="TempPlayer" parent="." instance=ExtResource("1_84did")]
