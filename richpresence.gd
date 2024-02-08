@@ -3,7 +3,7 @@ extends Node
 func _ready():
 	DiscordSDK.app_id = 1205246280536952862 # Application ID
 	DiscordSDK.details = "Sailing the high seas"
-	DiscordSDK.state = "0/69 maidens"
+	DiscordSDK.state = "0/69 Maidens"
 	
 	print("TEST")
 	
