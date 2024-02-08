@@ -18,6 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 WorldGlobals="*res://world_generation/world_globals.gd"
+DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/discord_autoload.gd"
+Richpresence="*res://richpresence.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg")
 
 [input]
 
