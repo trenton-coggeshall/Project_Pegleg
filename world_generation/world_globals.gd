@@ -8,4 +8,6 @@ enum TileType {
 	DARK_GRASS
 }
 
-var chunks : Array
+# var chunks : Array
+var tiles : Array
+var ports : Array
