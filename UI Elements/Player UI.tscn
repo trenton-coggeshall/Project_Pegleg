@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://fae4fid2cpto"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uwvv3"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 2
+
+[node name="SpeedRect" type="ColorRect" parent="."]
+offset_left = 38.0
+offset_top = 502.0
+offset_right = 78.0
+offset_bottom = 542.0
+scale = Vector2(6.6, 1.88)
+
+[node name="SpeedLabel" type="Label" parent="SpeedRect"]
+layout_mode = 0
+offset_top = 4.78724
+offset_right = 105.0
+offset_bottom = 27.7872
+scale = Vector2(0.369697, 1.21701)
+text = "Speed:"
+label_settings = SubResource("LabelSettings_uwvv3")
