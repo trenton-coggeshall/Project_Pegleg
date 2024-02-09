@@ -24,7 +24,7 @@ var tiles = [[WorldGlobals.TileType.DARK_GRASS, WorldGlobals.TileType.DARK_GRASS
 
 var img = Image.create(map_width, map_height, false, Image.FORMAT_RGBA8)
 
-var port_count = 30
+var port_count = 40
 var water_tiles = []
 
 func _ready():
@@ -72,13 +72,17 @@ func place_ports():
 	while total_ports < port_count:
 		var loc = water_tiles[randi() % len(water_tiles)]
 		var dir = directions[randi() % len(directions)]
+		var dist = 0
 		
 		while WorldGlobals.tiles[loc.x][loc.y] == WorldGlobals.TileType.WATER:
 			loc += dir
+			dist += 1
 			if loc.x < 0 or loc.x >= map_width or loc.y < 0 or loc.y >= map_height:
 				break
 			
 			if WorldGlobals.tiles[loc.x][loc.y] != WorldGlobals.TileType.WATER:
+				if dist < 20:
+					break
 				var valid_placement = true
 				for port in WorldGlobals.ports:
 					if abs(port.x - loc.x) < 10 or abs(port.y - loc.y) < 10:
@@ -87,23 +91,6 @@ func place_ports():
 				if valid_placement:
 					WorldGlobals.ports.append(loc)
 					total_ports += 1
-
-
-#func place_ports():
-	#var total_ports = 0
-	#
-	#while total_ports < port_count:
-		##var chunk = WorldGlobals.chunks[randi() % len(WorldGlobals.chunks)]
-		#var selected_loc = coast[randi() % len(coast)]
-		#WorldGlobals.ports.append(selected_loc)
-		#for x in range(50):
-			#for y in range(50):
-				#coast.erase(Vector2i(x, y) + selected_loc)
-				#coast.erase(Vector2i(x, -y) + selected_loc)
-				#coast.erase(Vector2i(-x, y) + selected_loc)
-				#coast.erase(Vector2i(-x, -y) + selected_loc)
-				#
-		#total_ports += 1
 
 
 func _on_generate_button_pressed():
