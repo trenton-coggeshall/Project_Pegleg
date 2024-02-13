@@ -10,7 +10,6 @@ var production : Dictionary
 
 func _ready():
 	initialize()
-	calculate_transaction(EconomyGlobals.GoodType.FOOD, 100)
 
 
 func _process(delta):
@@ -20,7 +19,7 @@ func _process(delta):
 # Returns the price of a good at a certain quantity
 func price_check(good, quantity):
 	var base_price = EconomyGlobals.base_prices[good]
-	var flux = float(goods[good] + 1) / float(demand[good])
+	var flux = float(quantity) / float(demand[good])
 	
 	return int(round(base_price / flux))
 
@@ -39,15 +38,37 @@ func initialize():
 		set_price(good)
 
 
-func calculate_transaction(good, quantity):
-	print("Starting price: " + str(prices[good]))
+func calculate_purchase(good, quantity):
 	var cost = 0
+	var current_price = prices[good]
 	for i in range(quantity):
-		cost += prices[good]
-		goods[good] -= 1
-		set_price(good)
+		cost += current_price
+		current_price = price_check(good, goods[good] - (i + 1))
+
+
+func execute_purchase(good, quantity, cost):
+	if goods[good] < quantity:
+		print("Not enough goods in port inventory")
+		return
 	
-	print("Ending price: " + str(prices[good]))
-	print("Total cost: " + str(cost))
+	goods[good] -= quantity
+	gold += cost
+	set_price(good)
 
 
+func calculate_sale(good, quantity):
+	var net = 0
+	var current_price = prices[good]
+	for i in range(quantity):
+		net += current_price
+		current_price = price_check(good, goods[good] + (i + 1))
+
+
+func execute_sale(good, quantity, cost):
+	if gold < cost:
+		print("Not enough gold in port inventory")
+		return
+	
+	goods[good] += quantity
+	gold -= cost
+	set_price(good)
