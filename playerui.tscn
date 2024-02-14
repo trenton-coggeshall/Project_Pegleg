@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuxwd0df8q1fx"]
+[gd_scene load_steps=15 format=3 uid="uid://cuxwd0df8q1fx"]
 
 [ext_resource type="FontFile" uid="uid://casam238cmavn" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_hm5tn"]
 [ext_resource type="Script" path="res://playerui.gd" id="1_imq6e"]
 [ext_resource type="Texture2D" uid="uid://d1tkv0ct4q5cq" path="res://Assets/Images/testsprites.png" id="2_pmj14"]
 [ext_resource type="Texture2D" uid="uid://bcc4tti4kgnnd" path="res://Assets/Images/coin.png" id="3_3ubaa"]
 [ext_resource type="Texture2D" uid="uid://buivdi4e26d7x" path="res://Assets/Images/fast-forward.png" id="4_s6c85"]
+[ext_resource type="Texture2D" uid="uid://c0chxsefb5t37" path="res://Assets/Images/overbig.png" id="6_fquss"]
+[ext_resource type="Texture2D" uid="uid://3py73oofqbk0" path="res://Assets/Images/progressbig.png" id="7_hjs7b"]
+[ext_resource type="Texture2D" uid="uid://cgrm0byybst0f" path="res://Assets/Images/oversmall.png" id="8_4hkb0"]
+[ext_resource type="Texture2D" uid="uid://d1m0pljiwfgo8" path="res://Assets/Images/progresssmall.png" id="9_ww7ba"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lamf"]
 bg_color = Color(0, 0, 0, 0.196078)
@@ -160,3 +164,25 @@ offset_right = 862.0
 offset_bottom = 186.0
 texture = ExtResource("4_s6c85")
 expand_mode = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 371.875
+offset_top = -115.625
+offset_right = 871.875
+offset_bottom = -15.625
+scale = Vector2(1, 0.5)
+value = 100.0
+texture_over = ExtResource("6_fquss")
+texture_progress = ExtResource("7_hjs7b")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 293.75
+offset_top = -181.25
+offset_right = 343.75
+offset_bottom = -170.25
+scale = Vector2(10.885, 3.955)
+value = 98.0
+texture_over = ExtResource("8_4hkb0")
+texture_progress = ExtResource("9_ww7ba")
