@@ -21,7 +21,8 @@ var current_speed = 0
 
 signal speed_changed(value:int)
 
-#@onready var speedLabel = get_node(\"/root/PlayerUI/CanvasLayer/UserInfoPatch/Speed\")
+func _ready():
+	get_tree().call_group(\"ui_elements\", \"show_UI\")
 
 func _physics_process(delta):
 	handle_rotation(delta)
@@ -29,9 +30,9 @@ func _physics_process(delta):
 	move_and_slide()
 	handle_anchor(delta)
 	
-	emit_signal(\"speed_changed\", floor(current_speed/1000))
+	#Update speed on player UI
+	get_tree().call_group(\"ui_elements\", \"update_speed\", floor(current_speed/1000))
 		
-	#speedLabel.text = str(floor(current_speed/1000))
 
 func handle_rotation(delta):
 	var turn_delta = Input.get_axis('left', 'right') * turn_speed * delta
