@@ -103,6 +103,7 @@ func _on_generate_button_pressed():
 	altitude.frequency = 0.005
 	
 	generate_map()
+	Signals.set_username.emit("balls")
 
 
 func _on_play_button_pressed():

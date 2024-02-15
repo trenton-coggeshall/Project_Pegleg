@@ -36,7 +36,7 @@ func _physics_process(delta):
 	handle_anchor(delta)
 	
 	#Update speed on player UI
-	get_tree().call_group(\"ui_elements\", \"update_speed\", floor(current_speed/1000.0))
+	Signals.speed_changed.emit(floor(current_speed/1000.0))
 
 func handle_rotation(delta):
 	var turn_delta = Input.get_axis('left', 'right') * turn_speed * delta
