@@ -27,7 +27,7 @@ var current_speed = 0
 
 
 func _ready():
-	get_tree().call_group(\"ui_elements\", \"show_UI\")
+	Signals.show_ui.emit()
 
 func _physics_process(delta):
 	handle_rotation(delta)

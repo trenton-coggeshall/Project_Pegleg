@@ -26,6 +26,7 @@ Signals="*res://Signals.gd"
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 

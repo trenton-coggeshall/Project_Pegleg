@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuxwd0df8q1fx"]
+[gd_scene load_steps=13 format=3 uid="uid://cuxwd0df8q1fx"]
 
 [ext_resource type="FontFile" uid="uid://casam238cmavn" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_hm5tn"]
 [ext_resource type="Script" path="res://playerui.gd" id="1_imq6e"]
@@ -34,7 +34,24 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvcl3"]
-bg_color = Color(0.388235, 1, 0.309804, 1)
+bg_color = Color(0.890196, 0.105882, 0.219608, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbdul"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 0.568627)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qs7q"]
+bg_color = Color(0.576471, 0.301961, 0.92549, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -53,6 +70,7 @@ usernameLabel = NodePath("CanvasLayer/UserInfoPatch/Username")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
+visible = false
 offset = Vector2(0, 163)
 transform = Transform2D(1, 0, 0, 1, 0, 163)
 
@@ -153,8 +171,8 @@ offset_bottom = 178.25
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_hm5tn")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/background = SubResource("StyleBoxFlat_btl8t")
-theme_override_styles/fill = SubResource("StyleBoxFlat_mvcl3")
+theme_override_styles/background = SubResource("StyleBoxFlat_qbdul")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7qs7q")
 value = 45.0
 show_percentage = false
 
