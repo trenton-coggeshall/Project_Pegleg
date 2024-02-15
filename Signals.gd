@@ -8,7 +8,7 @@ signal hide_ui
 signal show_ui
 
 signal speed_changed(value)
-signal set_username(value)
+signal username_changed(value)
 
 #+
 #|
