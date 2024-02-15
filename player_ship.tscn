@@ -25,7 +25,7 @@ var gold = 1000
 var inventory : Dictionary
 var inventory_cap = 100
 var near_port = false
-var current_port
+var current_port = null
 
 
 func _ready():
