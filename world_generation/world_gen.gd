@@ -103,8 +103,6 @@ func _on_generate_button_pressed():
 	altitude.frequency = 0.005
 	
 	generate_map()
-	Signals.set_username.emit("balls")
-
 
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file("res://world_generation/world.tscn")
