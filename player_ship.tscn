@@ -6,7 +6,11 @@
 [sub_resource type="GDScript" id="GDScript_5pico"]
 script/source = "extends CharacterBody2D
 
+#+------------------+
+#| Ship stat values |
+#+------------------+
 
+# Speed
 const max_speed = 50000
 const acceleration = 10000
 const anchor_acceleration = 50000
@@ -15,11 +19,12 @@ const furled_acceleration = 5000
 const turn_speed = 3
 const anchorspeed = 0
 
+# Status
 var anchored = false
 var furled = false
 var current_speed = 0
 
-signal speed_changed(value:int)
+
 
 func _ready():
 	get_tree().call_group(\"ui_elements\", \"show_UI\")
@@ -31,8 +36,7 @@ func _physics_process(delta):
 	handle_anchor(delta)
 	
 	#Update speed on player UI
-	get_tree().call_group(\"ui_elements\", \"update_speed\", floor(current_speed/1000))
-		
+	get_tree().call_group(\"ui_elements\", \"update_speed\", floor(current_speed/1000.0))
 
 func handle_rotation(delta):
 	var turn_delta = Input.get_axis('left', 'right') * turn_speed * delta

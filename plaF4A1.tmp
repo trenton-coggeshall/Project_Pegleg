@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuxwd0df8q1fx"]
+[gd_scene load_steps=14 format=3 uid="uid://cuxwd0df8q1fx"]
 
 [ext_resource type="FontFile" uid="uid://casam238cmavn" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_hm5tn"]
 [ext_resource type="Script" path="res://playerui.gd" id="1_imq6e"]
 [ext_resource type="Texture2D" uid="uid://d1tkv0ct4q5cq" path="res://Assets/Images/testsprites.png" id="2_pmj14"]
 [ext_resource type="Texture2D" uid="uid://bcc4tti4kgnnd" path="res://Assets/Images/coin.png" id="3_3ubaa"]
 [ext_resource type="Texture2D" uid="uid://buivdi4e26d7x" path="res://Assets/Images/fast-forward.png" id="4_s6c85"]
+[ext_resource type="Texture2D" uid="uid://cs8axgag5d18e" path="res://Assets/Images/circleprog.png" id="6_jq7c4"]
+[ext_resource type="Texture2D" uid="uid://d1m0pljiwfgo8" path="res://Assets/Images/progresssmall.png" id="9_ww7ba"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lamf"]
 bg_color = Color(0, 0, 0, 0.196078)
@@ -41,7 +43,13 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 corner_detail = 20
 
-[node name="Control" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel") groups=["ui_elements"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqubm"]
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="Control" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "bar1", "bar2") groups=["ui_elements"]]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -50,6 +58,8 @@ offset_bottom = 40.0
 script = ExtResource("1_imq6e")
 speedLabel = NodePath("CanvasLayer/UserInfoPatch/SpeedLabel")
 usernameLabel = NodePath("CanvasLayer/UserInfoPatch/Username")
+bar1 = NodePath("CanvasLayer/UserInfoPatch/Panel/TextureProgressBar")
+bar2 = NodePath("CanvasLayer/UserInfoPatch/Panel/TextureProgressBar2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -175,3 +185,34 @@ offset_right = 862.0
 offset_bottom = 186.0
 texture = ExtResource("4_s6c85")
 expand_mode = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 28.125
+offset_top = -209.375
+offset_right = 178.125
+offset_bottom = -59.375
+theme_override_styles/panel = SubResource("StyleBoxFlat_hqubm")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UserInfoPatch/Panel"]
+layout_mode = 0
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 137.5
+offset_bottom = 137.5
+scale = Vector2(1.18, 1.18)
+max_value = 50.0
+value = 47.0
+fill_mode = 4
+texture_progress = ExtResource("6_jq7c4")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="CanvasLayer/UserInfoPatch/Panel"]
+layout_mode = 0
+offset_left = 84.3749
+offset_top = -12.5
+offset_right = 134.375
+offset_bottom = -1.5
+scale = Vector2(5, 1.9)
+min_value = 50.0
+value = 75.0
+texture_progress = ExtResource("9_ww7ba")
