@@ -20,6 +20,12 @@ config/icon="res://icon.svg"
 WorldGlobals="*res://world_generation/world_globals.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/discord_autoload.gd"
 Richpresence="*res://richpresence.gd"
+PlayerUI="*res://playerui.tscn"
+Signals="*res://Signals.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

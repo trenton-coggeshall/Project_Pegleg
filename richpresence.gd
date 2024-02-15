@@ -5,8 +5,6 @@ func _ready():
 	DiscordSDK.details = "Sailing the high seas"
 	DiscordSDK.state = "0/69 Maidens"
 	
-	print("TEST")
-	
 	DiscordSDK.large_image = "pirateicon" # Image key from "Art Assets"
 	DiscordSDK.large_image_text = "Project Pegleg"
 	DiscordSDK.small_image = "compass" # Image key from "Art Assets"

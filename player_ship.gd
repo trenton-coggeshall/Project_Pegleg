@@ -13,7 +13,6 @@ var anchored = false
 var furled = false
 var current_speed = 0
 
-
 func _physics_process(delta):
 	handle_rotation(delta)
 	handle_sails(delta)
