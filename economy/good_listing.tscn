@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5oudf4jbsudi"]
+
+[ext_resource type="Script" path="res://economy/good_listing.gd" id="1_2oduk"]
+
+[node name="GoodListing" type="HBoxContainer"]
+custom_minimum_size = Vector2(400, 25)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -15.5
+offset_right = 200.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 80
+alignment = 1
+script = ExtResource("1_2oduk")
+
+[node name="PlayerQuantity" type="Label" parent="."]
+layout_mode = 2
+
+[node name="GoodTitle" type="Label" parent="."]
+layout_mode = 2
+
+[node name="GoodPrice" type="Label" parent="."]
+layout_mode = 2
+
+[node name="Buy1Button" type="Button" parent="."]
+layout_mode = 2
+text = "Buy 1"
+
+[node name="Sell1Button" type="Button" parent="."]
+layout_mode = 2
+text = "Sell 1"
+
+[node name="PortQuantity" type="Label" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="Buy1Button" to="." method="_on_buy_1_button_pressed"]
+[connection signal="pressed" from="Sell1Button" to="." method="_on_sell_1_button_pressed"]

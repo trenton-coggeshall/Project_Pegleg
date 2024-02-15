@@ -44,6 +44,7 @@ func calculate_purchase(good, quantity):
 	for i in range(quantity):
 		cost += current_price
 		current_price = price_check(good, goods[good] - (i + 1))
+	return cost
 
 
 func execute_purchase(good, quantity, cost):
@@ -62,6 +63,7 @@ func calculate_sale(good, quantity):
 	for i in range(quantity):
 		net += current_price
 		current_price = price_check(good, goods[good] + (i + 1))
+	return net
 
 
 func execute_sale(good, quantity, cost):
@@ -72,3 +74,13 @@ func execute_sale(good, quantity, cost):
 	goods[good] += quantity
 	gold -= cost
 	set_price(good)
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("Player"):
+		body.set_near_port(true, self)
+
+
+func _on_area_2d_body_exited(body):
+	if body.is_in_group("Player"):
+		body.set_near_port(false, null)
