@@ -24,8 +24,6 @@ var anchored = false
 var furled = false
 var current_speed = 0
 
-
-
 func _ready():
 	Signals.show_ui.emit()
 
