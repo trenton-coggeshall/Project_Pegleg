@@ -31,7 +31,7 @@ func _ready():
 	Signals.hide_ui.emit()
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 
