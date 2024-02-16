@@ -28,7 +28,7 @@ var port_count = 40
 var water_tiles = []
 
 func _ready():
-	pass
+	Signals.hide_ui.emit()
 
 
 func _process(delta):

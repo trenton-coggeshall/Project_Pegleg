@@ -70,7 +70,6 @@ usernameLabel = NodePath("CanvasLayer/UserInfoPatch/Username")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
-visible = false
 offset = Vector2(0, 163)
 transform = Transform2D(1, 0, 0, 1, 0, 163)
 
@@ -143,7 +142,7 @@ offset_left = 871.0
 offset_top = 111.0
 offset_right = 958.0
 offset_bottom = 180.0
-text = "250"
+text = "0"
 label_settings = SubResource("LabelSettings_al4go")
 horizontal_alignment = 1
 vertical_alignment = 1
