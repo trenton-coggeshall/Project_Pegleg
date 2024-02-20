@@ -6,10 +6,6 @@
 [sub_resource type="GDScript" id="GDScript_5pico"]
 script/source = "extends CharacterBody2D
 
-
-@onready var transaction_screen = $\"../CanvasLayer/TransactionScreen\"
-
-
 #+------------------+
 #| Ship stat values |
 #+------------------+
@@ -28,24 +24,12 @@ var anchored = false
 var furled = false
 var current_speed = 0
 
-var gold = 1000
-var inventory : Dictionary
-var inventory_cap = 100
-var near_port = false
-var current_port = null
-
-
 func _ready():
 	Signals.show_ui.emit()
-
-	for good in EconomyGlobals.GoodType.values():
-		inventory[good] = 0
-   
 
 func _physics_process(delta):
 	handle_rotation(delta)
 	handle_sails(delta)
-	handle_interact()
 	move_and_slide()
 	handle_anchor(delta)
 	
@@ -80,23 +64,13 @@ func handle_anchor(delta):
 			anchored = true
 			$Sprite2D/Anchor.visible = true
 			Signals.player_damaged.emit(10)
-
-
-func handle_interact():
-	if near_port and Input.is_action_just_pressed('interact'):
-		transaction_screen.show_transaction()
-
-
-func set_near_port(is_near, port):
-	near_port = is_near
-	current_port = port
-
+"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]
 radius = 20.0
 height = 80.0
 
-[node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
+[node name="PlayerShip" type="CharacterBody2D"]
 script = SubResource("GDScript_5pico")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
