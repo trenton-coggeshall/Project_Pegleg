@@ -28,11 +28,14 @@ var port_count = 40
 var water_tiles = []
 
 func _ready():
+	#Signals.hide_ui.emit()
 	pass
 
 
-func _process(delta):
-	pass
+# Using this for UI debug
+func _process(_delta):
+	if Input.is_action_just_pressed("debug"):
+		Signals.player_damaged.emit(10)
 
 
 func generate_map():

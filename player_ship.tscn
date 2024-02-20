@@ -24,8 +24,6 @@ var anchored = false
 var furled = false
 var current_speed = 0
 
-
-
 func _ready():
 	Signals.show_ui.emit()
 
@@ -65,6 +63,7 @@ func handle_anchor(delta):
 		if Input.is_action_just_pressed('anchor'):
 			anchored = true
 			$Sprite2D/Anchor.visible = true
+			Signals.player_damaged.emit(10)
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]
