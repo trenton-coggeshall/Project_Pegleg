@@ -28,16 +28,37 @@ layout_mode = 2
 [node name="GoodPrice" type="Label" parent="."]
 layout_mode = 2
 
-[node name="Buy1Button" type="Button" parent="."]
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-text = "Buy 1"
 
-[node name="Sell1Button" type="Button" parent="."]
+[node name="BuyMaxButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2
-text = "Sell 1"
+text = "<<<"
+
+[node name="Buy10Button" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "<10"
+
+[node name="Buy1Button" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "<1"
+
+[node name="Sell1Button" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "1>"
+
+[node name="Sell10Button" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "10>"
+
+[node name="SellMaxButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = ">>>"
 
 [node name="PortQuantity" type="Label" parent="."]
 layout_mode = 2
 
-[connection signal="pressed" from="Buy1Button" to="." method="_on_buy_1_button_pressed"]
-[connection signal="pressed" from="Sell1Button" to="." method="_on_sell_1_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/Buy10Button" to="." method="_on_buy_10_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/Buy1Button" to="." method="_on_buy_1_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/Sell1Button" to="." method="_on_sell_1_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/Sell10Button" to="." method="_on_sell_10_button_pressed"]

@@ -27,22 +27,22 @@ func show_transaction():
 
 func make_purchase(good, quantity):
 	var total = player.current_port.calculate_purchase(good, quantity)
-	player.current_port.execute_purchase(good, quantity, total)
-	player.gold -= total
-	player.inventory[good] += quantity
-	good_listings[good].set_price_quantity(player.current_port.prices[good], player.current_port.goods[good], player.inventory[good])
-	$PortGold.text = 'Port gold: ' + str(player.current_port.gold) + 'g'
-	$PlayerGold.text = 'Your gold: ' + str(player.gold) + 'g'
+	if player.current_port.execute_purchase(good, quantity, total):
+		player.gold -= total
+		player.inventory[good] += quantity
+		good_listings[good].set_price_quantity(player.current_port.prices[good], player.current_port.goods[good], player.inventory[good])
+		$PortGold.text = 'Port gold: ' + str(player.current_port.gold) + 'g'
+		$PlayerGold.text = 'Your gold: ' + str(player.gold) + 'g'
 
 
 func make_sale(good, quantity):
 	var total = player.current_port.calculate_sale(good, quantity)
-	player.current_port.execute_sale(good, quantity, total)
-	player.gold += total
-	player.inventory[good] -= quantity
-	good_listings[good].set_price_quantity(player.current_port.prices[good], player.current_port.goods[good], player.inventory[good])
-	$PortGold.text = 'Port gold: ' + str(player.current_port.gold) + 'g'
-	$PlayerGold.text = 'Your gold: ' + str(player.gold) + 'g'
+	if player.current_port.execute_sale(good, quantity, total):
+		player.gold += total
+		player.inventory[good] -= quantity
+		good_listings[good].set_price_quantity(player.current_port.prices[good], player.current_port.goods[good], player.inventory[good])
+		$PortGold.text = 'Port gold: ' + str(player.current_port.gold) + 'g'
+		$PlayerGold.text = 'Your gold: ' + str(player.gold) + 'g'
 
 
 func _on_button_pressed():

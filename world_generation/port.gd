@@ -19,7 +19,7 @@ func _process(delta):
 # Returns the price of a good at a certain quantity
 func price_check(good, quantity):
 	var base_price = EconomyGlobals.base_prices[good]
-	var flux = float(quantity) / float(demand[good])
+	var flux = float(quantity + 1) / float(demand[good])
 	
 	return int(round(base_price / flux))
 
@@ -50,11 +50,12 @@ func calculate_purchase(good, quantity):
 func execute_purchase(good, quantity, cost):
 	if goods[good] < quantity:
 		print("Not enough goods in port inventory")
-		return
+		return false
 	
 	goods[good] -= quantity
 	gold += cost
 	set_price(good)
+	return true
 
 
 func calculate_sale(good, quantity):
@@ -69,11 +70,12 @@ func calculate_sale(good, quantity):
 func execute_sale(good, quantity, cost):
 	if gold < cost:
 		print("Not enough gold in port inventory")
-		return
+		return false
 	
 	goods[good] += quantity
 	gold -= cost
 	set_price(good)
+	return true
 
 
 func _on_area_2d_body_entered(body):

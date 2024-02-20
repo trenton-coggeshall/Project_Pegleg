@@ -21,16 +21,16 @@ func set_price_quantity(g_price, po_quantity, pl_quantity):
 	$PortQuantity.text = str(port_quantity)
 	$PlayerQuantity.text = str(player_quantity)
 	$GoodPrice.text = str(price) + 'g'
-	
-	if port_quantity == 0:
-		$Buy1Button.disabled = true
-	else:
-		$Buy1Button.disabled = false
-	
-	if player_quantity == 0:
-		$Sell1Button.disabled = true
-	else:
-		$Sell1Button.disabled = false
+	check_buttons()
+
+
+func check_buttons():
+	$ButtonContainer/Buy1Button.disabled = port_quantity <= 0
+	$ButtonContainer/Buy10Button.disabled = port_quantity < 10	
+	$ButtonContainer/BuyMaxButton.disabled = port_quantity <= 0
+	$ButtonContainer/Sell1Button.disabled = player_quantity <= 0
+	$ButtonContainer/Sell10Button.disabled = player_quantity < 10
+	$ButtonContainer/SellMaxButton.disabled = player_quantity <= 0
 
 
 func _on_buy_1_button_pressed():
@@ -39,3 +39,11 @@ func _on_buy_1_button_pressed():
 
 func _on_sell_1_button_pressed():
 	transaction_screen.make_sale(id, 1)
+
+
+func _on_buy_10_button_pressed():
+		transaction_screen.make_purchase(id, 10)
+
+
+func _on_sell_10_button_pressed():
+	transaction_screen.make_sale(id, 10)
