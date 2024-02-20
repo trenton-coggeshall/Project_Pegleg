@@ -6,6 +6,8 @@ const WORLD_TILES = preload("res://world_generation/world_tiles.tscn")
 var chunks : Array
 var tiles
 
+@onready var PlayerUI = get_node("/root/PlayerUI")
+
 func _ready():
 	#for i in len(WorldGlobals.chunks):
 		#chunks.append(CHUNK_TILES.instantiate())

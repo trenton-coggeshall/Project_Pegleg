@@ -1,0 +1,218 @@
+[gd_scene load_steps=14 format=3 uid="uid://cuxwd0df8q1fx"]
+
+[ext_resource type="FontFile" uid="uid://casam238cmavn" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_hm5tn"]
+[ext_resource type="Script" path="res://playerui.gd" id="1_imq6e"]
+[ext_resource type="Texture2D" uid="uid://d1tkv0ct4q5cq" path="res://Assets/Images/testsprites.png" id="2_pmj14"]
+[ext_resource type="Texture2D" uid="uid://bcc4tti4kgnnd" path="res://Assets/Images/coin.png" id="3_3ubaa"]
+[ext_resource type="Texture2D" uid="uid://buivdi4e26d7x" path="res://Assets/Images/fast-forward.png" id="4_s6c85"]
+[ext_resource type="Texture2D" uid="uid://cs8axgag5d18e" path="res://Assets/Images/circleprog.png" id="6_jq7c4"]
+[ext_resource type="Texture2D" uid="uid://d1m0pljiwfgo8" path="res://Assets/Images/progresssmall.png" id="9_ww7ba"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lamf"]
+bg_color = Color(0, 0, 0, 0.196078)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_lidim"]
+font = ExtResource("1_hm5tn")
+font_size = 75
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_al4go"]
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btl8t"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 0.568627)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvcl3"]
+bg_color = Color(0.388235, 1, 0.309804, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqubm"]
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="Control" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "bar1", "bar2") groups=["ui_elements"]]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_imq6e")
+speedLabel = NodePath("CanvasLayer/UserInfoPatch/SpeedLabel")
+usernameLabel = NodePath("CanvasLayer/UserInfoPatch/Username")
+bar1 = NodePath("CanvasLayer/UserInfoPatch/Panel/TextureProgressBar")
+bar2 = NodePath("CanvasLayer/UserInfoPatch/Panel/TextureProgressBar2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+offset = Vector2(0, 163)
+transform = Transform2D(1, 0, 0, 1, 0, 163)
+
+[node name="UserInfoPatch" type="NinePatchRect" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -266.0
+offset_right = 1023.0
+offset_bottom = -26.0
+grow_vertical = 0
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("2_pmj14")
+region_rect = Rect2(3, 4, 128, 128)
+patch_margin_left = 49
+patch_margin_top = 53
+patch_margin_right = 49
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="AvatarPanel" type="Panel" parent="CanvasLayer/UserInfoPatch"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 45.0
+offset_top = -75.0
+offset_right = 195.0
+offset_bottom = 75.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0lamf")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/UserInfoPatch/AvatarPanel"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 27.0
+offset_right = 43.0
+offset_bottom = 40.0
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/UserInfoPatch/AvatarPanel"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 27.0
+offset_right = 63.0
+offset_bottom = 40.0
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/UserInfoPatch/AvatarPanel"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 47.0
+offset_right = 58.0
+offset_bottom = 51.0
+
+[node name="Username" type="Label" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 19.0
+offset_right = 753.0
+offset_bottom = 109.0
+text = "UserError"
+label_settings = SubResource("LabelSettings_lidim")
+horizontal_alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 871.0
+offset_top = 111.0
+offset_right = 958.0
+offset_bottom = 180.0
+text = "250"
+label_settings = SubResource("LabelSettings_al4go")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 218.75
+offset_top = 118.75
+offset_right = 753.75
+offset_bottom = 140.75
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_hm5tn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/background = SubResource("StyleBoxFlat_btl8t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mvcl3")
+value = 69.09
+show_percentage = false
+
+[node name="ExperienceBar2" type="ProgressBar" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 218.75
+offset_top = 156.25
+offset_right = 753.75
+offset_bottom = 178.25
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_hm5tn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/background = SubResource("StyleBoxFlat_btl8t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mvcl3")
+value = 45.0
+show_percentage = false
+
+[node name="CoinIcon" type="TextureRect" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 18.0
+offset_right = 860.0
+offset_bottom = 98.0
+texture = ExtResource("3_3ubaa")
+expand_mode = 1
+
+[node name="SpeedIcon" type="TextureRect" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 782.0
+offset_top = 106.0
+offset_right = 862.0
+offset_bottom = 186.0
+texture = ExtResource("4_s6c85")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 28.125
+offset_top = -209.375
+offset_right = 178.125
+offset_bottom = -59.375
+theme_override_styles/panel = SubResource("StyleBoxFlat_hqubm")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/UserInfoPatch/Panel"]
+layout_mode = 0
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 137.5
+offset_bottom = 137.5
+scale = Vector2(1.18, 1.18)
+max_value = 50.0
+value = 47.0
+fill_mode = 4
+texture_progress = ExtResource("6_jq7c4")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="CanvasLayer/UserInfoPatch/Panel"]
+layout_mode = 0
+offset_left = 84.3749
+offset_top = -12.5
+offset_right = 134.375
+offset_bottom = -1.5
+scale = Vector2(5, 1.9)
+min_value = 50.0
+value = 75.0
+texture_progress = ExtResource("9_ww7ba")
