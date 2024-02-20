@@ -6,8 +6,6 @@ extends Control
 @export var healthBar:TextureProgressBar
 @export var damageBar:TextureProgressBar
 
-var actualHealth = 100
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.hide_ui.connect(hide_UI)
@@ -40,9 +38,8 @@ func set_username(value):
 func player_damaged(value):
 	var tween = create_tween()
 	
-	var newHealth = actualHealth - value
-	actualHealth -= value
+	Player.health -= value
 	
-	tween.tween_property(healthBar, "value", newHealth, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(damageBar, "value", newHealth, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(healthBar, "value", Player.health, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(damageBar, "value", Player.health, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	
