@@ -2,4 +2,4 @@
 .godot/
 
 #Rich presence plugin debug
-#~discord_game_sdk_binding_debug.dll
+~discord_game_sdk_binding_debug.dll
