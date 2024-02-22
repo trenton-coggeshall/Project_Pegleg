@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://fae4fid2cpto"]
-
-[node name="CanvasLayer" type="CanvasLayer"]
-layer = 2

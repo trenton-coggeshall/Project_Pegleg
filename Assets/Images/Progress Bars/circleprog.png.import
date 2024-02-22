@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcc4tti4kgnnd"
-path="res://.godot/imported/coin.png-6d9c1a0639288f883fc95c7eadce92e2.ctex"
+uid="uid://cs8axgag5d18e"
+path="res://.godot/imported/circleprog.png-2c64496b1dce617ef1f1af12c4ac1b00.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/coin.png"
-dest_files=["res://.godot/imported/coin.png-6d9c1a0639288f883fc95c7eadce92e2.ctex"]
+source_file="res://Assets/Images/Progress Bars/circleprog.png"
+dest_files=["res://.godot/imported/circleprog.png-2c64496b1dce617ef1f1af12c4ac1b00.ctex"]
 
 [params]
 

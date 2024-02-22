@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://er6hi3m20o2u"
-path="res://.godot/imported/healthprog.png-1c5e742b8aedaedeca1c5e471d26f0fc.ctex"
+uid="uid://d1m0pljiwfgo8"
+path="res://.godot/imported/progresssmall.png-d6b32daad95b5352b543318b7c0eec99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/healthprog.png"
-dest_files=["res://.godot/imported/healthprog.png-1c5e742b8aedaedeca1c5e471d26f0fc.ctex"]
+source_file="res://Assets/Images/Progress Bars/progresssmall.png"
+dest_files=["res://.godot/imported/progresssmall.png-d6b32daad95b5352b543318b7c0eec99.ctex"]
 
 [params]
 
