@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1kexh3hro8nh"
-path="res://.godot/imported/healthover.png-2f95391118540eed0fbe6271230b0081.ctex"
+uid="uid://buivdi4e26d7x"
+path="res://.godot/imported/fast-forward.png-1da3a6846abbe148465bc5fe55d84cf7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/healthover.png"
-dest_files=["res://.godot/imported/healthover.png-2f95391118540eed0fbe6271230b0081.ctex"]
+source_file="res://Assets/Images/Icons/fast-forward.png"
+dest_files=["res://.godot/imported/fast-forward.png-1da3a6846abbe148465bc5fe55d84cf7.ctex"]
 
 [params]
 

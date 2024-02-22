@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6kq13j2y4s6d"
-path="res://.godot/imported/healthprog2.png-e4882c7075677bea869470eb98441bad.ctex"
+uid="uid://bcc4tti4kgnnd"
+path="res://.godot/imported/coin.png-b61cc28b7ec9d374e9c737312b4a945d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/healthprog2.png"
-dest_files=["res://.godot/imported/healthprog2.png-e4882c7075677bea869470eb98441bad.ctex"]
+source_file="res://Assets/Images/Icons/coin.png"
+dest_files=["res://.godot/imported/coin.png-b61cc28b7ec9d374e9c737312b4a945d.ctex"]
 
 [params]
 

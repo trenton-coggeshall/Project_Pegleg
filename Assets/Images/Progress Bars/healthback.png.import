@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs8axgag5d18e"
-path="res://.godot/imported/circleprog.png-ccfc4212858d5a148e2fd6e68f009174.ctex"
+uid="uid://cbjv3f6jult2x"
+path="res://.godot/imported/healthback.png-2bd4438e6118492beb1be878cd25086c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/circleprog.png"
-dest_files=["res://.godot/imported/circleprog.png-ccfc4212858d5a148e2fd6e68f009174.ctex"]
+source_file="res://Assets/Images/Progress Bars/healthback.png"
+dest_files=["res://.godot/imported/healthback.png-2bd4438e6118492beb1be878cd25086c.ctex"]
 
 [params]
 
