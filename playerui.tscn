@@ -1,6 +1,5 @@
-[gd_scene load_steps=17 format=3 uid="uid://cuxwd0df8q1fx"]
+[gd_scene load_steps=12 format=3 uid="uid://cuxwd0df8q1fx"]
 
-[ext_resource type="FontFile" uid="uid://casam238cmavn" path="res://Assets/Fonts/PixelifySans-VariableFont_wght.ttf" id="1_hm5tn"]
 [ext_resource type="Script" path="res://playerui.gd" id="1_imq6e"]
 [ext_resource type="Texture2D" uid="uid://d1tkv0ct4q5cq" path="res://Assets/Images/testsprites.png" id="2_pmj14"]
 [ext_resource type="Texture2D" uid="uid://bcc4tti4kgnnd" path="res://Assets/Images/Icons/coin.png" id="3_3ubaa"]
@@ -27,40 +26,6 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 50
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btl8t"]
-bg_color = Color(0.145098, 0.145098, 0.145098, 0.568627)
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvcl3"]
-bg_color = Color(0.890196, 0.105882, 0.219608, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbdul"]
-bg_color = Color(0.145098, 0.145098, 0.145098, 0.568627)
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qs7q"]
-bg_color = Color(0.576471, 0.301961, 0.92549, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 20
 
 [node name="Control" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "healthBar", "damageBar")]
 visible = false
@@ -153,34 +118,6 @@ label_settings = SubResource("LabelSettings_al4go")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer/UserInfoPatch"]
-layout_mode = 0
-offset_left = 218.75
-offset_top = 118.75
-offset_right = 753.75
-offset_bottom = 140.75
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_hm5tn")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/background = SubResource("StyleBoxFlat_btl8t")
-theme_override_styles/fill = SubResource("StyleBoxFlat_mvcl3")
-value = 69.09
-show_percentage = false
-
-[node name="ExperienceBar2" type="ProgressBar" parent="CanvasLayer/UserInfoPatch"]
-layout_mode = 0
-offset_left = 218.75
-offset_top = 156.25
-offset_right = 753.75
-offset_bottom = 178.25
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_hm5tn")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/background = SubResource("StyleBoxFlat_qbdul")
-theme_override_styles/fill = SubResource("StyleBoxFlat_7qs7q")
-value = 45.0
-show_percentage = false
-
 [node name="CoinIcon" type="TextureRect" parent="CanvasLayer/UserInfoPatch"]
 layout_mode = 0
 offset_left = 780.0
@@ -202,11 +139,11 @@ expand_mode = 1
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/UserInfoPatch"]
 z_index = 1
 layout_mode = 0
-offset_left = 128.125
-offset_top = -181.25
-offset_right = 178.125
-offset_bottom = -174.25
-scale = Vector2(10, 10)
+offset_left = 278.125
+offset_top = 121.875
+offset_right = 328.125
+offset_bottom = 128.875
+scale = Vector2(8, 8)
 value = 100.0
 texture_over = ExtResource("6_5j3q8")
 texture_progress = ExtResource("7_7dlcc")
