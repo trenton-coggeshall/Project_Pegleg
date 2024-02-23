@@ -49,12 +49,12 @@ func initialize():
 		#if port.get_faction() != "none":
 			print("=== " + port.name + " ===")
 			var rng = RandomNumberGenerator.new()
-			var closest_ports = [[null, 10000], [null, 10000], [null, 10000]]
+			var closest_ports = [[null, 100000], [null, 100000], [null, 100000]]
 			
 			#port.set_faction(rng.randi_range(0, factions.size()-1))
 			for subport in ports:
 				var distvect = abs(port.global_position - subport.global_position)
-				var distance = abs(distvect.x - distvect.y)
+				var distance = abs(distvect.x + distvect.y)
 				if distance != 0:
 					for i in range(closest_ports.size()):
 						var p = closest_ports[i]
