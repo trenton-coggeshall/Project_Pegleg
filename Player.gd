@@ -5,7 +5,7 @@ extends Node
 #+--------------+
 
 var health = 100
-var money = 100
+var gold = 100
 
 
 

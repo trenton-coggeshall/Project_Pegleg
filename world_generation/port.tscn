@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c015pden3vpre"]
+[gd_scene load_steps=3 format=3 uid="uid://c015pden3vpre"]
 
 [ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="1_n35uh"]
+[ext_resource type="Script" path="res://world_generation/port.gd" id="1_s0bxu"]
 
 [node name="Port" type="Node2D" groups=["Ports"]]
+script = ExtResource("1_s0bxu")
 
 [node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.364706)
 texture = ExtResource("1_n35uh")
