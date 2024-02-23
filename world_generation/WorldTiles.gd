@@ -2,9 +2,13 @@ extends TileMap
 
 const PORT = preload("res://world_generation/port.tscn")
 
+var portNames:Array
+var factions = ["BobsClub", "Faction2", "UniqueName"]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	for n in 50:
+		portNames.append("Port" + str(n+1))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,4 +35,33 @@ func initialize():
 	for loc in WorldGlobals.ports:
 		var port = PORT.instantiate()
 		port.position = loc * 16
+		
+		var rng = RandomNumberGenerator.new()
+		var rand = rng.randi_range(0, portNames.size()-1)
+		port.name = portNames[rand]
+		portNames.remove_at(rand)
+		
 		add_child(port)
+
+	var ports = get_tree().get_nodes_in_group("Ports")
+	for port in ports:
+		
+		#if port.get_faction() != "none":
+			print("=== " + port.name + " ===")
+			var rng = RandomNumberGenerator.new()
+			var closest_ports = [[null, 10000], [null, 10000], [null, 10000]]
+			
+			#port.set_faction(rng.randi_range(0, factions.size()-1))
+			for subport in ports:
+				var distvect = abs(port.global_position - subport.global_position)
+				var distance = abs(distvect.x - distvect.y)
+				if distance != 0:
+					for i in range(closest_ports.size()):
+						var p = closest_ports[i]
+						if distance < p[1]:
+							closest_ports[i] = [subport, distance]
+							break;
+			print("Closest ports: ")
+			for i in range(closest_ports.size()):
+				print(closest_ports[i][0].name + " - " + str(closest_ports[i][1]))
+	
