@@ -26,7 +26,7 @@ func set_price_quantity(g_price, po_quantity, pl_quantity):
 
 func check_buttons():
 	$ButtonContainer/Buy1Button.disabled = port_quantity <= 0
-	$ButtonContainer/Buy10Button.disabled = port_quantity < 10	
+	$ButtonContainer/Buy10Button.disabled = port_quantity < 10
 	$ButtonContainer/BuyMaxButton.disabled = port_quantity <= 0
 	$ButtonContainer/Sell1Button.disabled = player_quantity <= 0
 	$ButtonContainer/Sell10Button.disabled = player_quantity < 10

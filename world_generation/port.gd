@@ -58,6 +58,10 @@ func execute_purchase(good, quantity, cost):
 		print("Not enough goods in port inventory")
 		return false
 	
+	if Player.gold < cost:
+		print("Not enough player gold")
+		return
+	
 	goods[good] -= quantity
 	gold += cost
 	set_price(good)
