@@ -3,7 +3,7 @@ extends Node
 func _ready():
 	DiscordSDK.app_id = 1205246280536952862 # Application ID
 	DiscordSDK.details = "Sailing the high seas"
-	DiscordSDK.state = "0/69 Maidens"
+	DiscordSDK.state = "Money: " + str(Player.gold) + "g"
 	
 	DiscordSDK.large_image = "pirateicon" # Image key from "Art Assets"
 	DiscordSDK.large_image_text = "Project Pegleg"

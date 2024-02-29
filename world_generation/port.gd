@@ -6,6 +6,7 @@ var goods : Dictionary
 var prices : Dictionary
 var demand : Dictionary
 var production : Dictionary
+var faction = "none"
 
 
 func _ready():
@@ -15,6 +16,11 @@ func _ready():
 func _process(delta):
 	pass
 
+func get_faction():
+	return faction
+
+func set_faction(value):
+	faction = value;
 
 # Returns the price of a good at a certain quantity
 func price_check(good, quantity):

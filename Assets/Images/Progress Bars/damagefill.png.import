@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgrm0byybst0f"
-path="res://.godot/imported/oversmall.png-d6b187c99ebe9e3ca225e8799bceec66.ctex"
+uid="uid://mwr27kp7xmsc"
+path="res://.godot/imported/damagefill.png-ec9c23cb08cb6ad1e9ae52665eaa8f7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/oversmall.png"
-dest_files=["res://.godot/imported/oversmall.png-d6b187c99ebe9e3ca225e8799bceec66.ctex"]
+source_file="res://Assets/Images/Progress Bars/damagefill.png"
+dest_files=["res://.godot/imported/damagefill.png-ec9c23cb08cb6ad1e9ae52665eaa8f7c.ctex"]
 
 [params]
 

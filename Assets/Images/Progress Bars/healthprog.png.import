@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mwr27kp7xmsc"
-path="res://.godot/imported/damagefill.png-c977f463075be5244ed867cd1cbede66.ctex"
+uid="uid://er6hi3m20o2u"
+path="res://.godot/imported/healthprog.png-1fdd51babead356be54ceff01a156a16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/damagefill.png"
-dest_files=["res://.godot/imported/damagefill.png-c977f463075be5244ed867cd1cbede66.ctex"]
+source_file="res://Assets/Images/Progress Bars/healthprog.png"
+dest_files=["res://.godot/imported/healthprog.png-1fdd51babead356be54ceff01a156a16.ctex"]
 
 [params]
 

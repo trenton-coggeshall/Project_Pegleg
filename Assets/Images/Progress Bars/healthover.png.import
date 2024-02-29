@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b86npyaq1ycgp"
-path="res://.godot/imported/pixil-frame-0.png-78c971d52393868e0f7af5b9cb795496.ctex"
+uid="uid://c1kexh3hro8nh"
+path="res://.godot/imported/healthover.png-2fa3a3c77d5426de3438baa3166110f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/pixil-frame-0.png"
-dest_files=["res://.godot/imported/pixil-frame-0.png-78c971d52393868e0f7af5b9cb795496.ctex"]
+source_file="res://Assets/Images/Progress Bars/healthover.png"
+dest_files=["res://.godot/imported/healthover.png-2fa3a3c77d5426de3438baa3166110f3.ctex"]
 
 [params]
 
