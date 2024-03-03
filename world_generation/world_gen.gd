@@ -4,6 +4,7 @@ extends Control
 @onready var altitude_seed_text = $Seeds/AltitudeSeedText
 @onready var temp_seed_text = $Seeds/TempSeedText
 @onready var moisture_seed_text = $Seeds/MoistureSeedText
+@onready var play_button = $PlayButton
 
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 const CHUNK_TILES = preload("res://world_generation/chunk_tiles.tscn")
@@ -39,6 +40,8 @@ func _process(_delta):
 
 
 func generate_map():
+	play_button.disabled = true
+	
 	var map_tiles : Array
 	
 	for x in range(map_width):
@@ -66,6 +69,8 @@ func generate_map():
 	
 	WorldGlobals.tiles = map_tiles
 	place_ports()
+	
+	play_button.disabled = false
 
 
 func place_ports():
@@ -108,3 +113,7 @@ func _on_generate_button_pressed():
 
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file("res://world_generation/world.tscn")
+
+
+func _on_test_world_button_pressed():
+	get_tree().change_scene_to_file("res://world_generation/PreBuiltWorld.tscn")
