@@ -17,7 +17,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -54,7 +54,7 @@ func initialize():
 	for port in ports:
 		if port.get_faction() != "none": continue
 		
-		print("=== " + port.name + " ===")
+		#print("=== " + port.name + " ===")
 		var closest_num = 3 # Number of nearby ports to be assigned
 		var closest_ports = []
 		
@@ -62,7 +62,7 @@ func initialize():
 		var thisFaction = factions[RandomNumberGenerator.new().randi_range(0, factions.size()-1)]
 		port.set_faction(thisFaction)
 		port.get_node("Icon").modulate = Color(factionColors[thisFaction])
-		print("Faction: " + str(port.get_faction()))
+		#print("Faction: " + str(port.get_faction()))
 		
 		for subport in ports:
 			if subport.get_faction() != "none": continue
@@ -72,7 +72,7 @@ func initialize():
 			var distance = abs(distvect.x + distvect.y)
 			if distance == 0: continue #yippee, you found yourself
 			
-			if closest_ports.size() < 3:
+			if closest_ports.size() < closest_num:
 				closest_ports.append([subport, distance])
 				continue
 			for i in range(closest_ports.size()):
@@ -84,7 +84,8 @@ func initialize():
 		for i in range (closest_ports.size()):
 			closest_ports[i][0].set_faction(thisFaction)
 			closest_ports[i][0].get_node("Icon").modulate = Color(factionColors[thisFaction])
-		
+		"""
 		print("Closest ports: ")
 		for i in range(closest_ports.size()):
 			print(closest_ports[i][0].name + " - " + str(closest_ports[i][1]) + " - " + closest_ports[i][0].get_faction())
+		"""

@@ -13,7 +13,7 @@ func _ready():
 	initialize()
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func get_faction():
