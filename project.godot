@@ -21,9 +21,9 @@ WorldGlobals="*res://world_generation/world_globals.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/discord_autoload.gd"
 Richpresence="*res://richpresence.gd"
 EconomyGlobals="*res://economy/economy_globals.gd"
-PlayerUI="*res://playerui.tscn"
+PlayerUI="*res://player/playerui.tscn"
 Signals="*res://Signals.gd"
-Player="*res://Player.gd"
+Player="*res://player/Player.gd"
 
 [display]
 
