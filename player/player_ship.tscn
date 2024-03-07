@@ -88,7 +88,11 @@ func handle_shooting(_delta):
 func shoot():
 	var projectile = Cannonball.instantiate()
 	owner.add_child(projectile)
-	projectile.position = ($Sprite2D.global_position + Vector2(100, 0))
+	projectile.transform = ($Marker2D.global_transform)
+	\"\"\"
+	var direction = -transform.y.normalized()
+	projectile.velocity = direction
+	\"\"\"
 	print(\"PEW\")
 
 func set_near_port(is_near, port):
@@ -109,6 +113,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("1_vnj8m")
 
 [node name="Anchor" type="Sprite2D" parent="Sprite2D"]
+visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_q6hqy")
 
@@ -118,3 +123,7 @@ shape = SubResource("CapsuleShape2D_ru18s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.25, 0.25)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(30, 0)
+scale = Vector2(0.1, 0.1)

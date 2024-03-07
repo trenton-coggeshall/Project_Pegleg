@@ -1,6 +1,7 @@
 extends Area2D
 
-var speed = 1000
+var speed = 10000
+#var velocity = Vector2.ZERO
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
