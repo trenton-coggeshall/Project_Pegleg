@@ -89,10 +89,6 @@ func shoot():
 	var projectile = Cannonball.instantiate()
 	owner.add_child(projectile)
 	projectile.transform = ($Marker2D.global_transform)
-	\"\"\"
-	var direction = -transform.y.normalized()
-	projectile.velocity = direction
-	\"\"\"
 	print(\"PEW\")
 
 func set_near_port(is_near, port):
