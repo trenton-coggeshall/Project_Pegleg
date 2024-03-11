@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://da33nildxsf6n"]
+[gd_scene load_steps=5 format=3 uid="uid://da33nildxsf6n"]
 
 [ext_resource type="Script" path="res://world_generation/world.gd" id="1_m2roe"]
 [ext_resource type="PackedScene" uid="uid://dles4x7stbjs3" path="res://player_ship.tscn" id="2_ec0ey"]
+[ext_resource type="PackedScene" uid="uid://bk8vvi3gayig8" path="res://world_generation/world_tiles.tscn" id="2_lkb3k"]
 [ext_resource type="PackedScene" uid="uid://ckam0nnktcllc" path="res://economy/transaction_screen.tscn" id="3_ga37j"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_m2roe")
+
+[node name="WorldTiles" parent="." instance=ExtResource("2_lkb3k")]
 
 [node name="PlayerShip" parent="." instance=ExtResource("2_ec0ey")]
 z_index = 10

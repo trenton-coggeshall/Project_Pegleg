@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw1v2xxh1xb4f"]
+
+[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_h6fvy"]
+[ext_resource type="Script" path="res://ai/ai_ship.gd" id="1_t4vct"]
+[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://anchor.png" id="2_ojbtm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40ts"]
+radius = 20.0
+height = 80.0
+
+[node name="AI_Ship" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_t4vct")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.356863, 0.352941, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("1_h6fvy")
+
+[node name="Anchor" type="Sprite2D" parent="Sprite2D"]
+visible = false
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ojbtm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_j40ts")
