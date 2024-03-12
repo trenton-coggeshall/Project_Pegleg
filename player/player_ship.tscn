@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dles4x7stbjs3"]
+[gd_scene load_steps=7 format=3 uid="uid://dles4x7stbjs3"]
 
 [ext_resource type="PackedScene" uid="uid://kr3hxcmrgi8o" path="res://Player/cannonball.tscn" id="1_7u48p"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_q6hqy"]
+[ext_resource type="Texture2D" uid="uid://b7y5o14pgwqfq" path="res://Assets/Images/CannonBall.webp" id="4_jiywo"]
 
 [sub_resource type="GDScript" id="GDScript_5pico"]
 script/source = "extends CharacterBody2D
@@ -81,15 +82,15 @@ func handle_interact():
 	if near_port and Input.is_action_just_pressed('interact'):
 		transaction_screen.show_transaction()
 
-func handle_shooting(_delta):
+func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
-		shoot()
+		shoot(delta)
 		
-func shoot():
+func shoot(delta):
 	var projectile = Cannonball.instantiate()
 	owner.add_child(projectile)
-	projectile.transform = ($Marker2D.global_transform)
-	print(\"PEW\")
+	projectile.global_transform = $Marker2D.global_transform
+	projectile.velocity = velocity * delta
 
 func set_near_port(is_near, port):
 	near_port = is_near
@@ -123,3 +124,7 @@ zoom = Vector2(0.25, 0.25)
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(30, 0)
 scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+visible = false
+texture = ExtResource("4_jiywo")
