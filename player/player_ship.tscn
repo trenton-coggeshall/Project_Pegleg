@@ -40,13 +40,14 @@ func _ready():
 	Signals.show_ui.emit()
 
 func _physics_process(delta):
+	handle_anchor(delta)
+	handle_shooting(delta)
 	handle_rotation(delta)
 	handle_sails(delta)
 	handle_interact()
 	move_and_slide()
-	handle_anchor(delta)
-	handle_shooting(delta)
-	
+
+		
 	#Update speed on player UI
 	Signals.speed_changed.emit(floor(current_speed/1000.0))
 
@@ -84,13 +85,10 @@ func handle_interact():
 
 func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
-		shoot(delta)
-		
-func shoot(delta):
-	var projectile = Cannonball.instantiate()
-	owner.add_child(projectile)
-	projectile.global_transform = $Marker2D.global_transform
-	projectile.velocity = velocity * delta
+		var projectile = Cannonball.instantiate()
+		owner.add_child(projectile)
+		projectile.velocity = velocity * delta
+		projectile.transform = $Marker2D.global_transform
 
 func set_near_port(is_near, port):
 	near_port = is_near
