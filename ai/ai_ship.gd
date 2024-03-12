@@ -19,7 +19,7 @@ var current_speed = 0
 var near_port = false
 var current_port = null
 
-var destination = WorldGlobals.ports[0]
+var destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
 var path : Array
 var port_index = 0
 
@@ -38,6 +38,9 @@ func _physics_process(delta):
 
 func handle_navigation(delta):
 	if len(path) > 0:
-		position = position.move_toward(world_tiles.map_to_local(path[0]), 5 * delta)
+		position = position.move_toward(world_tiles.map_to_local(path[0]), 500 * delta)
 		if position.distance_to(world_tiles.map_to_local(path[0])) < 0.5:
 			path.pop_front()
+	else:
+		destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
+		path = path_finder.find_path(world_tiles.local_to_map(position), destination)

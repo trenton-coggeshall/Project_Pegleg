@@ -9,8 +9,8 @@ extends Control
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 const CHUNK_TILES = preload("res://world_generation/chunk_tiles.tscn")
 
-var map_width = 256
-var map_height = 256
+var map_width = 1024
+var map_height = 512
 var chunk_size = 512
 
 var moisture = FastNoiseLite.new()
@@ -25,12 +25,13 @@ var tiles = [[WorldGlobals.TileType.DARK_GRASS, WorldGlobals.TileType.DARK_GRASS
 
 var img = Image.create(map_width, map_height, false, Image.FORMAT_RGBA8)
 
-var port_count = 4
+var port_count = 20
 var water_tiles = []
 
 func _ready():
 	Signals.hide_ui.emit()
-	pass
+	WorldGlobals.map_width = map_width
+	WorldGlobals.map_height = map_height
 
 
 # Using this for UI debug

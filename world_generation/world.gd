@@ -17,8 +17,10 @@ func _ready():
 	add_child(tiles)
 	tiles.initialize()
 	
-	var ai_ship = AI_SHIP.instantiate()
-	add_child(ai_ship)
+	for i in range(len(WorldGlobals.ports)):
+		var ai_ship = AI_SHIP.instantiate()
+		ai_ship.position = tiles.map_to_local(WorldGlobals.ports[i])
+		add_child(ai_ship)
 
 
 func _process(delta):
