@@ -1,0 +1,128 @@
+[gd_scene load_steps=7 format=3 uid="uid://dles4x7stbjs3"]
+
+[ext_resource type="PackedScene" uid="uid://kr3hxcmrgi8o" path="res://Player/cannonball.tscn" id="1_7u48p"]
+[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
+[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_q6hqy"]
+[ext_resource type="Texture2D" uid="uid://b7y5o14pgwqfq" path="res://Assets/Images/CannonBall.webp" id="4_jiywo"]
+
+[sub_resource type="GDScript" id="GDScript_5pico"]
+script/source = "extends CharacterBody2D
+
+@onready var transaction_screen = $\"../CanvasLayer/TransactionScreen\"
+
+#+------------------+
+#| Ship stat values |
+#+------------------+
+
+# Speed
+const max_speed = 50000
+const acceleration = 10000
+const anchor_acceleration = 50000
+const max_furled_speed = 25000
+const furled_acceleration = 5000
+const turn_speed = 3
+const anchorspeed = 0
+
+# Status
+var anchored = false
+var furled = false
+var current_speed = 0
+var near_port = false
+var current_port = null
+
+#+-------------+
+#| Combat info |
+#+-------------+
+@export var Cannonball:PackedScene
+
+
+func _ready():
+	Signals.show_ui.emit()
+
+func _physics_process(delta):
+	handle_anchor(delta)
+	handle_shooting(delta)
+	handle_rotation(delta)
+	handle_sails(delta)
+	handle_interact()
+	move_and_slide()
+
+		
+	#Update speed on player UI
+	Signals.speed_changed.emit(floor(current_speed/1000.0))
+
+func handle_rotation(delta):
+	var turn_delta = Input.get_axis('left', 'right') * turn_speed * delta
+	rotate(turn_delta)
+
+func handle_sails(delta):
+	if furled:
+		if Input.is_action_just_pressed('up'):
+			furled = false
+		current_speed = move_toward(current_speed, max_furled_speed, furled_acceleration * delta)
+	else:
+		if Input.is_action_just_pressed('down'):
+			furled = true
+		current_speed = move_toward(current_speed, max_speed, acceleration * delta)
+	
+	velocity = -transform.y * current_speed * delta
+	
+func handle_anchor(delta):
+	if anchored:
+		if Input.is_action_just_pressed('anchor'):
+			anchored = false
+			furled = true
+			$Sprite2D/Anchor.visible = false
+		current_speed = move_toward(current_speed, 0, anchor_acceleration * delta)
+	else:
+		if Input.is_action_just_pressed('anchor'):
+			anchored = true
+			$Sprite2D/Anchor.visible = true
+
+func handle_interact():
+	if near_port and Input.is_action_just_pressed('interact'):
+		transaction_screen.show_transaction()
+
+func handle_shooting(delta):
+	if Input.is_action_just_pressed('shoot'):
+		var projectile = Cannonball.instantiate()
+		owner.add_child(projectile)
+		projectile.velocity = velocity * delta
+		projectile.transform = $Marker2D.global_transform
+
+func set_near_port(is_near, port):
+	near_port = is_near
+	Player.current_port = port
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]
+radius = 20.0
+height = 80.0
+
+[node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
+script = SubResource("GDScript_5pico")
+Cannonball = ExtResource("1_7u48p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_vnj8m")
+
+[node name="Anchor" type="Sprite2D" parent="Sprite2D"]
+visible = false
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_q6hqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_ru18s")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(30, 0)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+visible = false
+texture = ExtResource("4_jiywo")
