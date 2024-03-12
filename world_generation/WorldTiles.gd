@@ -12,7 +12,7 @@ var factionColors = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for n in 40:
+	for n in len(WorldGlobals.ports):
 		portNames.append("Port" + str(n+1))
 
 

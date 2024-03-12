@@ -124,6 +124,34 @@ stretch_mode = 4
 flip_v = true
 metadata/_edit_use_anchors_ = true
 
+[node name="WorldSizeLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.269965
+anchor_top = 0.794753
+anchor_right = 0.376736
+anchor_bottom = 0.830247
+text = "World Size"
+metadata/_edit_use_anchors_ = true
+
+[node name="WorldSizeOptions" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 403.0
+offset_top = 510.0
+offset_right = 512.0
+offset_bottom = 541.0
+item_count = 4
+selected = 0
+popup/item_0/text = "Tiny"
+popup/item_0/id = 0
+popup/item_1/text = "Small"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "Large"
+popup/item_3/id = 3
+
 [connection signal="pressed" from="GenerateButton" to="." method="_on_generate_button_pressed"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TestWorldButton" to="." method="_on_test_world_button_pressed"]
+[connection signal="item_selected" from="WorldSizeOptions" to="." method="_on_world_size_options_item_selected"]
