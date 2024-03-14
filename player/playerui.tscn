@@ -169,9 +169,10 @@ offset_bottom = 377.0
 text = "Settings"
 
 [node name="settingsWindow" parent="CanvasLayer" instance=ExtResource("9_ciqn1")]
-offset_left = 366.173
-offset_top = 200.959
-offset_right = 603.173
-offset_bottom = 346.959
+visible = false
+offset_left = 471.0
+offset_top = 69.0
+offset_right = 708.0
+offset_bottom = 215.0
 
 [connection signal="pressed" from="CanvasLayer/SettingsButton" to="." method="_on_settings_button_pressed"]
