@@ -28,7 +28,7 @@ font_size = 50
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Control" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "healthBar", "damageBar", "settingsButton", "settingsWindow")]
+[node name="Control" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "healthBar", "damageBar")]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -39,8 +39,6 @@ speedLabel = NodePath("CanvasLayer/UserInfoPatch/SpeedLabel")
 usernameLabel = NodePath("CanvasLayer/UserInfoPatch/Username")
 healthBar = NodePath("CanvasLayer/UserInfoPatch/HealthBar")
 damageBar = NodePath("CanvasLayer/UserInfoPatch/HealthBar/DamageBar")
-settingsButton = NodePath("CanvasLayer/SettingsButton")
-settingsWindow = NodePath("CanvasLayer/settingsWindow")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
