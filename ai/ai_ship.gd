@@ -27,8 +27,6 @@ var port_index = 0
 func _ready():
 	path = path_finder.find_path(world_tiles.local_to_map(position), destination)
 	print(len(path))
-	print("Ship pos: ", world_tiles.local_to_map(position))
-	print("Destination: ", destination)
 
 
 func _physics_process(delta):
