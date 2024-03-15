@@ -9,8 +9,10 @@ extends Control
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 const CHUNK_TILES = preload("res://world_generation/chunk_tiles.tscn")
 
-var map_width = 1024
-var map_height = 512
+
+var map_width = 256
+var map_height = 256
+
 var chunk_size = 512
 
 var moisture = FastNoiseLite.new()
@@ -25,7 +27,9 @@ var tiles = [[WorldGlobals.TileType.DARK_GRASS, WorldGlobals.TileType.DARK_GRASS
 
 var img = Image.create(map_width, map_height, false, Image.FORMAT_RGBA8)
 
-var port_count = 20
+
+var port_count = 4
+
 var water_tiles = []
 
 func _ready():
@@ -42,6 +46,7 @@ func _process(_delta):
 
 func generate_map():
 	play_button.disabled = true
+	water_tiles.clear()
 	
 	var map_tiles : Array
 	
@@ -118,3 +123,23 @@ func _on_play_button_pressed():
 
 func _on_test_world_button_pressed():
 	get_tree().change_scene_to_file("res://world_generation/PreBuiltWorld.tscn")
+
+
+func _on_world_size_options_item_selected(index):
+	match index:
+		0:
+			map_width = 256
+			map_height = 256
+			port_count = 4
+		1: 
+			map_width = 512
+			map_height = 256
+			port_count = 8
+		2:
+			map_width = 1024
+			map_height = 512
+			port_count = 20
+		3: 
+			map_width = 2048
+			map_height = 1024
+			port_count = 40

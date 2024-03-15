@@ -23,6 +23,6 @@ func _ready():
 		add_child(ai_ship)
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
