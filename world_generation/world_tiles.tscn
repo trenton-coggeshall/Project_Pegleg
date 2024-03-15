@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk8vvi3gayig8"]
+[gd_scene load_steps=6 format=3 uid="uid://bk8vvi3gayig8"]
 
 [ext_resource type="Texture2D" uid="uid://c53rc2o2fs36w" path="res://world_generation/temp_tiles.png" id="1_pjgv6"]
 [ext_resource type="Script" path="res://world_generation/WorldTiles.gd" id="1_rk5rh"]
+[ext_resource type="PackedScene" uid="uid://2t4qsehwpv24" path="res://ai/path_finder.tscn" id="3_ktxcw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yl5ib"]
 texture = ExtResource("1_pjgv6")
@@ -74,3 +75,5 @@ sources/0 = SubResource("TileSetAtlasSource_yl5ib")
 tile_set = SubResource("TileSet_j6acj")
 format = 2
 script = ExtResource("1_rk5rh")
+
+[node name="path_finder" parent="." instance=ExtResource("3_ktxcw")]
