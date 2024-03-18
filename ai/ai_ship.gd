@@ -30,7 +30,6 @@ func _ready():
 func _physics_process(delta):
 	handle_navigation(delta)
 	move_and_slide()
-	print(current_port)
 
 
 func handle_navigation(delta):
