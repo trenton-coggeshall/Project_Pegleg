@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw1v2xxh1xb4f"]
+[gd_scene load_steps=6 format=3 uid="uid://dw1v2xxh1xb4f"]
 
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_h6fvy"]
 [ext_resource type="Script" path="res://ai/ai_ship.gd" id="1_t4vct"]
-[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://anchor.png" id="2_ojbtm"]
+[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="2_ojbtm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40ts"]
 radius = 20.0
 height = 80.0
 
-[node name="AI_Ship" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gclm"]
+size = Vector2(37, 75)
+
+[node name="AI_Ship" type="CharacterBody2D" groups=["ai_ship"]]
 z_index = 5
 script = ExtResource("1_t4vct")
 
@@ -26,3 +29,9 @@ texture = ExtResource("2_ojbtm")
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_j40ts")
 disabled = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["ai_ship"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_4gclm")

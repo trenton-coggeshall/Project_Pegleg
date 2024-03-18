@@ -2,6 +2,8 @@ extends TileMap
 
 const PORT = preload("res://world_generation/port.tscn")
 
+@onready var path_finder = $path_finder
+
 var portNames:Array
 var factions = ["RedTeam", "GreenTeam", "BlueTeam"]
 var factionColors = {
@@ -9,6 +11,8 @@ var factionColors = {
 	"GreenTeam" = "#2fb26e",
 	"BlueTeam" = "#547ee7"
 }
+
+var ports : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,7 +49,7 @@ func initialize():
 		var rand = rng.randi_range(0, portNames.size()-1)
 		port.name = portNames[rand]
 		portNames.remove_at(rand)
-		
+		ports[port.name] = port
 		add_child(port)
 
 	var ports = get_tree().get_nodes_in_group("Ports")
@@ -89,3 +93,23 @@ func initialize():
 		for i in range(closest_ports.size()):
 			print(closest_ports[i][0].name + " - " + str(closest_ports[i][1]) + " - " + closest_ports[i][0].get_faction())
 		"""
+	
+	find_port_routes()
+	
+	for port in ports:
+		port.spawn_ship()
+
+func find_port_routes():
+	var names = ports.keys()
+	
+	for i in range(len(ports) - 1):
+		var p_name = names.pop_back()
+		for n in names:
+			var path = path_finder.find_path(local_to_map(ports[p_name].position), local_to_map(ports[n].position))
+			# Uncomment to draw paths on map
+			#for p in path:
+				#set_cell(0, p, 0, Vector2i())
+			ports[p_name].paths[n] = path
+			var other_path = path.duplicate()
+			other_path.reverse()
+			ports[n].paths[p_name] = other_path

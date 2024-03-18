@@ -7,7 +7,6 @@ var astar_grid : AStarGrid2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_grid()
-	#print(find_path(Vector2i(0, 0), Vector2i(71, 125)))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

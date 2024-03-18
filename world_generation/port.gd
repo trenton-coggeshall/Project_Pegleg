@@ -1,12 +1,15 @@
 extends Node2D
 
-var location
+const AI_SHIP = preload("res://ai/ai_ship.tscn")
+
+var location : Vector2i
 var gold = 1000
 var goods : Dictionary
 var prices : Dictionary
 var demand : Dictionary
 var production : Dictionary
 var faction = "none"
+var paths : Dictionary
 
 
 func _ready():
@@ -18,6 +21,13 @@ func _process(_delta):
 
 func get_faction():
 	return faction
+
+
+func spawn_ship():
+	var ai_ship = AI_SHIP.instantiate()
+	ai_ship.path = random_path()
+	add_child(ai_ship)
+
 
 func set_faction(value):
 	faction = value;
@@ -96,3 +106,20 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	if body.is_in_group("Player"):
 		body.set_near_port(false, null)
+
+
+func random_path():
+	var key = paths.keys()[randi() % len(paths.keys())]
+	return paths[key].duplicate()
+
+
+func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	print("Entered")
+	if area.is_in_group("ai_ship"):
+		print("heck yeah")
+		area.get_parent().current_port = self
+
+
+func _on_area_2d_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("ai_ship"):
+		area.get_parent().current_port = null

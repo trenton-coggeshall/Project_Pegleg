@@ -143,3 +143,6 @@ func _on_world_size_options_item_selected(index):
 			map_width = 2048
 			map_height = 1024
 			port_count = 40
+	
+	WorldGlobals.map_width = map_width
+	WorldGlobals.map_height = map_height
