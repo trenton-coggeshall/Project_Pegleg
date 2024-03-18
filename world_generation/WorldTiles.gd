@@ -40,6 +40,8 @@ func initialize():
 					set_cell(0, Vector2i(x, y), 0, Vector2i(1, 2))
 				WorldGlobals.TileType.DARK_GRASS:
 					set_cell(0, Vector2i(x, y), 0, Vector2i(1, 1))
+				WorldGlobals.TileType.SHALLOWS:
+					set_cell(0, Vector2i(x, y), 0, Vector2i(3, 3))
 	
 	for loc in WorldGlobals.ports:
 		var port = PORT.instantiate()

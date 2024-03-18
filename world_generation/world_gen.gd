@@ -59,8 +59,11 @@ func generate_map():
 			
 			if alt < 2:
 				water_tiles.append(Vector2i(x, y))
-				y_tiles.append(WorldGlobals.TileType.WATER)
 				img.set_pixel(x + position.x, y + position.y, Color.BLUE) #water
+				if alt < 1:
+					y_tiles.append(WorldGlobals.TileType.WATER)
+				else:
+					y_tiles.append(WorldGlobals.TileType.SHALLOWS)
 			elif alt < 2.3 and moist < 2:
 				y_tiles.append(WorldGlobals.TileType.SAND)
 				#chunk.possible_ports.append(Vector2i(x, y))
@@ -88,13 +91,13 @@ func place_ports():
 		var dir = directions[randi() % len(directions)]
 		var dist = 0
 		
-		while WorldGlobals.tiles[loc.x][loc.y] == WorldGlobals.TileType.WATER:
+		while WorldGlobals.tiles[loc.x][loc.y] == WorldGlobals.TileType.WATER or WorldGlobals.tiles[loc.x][loc.y] == WorldGlobals.TileType.SHALLOWS:
 			loc += dir
 			dist += 1
 			if loc.x < 0 or loc.x >= map_width or loc.y < 0 or loc.y >= map_height:
 				break
 			
-			if WorldGlobals.tiles[loc.x][loc.y] != WorldGlobals.TileType.WATER:
+			if WorldGlobals.tiles[loc.x][loc.y] != WorldGlobals.TileType.WATER and WorldGlobals.tiles[loc.x][loc.y] != WorldGlobals.TileType.SHALLOWS:
 				if dist < 20:
 					break
 				var valid_placement = true
