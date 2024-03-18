@@ -114,9 +114,7 @@ func random_path():
 
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	print("Entered")
 	if area.is_in_group("ai_ship"):
-		print("heck yeah")
 		area.get_parent().current_port = self
 
 
