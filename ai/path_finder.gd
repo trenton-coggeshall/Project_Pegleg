@@ -7,7 +7,6 @@ var astar_grid : AStarGrid2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_grid()
-	#print(find_path(Vector2i(0, 0), Vector2i(71, 125)))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,7 +25,9 @@ func init_grid() -> void:
 	for i in range(astar_grid.size.x):
 		for j in range(astar_grid.size.y):
 			var tile_type = WorldGlobals.tiles[i][j]
-			astar_grid.set_point_solid(Vector2i(i, j), tile_type != WorldGlobals.TileType.WATER)
+			astar_grid.set_point_solid(Vector2i(i, j), tile_type != WorldGlobals.TileType.WATER and tile_type != WorldGlobals.TileType.SHALLOWS)
+			if WorldGlobals.tiles[i][j] == WorldGlobals.TileType.SHALLOWS:
+				astar_grid.set_point_weight_scale(Vector2i(i, j), 2)
 
 
 func find_path(start, end):

@@ -5,7 +5,8 @@ enum TileType {
 	SAND,
 	LIGHT_GRASS,
 	MED_GRASS,
-	DARK_GRASS
+	DARK_GRASS,
+	SHALLOWS
 }
 
 # var chunks : Array
