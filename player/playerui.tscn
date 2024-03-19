@@ -28,7 +28,7 @@ font_size = 50
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Control" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "healthBar", "damageBar", "settingsButton", "settingsWindow")]
+[node name="Control2" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "goldLabel", "healthBar", "damageBar", "settingsButton", "settingsWindow")]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -37,6 +37,7 @@ offset_bottom = 40.0
 script = ExtResource("1_imq6e")
 speedLabel = NodePath("CanvasLayer/UserInfoPatch/SpeedLabel")
 usernameLabel = NodePath("CanvasLayer/UserInfoPatch/Username")
+goldLabel = NodePath("CanvasLayer/UserInfoPatch/GoldLabel")
 healthBar = NodePath("CanvasLayer/UserInfoPatch/HealthBar")
 damageBar = NodePath("CanvasLayer/UserInfoPatch/HealthBar/DamageBar")
 settingsButton = NodePath("CanvasLayer/SettingsButton")
@@ -106,7 +107,7 @@ offset_left = 234.375
 offset_top = 15.6251
 offset_right = 728.375
 offset_bottom = 109.625
-text = "UserError"
+text = "Player"
 label_settings = SubResource("LabelSettings_lidim")
 horizontal_alignment = 1
 
@@ -116,6 +117,17 @@ offset_left = 871.0
 offset_top = 111.0
 offset_right = 958.0
 offset_bottom = 180.0
+text = "0"
+label_settings = SubResource("LabelSettings_al4go")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldLabel" type="Label" parent="CanvasLayer/UserInfoPatch"]
+layout_mode = 0
+offset_left = 871.0
+offset_top = 20.0
+offset_right = 958.0
+offset_bottom = 89.0
 text = "0"
 label_settings = SubResource("LabelSettings_al4go")
 horizontal_alignment = 1
@@ -170,9 +182,5 @@ text = "Settings"
 
 [node name="settingsWindow" parent="CanvasLayer" instance=ExtResource("9_ciqn1")]
 visible = false
-offset_left = 471.0
-offset_top = 69.0
-offset_right = 708.0
-offset_bottom = 215.0
 
 [connection signal="pressed" from="CanvasLayer/SettingsButton" to="." method="_on_settings_button_pressed"]
