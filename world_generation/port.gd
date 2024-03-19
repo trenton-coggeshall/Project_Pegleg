@@ -13,6 +13,7 @@ var paths : Dictionary
 
 
 func _ready():
+	EconomyGlobals.port_prices[name] = prices
 	initialize()
 
 

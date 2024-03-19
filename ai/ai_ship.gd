@@ -19,6 +19,9 @@ var current_speed = 0
 var near_port = false
 var current_port = null
 
+var gold = 100
+var inventory : Dictionary
+
 var destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
 var path : Array
 
