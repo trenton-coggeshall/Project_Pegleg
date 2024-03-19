@@ -2,6 +2,7 @@ extends Control
 
 @export var speedLabel:Label
 @export var usernameLabel:Label
+@export var goldLabel:Label
 
 @export var healthBar:TextureProgressBar
 @export var damageBar:TextureProgressBar
@@ -14,6 +15,7 @@ func _ready():
 	Signals.hide_ui.connect(hide_UI)
 	Signals.show_ui.connect(show_UI)
 	Signals.speed_changed.connect(update_speed)
+	Signals.gold_changed.connect(update_gold)
 	Signals.username_changed.connect(set_username)
 	
 	Signals.player_damaged.connect(player_damaged)
@@ -35,6 +37,9 @@ func show_UI():
 func update_speed(value):
 	speedLabel.text = str(value)
 
+func update_gold(value):
+	goldLabel.text = str(value)
+
 func set_username(value):
 	usernameLabel.text = value
 	
@@ -50,7 +55,7 @@ func _on_settings_button_pressed():
 
 	var closedPosition = Vector2(450, -500)
 	var openPosition = Vector2(450, 60)
-	var tween = create_tween()
+	var tween = get_tree().create_tween()
 	if !settingsWindow.visible: # Open settings
 		settingsWindow.visible = true
 		settingsButton.disabled = true

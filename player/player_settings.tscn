@@ -1,13 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://blcn84hidsyyp"]
-
-[ext_resource type="Script" path="res://player/player_settings.gd" id="1_coj2i"]
+[gd_scene format=3 uid="uid://blcn84hidsyyp"]
 
 [node name="settingsWindow" type="Panel"]
 offset_left = 450.0
-offset_top = 220.0
+offset_top = -500.0
 offset_right = 687.0
-offset_bottom = 366.0
-script = ExtResource("1_coj2i")
+offset_bottom = -354.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -30,12 +27,18 @@ offset_bottom = 115.0
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
+flat = true
 
 [node name="CheckButton2" type="CheckButton" parent="VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
+flat = true
 
 [node name="CheckButton3" type="CheckButton" parent="VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
+flat = true
 
 [node name="closeButton" type="Button" parent="."]
 modulate = Color(1, 0.0862745, 0.0627451, 1)

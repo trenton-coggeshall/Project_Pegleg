@@ -15,3 +15,12 @@ var current_port = null
 func _ready():
 	for good in EconomyGlobals.GoodType.values():
 		inventory[good] = 0 
+	Signals.gold_changed.emit(gold)
+
+func add_gold(amt):
+	gold += amt
+	Signals.gold_changed.emit(gold)
+
+func remove_gold(amt):
+	gold -= amt
+	Signals.gold_changed.emit(gold)
