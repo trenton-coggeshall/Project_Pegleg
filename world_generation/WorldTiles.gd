@@ -3,6 +3,8 @@ extends TileMap
 const PORT = preload("res://world_generation/port.tscn")
 
 @onready var path_finder = $path_finder
+@onready var map_border = $map_border
+@onready var border_tiles = $border_tiles
 
 var portNames:Array
 var factions = ["RedTeam", "GreenTeam", "BlueTeam"]
@@ -16,6 +18,7 @@ var ports : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	map_border.size = Vector2(WorldGlobals.map_width * 16 + 640, WorldGlobals.map_height * 16 + 640)
 	for n in len(WorldGlobals.ports):
 		portNames.append("Port" + str(n+1))
 
@@ -26,6 +29,14 @@ func _process(_delta):
 
 
 func initialize():
+	for x in range(-1, WorldGlobals.map_width):
+		border_tiles.set_cell(0, Vector2i(x, -1), 0, Vector2i(0, 0))
+		border_tiles.set_cell(0, Vector2i(x, WorldGlobals.map_height), 0, Vector2i(0, 0))
+	
+	for y in range(-1, WorldGlobals.map_height):
+		border_tiles.set_cell(0, Vector2i(-1, y), 0, Vector2i(0, 0))
+		border_tiles.set_cell(0, Vector2i(WorldGlobals.map_width, y), 0, Vector2i(0, 0))
+	
 	var tiles = WorldGlobals.tiles
 	for x in range(len(tiles)):
 		for y in range(len(tiles[x])):

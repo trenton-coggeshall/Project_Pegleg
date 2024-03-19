@@ -5,11 +5,15 @@ var max_zoom = Vector2(2, 2)
 var min_zoom = Vector2(0.1, 0.1)
 var current_zoom = zoom
 var zoom_speed = 5
+var edge_buffer = 20
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	limit_left = -edge_buffer * 16
+	limit_right = (WorldGlobals.map_width + edge_buffer) * 16
+	limit_top = -edge_buffer * 16
+	limit_bottom = (WorldGlobals.map_height + edge_buffer) * 16
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
