@@ -40,5 +40,13 @@ func find_arb(current_port):
 			best_price_diff = price_diff
 			good_type = good
 	
+	best_price_diff = 1
+	var other_port = ''
+	
 	for p in port_prices.keys():
-		pass
+		var price_diff = float(port_prices[p][good_type]) / float(base_prices[good_type])
+		if price_diff > best_price_diff:
+			best_price_diff = price_diff
+			other_port = p
+	
+	return [good_type, other_port]
