@@ -115,7 +115,7 @@ func random_path():
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("ai_ship"):
-		area.get_parent().current_port = self
+		area.get_parent().get_parent().current_port = self
 
 
 func _on_area_2d_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
@@ -123,4 +123,4 @@ func _on_area_2d_area_shape_exited(area_rid, area, area_shape_index, local_shape
 		return
 
 	if area.is_in_group("ai_ship"):
-		area.get_parent().current_port = null
+		area.get_parent().get_parent().current_port = null
