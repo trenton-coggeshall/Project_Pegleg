@@ -32,6 +32,9 @@ func make_purchase(good, quantity):
 		good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
 		$PortGold.text = 'Port gold: ' + str(Player.current_port.gold) + 'g'
 		$PlayerGold.text = 'Your gold: ' + str(Player.gold) + 'g'
+		
+		DiscordSDK.state = "Money: " + str(Player.gold) + "g"
+		DiscordSDK.refresh()
 
 
 func make_sale(good, quantity):
@@ -42,6 +45,9 @@ func make_sale(good, quantity):
 		good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
 		$PortGold.text = 'Port gold: ' + str(Player.current_port.gold) + 'g'
 		$PlayerGold.text = 'Your gold: ' + str(Player.gold) + 'g'
+		
+		DiscordSDK.state = "Money: " + str(Player.gold) + "g"
+		DiscordSDK.refresh()
 
 
 func _on_button_pressed():

@@ -44,5 +44,4 @@ func handle_navigation(delta):
 		if follownode.global_position.distance_to(world_tiles.map_to_local(path[0])) < 0.5:
 			path.pop_front()
 	elif current_port:
-		print("new path!")
 		path = current_port.random_path()
