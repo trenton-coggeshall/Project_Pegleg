@@ -101,11 +101,15 @@ func execute_sale(good, quantity, cost):
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
 		body.set_near_port(true, self)
+		DiscordSDK.details = ("Docked at " + self.name)
+		DiscordSDK.refresh()
 
 
 func _on_area_2d_body_exited(body):
 	if body.is_in_group("Player"):
 		body.set_near_port(false, null)
+		DiscordSDK.details = ("Sailing the high seas")
+		DiscordSDK.refresh()
 
 
 func random_path():
