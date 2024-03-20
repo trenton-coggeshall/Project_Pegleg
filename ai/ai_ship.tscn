@@ -35,3 +35,29 @@ disabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_4gclm")
+
+[node name="context_map" type="Node" parent="."]
+
+[node name="North" type="RayCast2D" parent="context_map"]
+target_position = Vector2(0, -100)
+
+[node name="Northeast" type="RayCast2D" parent="context_map"]
+target_position = Vector2(50, -50)
+
+[node name="East" type="RayCast2D" parent="context_map"]
+target_position = Vector2(100, 0)
+
+[node name="Southeast" type="RayCast2D" parent="context_map"]
+target_position = Vector2(50, 50)
+
+[node name="South" type="RayCast2D" parent="context_map"]
+target_position = Vector2(0, 100)
+
+[node name="Southwest" type="RayCast2D" parent="context_map"]
+target_position = Vector2(-50, 50)
+
+[node name="West" type="RayCast2D" parent="context_map"]
+target_position = Vector2(-100, 0)
+
+[node name="Northwest" type="RayCast2D" parent="context_map"]
+target_position = Vector2(-50, -50)
