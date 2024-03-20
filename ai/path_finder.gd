@@ -17,7 +17,7 @@ func _process(delta):
 func init_grid() -> void:
 	astar_grid = AStarGrid2D.new()
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
-	astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_OCTILE
 	astar_grid.size = Vector2i(WorldGlobals.map_width, WorldGlobals.map_height)
 	astar_grid.cell_size = map_tiles.tile_set.tile_size
 	astar_grid.update()
