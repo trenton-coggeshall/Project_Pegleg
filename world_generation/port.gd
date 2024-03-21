@@ -16,11 +16,12 @@ func _ready():
 	initialize()
 
 
-func _process(_delta):
-	pass
-
 func get_faction():
 	return faction
+
+
+func set_faction(value):
+	faction = value;
 
 
 func spawn_ship():
@@ -28,9 +29,6 @@ func spawn_ship():
 	ai_ship.path = random_path()
 	add_child(ai_ship)
 
-
-func set_faction(value):
-	faction = value;
 
 # Returns the price of a good at a certain quantity
 func price_check(good, quantity):
