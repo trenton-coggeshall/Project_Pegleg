@@ -26,4 +26,9 @@ func init_grid() -> void:
 
 
 func find_path(start, end):
-	return astar_grid.get_id_path(start, end)
+	var map_path = astar_grid.get_id_path(map_tiles.local_to_map(start), map_tiles.local_to_map(end))
+	var local_path : Array
+	
+	for i in range(len(map_path)):
+		local_path.append(map_tiles.map_to_local(map_path[i]))
+	return local_path
