@@ -29,13 +29,14 @@ func handle_navigation(delta):
 	if len(path) > 0:
 		
 		# Move invisible node along A* path
-		pathnode.global_position = pathnode.global_position.move_toward(world_tiles.map_to_local(path[0]), max_speed * delta)
+
+		pathnode.global_position = pathnode.global_position.move_toward(path[0], max_speed * delta)
 		
 		# AI ship sprite lerps to node, not the path
 		aiship.look_at(pathnode.global_position)
 		aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
 		
-		if pathnode.global_position.distance_to(world_tiles.map_to_local(path[0])) < 0.5:
+		if pathnode.global_position.distance_to(path[0]) < 0.5:
 			path.pop_front()
 		
 	elif current_port:

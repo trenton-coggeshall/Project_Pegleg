@@ -118,7 +118,7 @@ func find_port_routes():
 	for i in range(len(ports) - 1):
 		var p_name = names.pop_back()
 		for n in names:
-			var path = path_finder.find_path(local_to_map(ports[p_name].position), local_to_map(ports[n].position))
+			var path = path_finder.find_path(ports[p_name].position, ports[n].position)
 			# Uncomment to draw paths on map
 			#for p in path:
 				#set_cell(0, p, 0, Vector2i())
