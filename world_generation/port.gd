@@ -26,8 +26,10 @@ func set_faction(value):
 
 func spawn_ship():
 	var ai_ship = AI_SHIP.instantiate()
+	ai_ship.name = self.name + "_AI_Ship"
 	ai_ship.path = random_path()
-	add_child(ai_ship)
+	get_parent().get_parent().add_child(ai_ship)
+	ai_ship.global_position = global_position
 
 
 # Returns the price of a good at a certain quantity
