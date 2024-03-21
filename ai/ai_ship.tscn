@@ -37,13 +37,13 @@ position = Vector2(0, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j40ts")
 
-[node name="Vision_Radius" type="Area2D" parent="Actual_Ship"]
+[node name="Detection_Radius" type="Area2D" parent="Actual_Ship"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship/Vision_Radius"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship/Detection_Radius"]
 scale = Vector2(20, 20)
 shape = SubResource("CircleShape2D_pnrlq")
 
-[node name="Sprite2D" type="Sprite2D" parent="Actual_Ship/Vision_Radius"]
+[node name="Sprite2D" type="Sprite2D" parent="Actual_Ship/Detection_Radius"]
 
 [node name="Pathfinding_Node" type="CharacterBody2D" parent="."]
 visible = false
