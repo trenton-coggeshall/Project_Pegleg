@@ -56,6 +56,7 @@ func _on_settings_button_pressed():
 	var closedPosition = Vector2(450, -500)
 	var openPosition = Vector2(450, 60)
 	var tween = get_tree().create_tween()
+	
 	if !settingsWindow.visible: # Open settings
 		settingsWindow.visible = true
 		settingsButton.disabled = true

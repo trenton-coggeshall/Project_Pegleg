@@ -9,11 +9,6 @@ func _ready():
 	init_grid()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func init_grid() -> void:
 	astar_grid = AStarGrid2D.new()
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
