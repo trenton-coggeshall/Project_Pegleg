@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw1v2xxh1xb4f"]
+
+[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_h6fvy"]
+[ext_resource type="Script" path="res://ai/ai_ship.gd" id="1_t4vct"]
+[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="2_ojbtm"]
+[ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="4_3irr0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40ts"]
+radius = 20.0
+height = 80.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gclm"]
+size = Vector2(37, 75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l08kp"]
+
+[node name="AI_Ship" type="CharacterBody2D" groups=["ai_ship"]]
+z_index = 5
+script = ExtResource("1_t4vct")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.356863, 0.352941, 1)
+rotation = 1.5708
+scale = Vector2(5, 5)
+texture = ExtResource("1_h6fvy")
+
+[node name="Anchor" type="Sprite2D" parent="Sprite2D"]
+visible = false
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ojbtm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_j40ts")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["ai_ship"]]
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_4gclm")
+
+[node name="context_map" type="Node" parent="."]
+
+[node name="North" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(0, -100)
+
+[node name="Northeast" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(50, -50)
+
+[node name="East" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(100, 0)
+
+[node name="Southeast" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(50, 50)
+
+[node name="South" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(0, 100)
+
+[node name="Southwest" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(-50, 50)
+
+[node name="West" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(-100, 0)
+
+[node name="Northwest" type="RayCast2D" parent="context_map"]
+rotation = 1.5708
+target_position = Vector2(-50, -50)
+
+[node name="follownode" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="follownode"]
+shape = SubResource("CircleShape2D_l08kp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="follownode"]
+position = Vector2(-0.500002, -0.750003)
+scale = Vector2(0.164063, 0.152344)
+texture = ExtResource("4_3irr0")

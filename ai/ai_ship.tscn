@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw1v2xxh1xb4f"]
+[gd_scene load_steps=7 format=3 uid="uid://dw1v2xxh1xb4f"]
 
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_h6fvy"]
 [ext_resource type="Script" path="res://ai/ai_ship.gd" id="1_t4vct"]
@@ -8,30 +8,46 @@
 radius = 20.0
 height = 80.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_l08kp"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gclm"]
 size = Vector2(37, 75)
 
-[node name="AI_Ship" type="CharacterBody2D" groups=["ai_ship"]]
-z_index = 5
+[node name="AI_Scene" type="Node2D"]
 script = ExtResource("1_t4vct")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AI_Ship" type="CharacterBody2D" parent="." groups=["ai_ship"]]
+z_index = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="AI_Ship"]
 modulate = Color(1, 0.356863, 0.352941, 1)
+rotation = 1.5708
 scale = Vector2(5, 5)
 texture = ExtResource("1_h6fvy")
 
-[node name="Anchor" type="Sprite2D" parent="Sprite2D"]
+[node name="Anchor" type="Sprite2D" parent="AI_Ship/Sprite2D"]
 visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_ojbtm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI_Ship"]
 position = Vector2(0, 1)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j40ts")
 disabled = true
 
-[node name="Area2D" type="Area2D" parent="." groups=["ai_ship"]]
+[node name="follownode" type="CharacterBody2D" parent="."]
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="follownode"]
+scale = Vector2(1.28112, 1.24626)
+shape = SubResource("CircleShape2D_l08kp")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="follownode" groups=["ai_ship"]]
+rotation = 1.5708
+scale = Vector2(0.722215, 0.361986)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="follownode/Area2D"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_4gclm")

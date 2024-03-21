@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dles4x7stbjs3"]
+[gd_scene load_steps=7 format=3 uid="uid://qjxvca13e7ka"]
 
 [ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://player/cannonball.tscn" id="1_7u48p"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
