@@ -2,7 +2,6 @@ extends Node2D
 
 # Object References
 @onready var world_tiles = $'../WorldTiles'
-@onready var path_finder = $'../WorldTiles/path_finder'
 
 @onready var pathnode = $Pathfinding_Node
 @onready var aiship = $Actual_Ship

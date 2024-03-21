@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dw1v2xxh1xb4f"]
+[gd_scene load_steps=8 format=3 uid="uid://dw1v2xxh1xb4f"]
 
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_h6fvy"]
 [ext_resource type="Script" path="res://ai/ai_ship.gd" id="1_t4vct"]
@@ -7,6 +7,8 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40ts"]
 radius = 20.0
 height = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnrlq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l08kp"]
 
@@ -34,7 +36,14 @@ texture = ExtResource("2_ojbtm")
 position = Vector2(0, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j40ts")
-disabled = true
+
+[node name="Vision_Radius" type="Area2D" parent="Actual_Ship"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship/Vision_Radius"]
+scale = Vector2(20, 20)
+shape = SubResource("CircleShape2D_pnrlq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Actual_Ship/Vision_Radius"]
 
 [node name="Pathfinding_Node" type="CharacterBody2D" parent="."]
 visible = false
