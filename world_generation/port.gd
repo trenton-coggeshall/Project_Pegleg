@@ -9,7 +9,7 @@ var prices : Dictionary
 var demand : Dictionary
 var production : Dictionary
 var faction = "none"
-@export var paths : Dictionary
+var paths : Dictionary
 
 
 func _ready():

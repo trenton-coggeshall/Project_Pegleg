@@ -21,7 +21,7 @@ var target = null
 const max_speed = 500
 
 var destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
-@export var path : Array
+var path : Array
 
 
 func _physics_process(delta):
@@ -30,11 +30,11 @@ func _physics_process(delta):
 
 func handle_navigation(delta):
 	
-	if target: # Player in detection radius
-		pathnode.global_position = pathnode.global_position.move_toward(target.global_position, max_speed*delta)
-		aiship.look_at(pathnode.global_position)
-		aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
-		return
+	#if target: # Player in detection radius
+		#pathnode.global_position = pathnode.global_position.move_toward(target.global_position, max_speed*delta)
+		#aiship.look_at(pathnode.global_position)
+		#aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
+		#return
 	
 	if len(path) > 0:
 		# Move invisible node along A* path
