@@ -21,7 +21,7 @@ var target = null
 const max_speed = 500
 
 var destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
-var path : Array
+@export var path : Array
 
 
 func _physics_process(delta):
