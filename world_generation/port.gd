@@ -26,8 +26,10 @@ func set_faction(value):
 
 func spawn_ship():
 	var ai_ship = AI_SHIP.instantiate()
+	ai_ship.name = self.name + "_AI_Ship"
 	ai_ship.path = random_path()
-	add_child(ai_ship)
+	get_parent().get_parent().add_child(ai_ship)
+	ai_ship.global_position = global_position
 
 
 # Returns the price of a good at a certain quantity
@@ -104,8 +106,9 @@ func _on_area_2d_body_entered(body):
 
 
 func _on_area_2d_body_exited(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and Player.current_port == self:
 		body.set_near_port(false, null)
+		Signals.player_left_port.emit()
 		DiscordSDK.details = ("Sailing the high seas")
 		DiscordSDK.refresh()
 
@@ -124,5 +127,5 @@ func _on_area_2d_area_shape_exited(area_rid, area, area_shape_index, local_shape
 	if not area:
 		return
 
-	if area.is_in_group("ai_ship"):
+	if area.is_in_group("ai_ship") and area.get_parent().get_parent().current_port == self:
 		area.get_parent().get_parent().current_port = null

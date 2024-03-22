@@ -19,6 +19,7 @@ func _ready():
 	tiles.initialize()
 	
 	player_ship.position = tiles.map_to_local(WorldGlobals.ports[0])
+
 	
 	#for i in range(len(WorldGlobals.ports)):
 		#var ai_ship = AI_SHIP.instantiate()

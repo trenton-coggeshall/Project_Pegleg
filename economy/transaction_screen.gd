@@ -9,6 +9,9 @@ var port
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	Signals.player_left_port.connect(_on_button_pressed)
+	
 	for good in EconomyGlobals.GoodType.values():
 		good_listings[good] = GOOD_LISTING.instantiate()
 		good_listings[good].set_title(EconomyGlobals.GoodType.find_key(good), good)
