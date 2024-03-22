@@ -106,8 +106,9 @@ func _on_area_2d_body_entered(body):
 
 
 func _on_area_2d_body_exited(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and Player.current_port == self:
 		body.set_near_port(false, null)
+		Signals.player_left_port.emit()
 		DiscordSDK.details = ("Sailing the high seas")
 		DiscordSDK.refresh()
 
@@ -126,5 +127,5 @@ func _on_area_2d_area_shape_exited(area_rid, area, area_shape_index, local_shape
 	if not area:
 		return
 
-	if area.is_in_group("ai_ship"):
+	if area.is_in_group("ai_ship") and area.get_parent().get_parent().current_port == self:
 		area.get_parent().get_parent().current_port = null

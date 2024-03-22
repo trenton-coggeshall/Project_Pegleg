@@ -104,7 +104,7 @@ func set_near_port(is_near, port):
 radius = 20.0
 height = 80.0
 
-[node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
+[node name="PlayerShip2" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_5pico")
 Cannonball = ExtResource("1_7u48p")
 

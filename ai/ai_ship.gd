@@ -30,9 +30,8 @@ func _physics_process(delta):
 
 func handle_navigation(delta):
 	
-	if target:
+	if target: # Player in detection radius
 		pathnode.global_position = pathnode.global_position.move_toward(target.global_position, max_speed*delta)
-		# AI ship sprite lerps to node, not the path
 		aiship.look_at(pathnode.global_position)
 		aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
 		return

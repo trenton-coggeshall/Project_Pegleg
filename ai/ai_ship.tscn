@@ -47,6 +47,7 @@ shape = SubResource("CircleShape2D_pnrlq")
 [node name="Sprite2D" type="Sprite2D" parent="Actual_Ship/Detection_Radius"]
 
 [node name="Pathfinding_Node" type="CharacterBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pathfinding_Node"]
 scale = Vector2(1.28112, 1.24626)
