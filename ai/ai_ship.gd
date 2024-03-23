@@ -7,7 +7,7 @@ extends Node2D
 @onready var pathnode = $Pathfinding_Node
 @onready var aiship = $Actual_Ship
 @onready var detect_radius = $Actual_Ship/Detection_Radius
-@onready var node_radius = $Pathfinding_Node/Area2D
+@onready var node_radius = $Pathfinding_Node/Node_Radius
 
 # Status
 var anchored = false
