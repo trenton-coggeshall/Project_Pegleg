@@ -7,6 +7,7 @@ var chunks : Array
 var tiles
 
 @onready var PlayerUI = get_node("/root/PlayerUI")
+@onready var player_ship = $PlayerShip
 
 func _ready():
 	#for i in len(WorldGlobals.chunks):
@@ -16,6 +17,9 @@ func _ready():
 	tiles = WORLD_TILES.instantiate()
 	add_child(tiles)
 	tiles.initialize()
+	
+	player_ship.position = tiles.map_to_local(WorldGlobals.ports[0])
+
 	
 	#for i in range(len(WorldGlobals.ports)):
 		#var ai_ship = AI_SHIP.instantiate()

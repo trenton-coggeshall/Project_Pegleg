@@ -17,21 +17,21 @@ func _ready():
 	initialize()
 
 
-func _process(_delta):
-	pass
-
 func get_faction():
 	return faction
 
 
-func spawn_ship():
-	var ai_ship = AI_SHIP.instantiate()
-	ai_ship.path = random_path()
-	add_child(ai_ship)
-
-
 func set_faction(value):
 	faction = value;
+
+
+func spawn_ship():
+	var ai_ship = AI_SHIP.instantiate()
+	ai_ship.name = self.name + "_AI_Ship"
+	ai_ship.path = random_path()
+	get_parent().get_parent().add_child(ai_ship)
+	ai_ship.global_position = global_position
+
 
 # Returns the price of a good at a certain quantity
 func price_check(good, quantity):
@@ -102,11 +102,16 @@ func execute_sale(good, quantity, cost):
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
 		body.set_near_port(true, self)
+		DiscordSDK.details = ("Docked at " + self.name)
+		DiscordSDK.refresh()
 
 
 func _on_area_2d_body_exited(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and Player.current_port == self:
 		body.set_near_port(false, null)
+		Signals.player_left_port.emit()
+		DiscordSDK.details = ("Sailing the high seas")
+		DiscordSDK.refresh()
 
 
 func random_path():
@@ -116,12 +121,12 @@ func random_path():
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("ai_ship"):
-		area.get_parent().current_port = self
+		area.get_parent().get_parent().current_port = self
 
 
 func _on_area_2d_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
 	if not area:
 		return
 
-	if area.is_in_group("ai_ship"):
-		area.get_parent().current_port = null
+	if area.is_in_group("ai_ship") and area.get_parent().get_parent().current_port == self:
+		area.get_parent().get_parent().current_port = null

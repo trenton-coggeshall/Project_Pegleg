@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dles4x7stbjs3"]
+[gd_scene load_steps=7 format=3 uid="uid://qjxvca13e7ka"]
 
-[ext_resource type="PackedScene" uid="uid://bj3rpiswf0d07" path="res://player/cannonball.tscn" id="1_7u48p"]
+[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://player/cannonball.tscn" id="1_7u48p"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_q6hqy"]
+[ext_resource type="Script" path="res://player/Camera2D.gd" id="4_3hkxc"]
 
 [sub_resource type="GDScript" id="GDScript_5pico"]
 script/source = "extends CharacterBody2D
@@ -50,11 +51,13 @@ func _physics_process(delta):
 	#Update speed on player UI
 	Signals.speed_changed.emit(floor(current_speed/1000.0))
 
+
 func handle_rotation(delta):
 	var turn_delta = Input.get_axis('left', 'right') * turn_speed * delta
 	rotate(turn_delta)
 
 func handle_sails(delta):
+	
 	if furled:
 		if Input.is_action_just_pressed('up'):
 			furled = false
@@ -63,6 +66,8 @@ func handle_sails(delta):
 		if Input.is_action_just_pressed('down'):
 			furled = true
 		current_speed = move_toward(current_speed, max_speed, acceleration * delta)
+		
+	if anchored: current_speed = move_toward(current_speed, 0, anchor_acceleration * delta)
 	
 	velocity = -transform.y * current_speed * delta
 	
@@ -72,7 +77,6 @@ func handle_anchor(delta):
 			anchored = false
 			furled = true
 			$Sprite2D/Anchor.visible = false
-		current_speed = move_toward(current_speed, 0, anchor_acceleration * delta)
 	else:
 		if Input.is_action_just_pressed('anchor'):
 			anchored = true
@@ -100,7 +104,7 @@ func set_near_port(is_near, port):
 radius = 20.0
 height = 80.0
 
-[node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
+[node name="PlayerShip2" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_5pico")
 Cannonball = ExtResource("1_7u48p")
 
@@ -119,6 +123,7 @@ shape = SubResource("CapsuleShape2D_ru18s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.25, 0.25)
+script = ExtResource("4_3hkxc")
 
 [node name="cannonRight" type="Marker2D" parent="." groups=["Player_cannons"]]
 position = Vector2(30, 0)

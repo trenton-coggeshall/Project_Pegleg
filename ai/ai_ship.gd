@@ -1,16 +1,13 @@
-extends CharacterBody2D
+extends Node2D
 
-@onready var world_tiles = $'../..'
-@onready var path_finder = $'../../path_finder'
+# Object References
+@onready var world_tiles = $'../WorldTiles'
+@onready var path_finder = $'../WorldTiles/path_finder'
 
-# Speed
-const max_speed = 50000
-const acceleration = 10000
-const anchor_acceleration = 50000
-const max_furled_speed = 25000
-const furled_acceleration = 5000
-const turn_speed = 3
-const anchorspeed = 0
+@onready var pathnode = $Pathfinding_Node
+@onready var aiship = $Actual_Ship
+@onready var detect_radius = $Actual_Ship/Detection_Radius
+@onready var node_radius = $Pathfinding_Node/Node_Radius
 
 # Status
 var anchored = false
@@ -18,6 +15,10 @@ var furled = false
 var current_speed = 0
 var near_port = false
 var current_port = null
+var target = null
+
+# Speed
+const max_speed = 500
 
 var gold = 100
 var inventory : Dictionary
@@ -26,19 +27,38 @@ var destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
 var path : Array
 
 
-func _ready():
-	pass
-
-
 func _physics_process(delta):
 	handle_navigation(delta)
-	move_and_slide()
-
+	pathnode.move_and_slide()
 
 func handle_navigation(delta):
+	
+	#if target: # Player in detection radius
+		#pathnode.global_position = pathnode.global_position.move_toward(target.global_position, max_speed*delta)
+		#aiship.look_at(pathnode.global_position)
+		#aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
+		#return
+	
 	if len(path) > 0:
-		global_position = global_position.move_toward(world_tiles.map_to_local(path[0]), 500 * delta)
-		if global_position.distance_to(world_tiles.map_to_local(path[0])) < 0.5:
+		# Move invisible node along A* path
+		pathnode.global_position = pathnode.global_position.move_toward(path[0], max_speed * delta)
+		
+		# AI ship sprite lerps to node, not the path
+		aiship.look_at(pathnode.global_position)
+		aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
+		
+		if pathnode.global_position.distance_to(path[0]) < 0.5:
 			path.pop_front()
+		
 	elif current_port:
 		path = current_port.random_path()
+
+
+func _on_detection_radius_body_entered(body):
+	if body.is_in_group("Player"):
+		target = body
+
+func _on_detection_radius_body_exited(body):
+	if body.is_in_group("Player"):
+		target = null
+		path = path_finder.find_path(pathnode.global_position, path[-1])

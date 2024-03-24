@@ -38,12 +38,6 @@ func _ready():
 	WorldGlobals.map_height = map_height
 
 
-# Using this for UI debug
-func _process(_delta):
-	if Input.is_action_just_pressed("debug"):
-		Signals.player_damaged.emit(10)
-
-
 func generate_map():
 	play_button.disabled = true
 	water_tiles.clear()
