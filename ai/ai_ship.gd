@@ -1,8 +1,8 @@
 extends Node2D
 
 # Object References
-@onready var world_tiles = $'../WorldTiles'
-@onready var path_finder = $'../WorldTiles/path_finder'
+@onready var world_tiles = $'../../WorldTiles'
+@onready var path_finder = $'../../WorldTiles/path_finder'
 
 @onready var pathnode = $Pathfinding_Node
 @onready var aiship = $Actual_Ship
@@ -23,8 +23,13 @@ const max_speed = 500
 var gold = 100
 var inventory : Dictionary
 
-var destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
+var destination = []
 var path : Array
+
+
+func _ready():
+	for good in EconomyGlobals.GoodType.values():
+		inventory[good] = 0 
 
 
 func _physics_process(delta):
@@ -49,9 +54,11 @@ func handle_navigation(delta):
 		
 		if pathnode.global_position.distance_to(path[0]) < 0.5:
 			path.pop_front()
-		
-	elif current_port:
-		path = current_port.random_path()
+
+
+func update_inventory(gold_change, good_type, good_change):
+	gold += gold_change
+	inventory[good_type] += good_change
 
 
 func _on_detection_radius_body_entered(body):

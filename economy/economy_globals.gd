@@ -32,13 +32,16 @@ var port_prices : Dictionary
 
 func find_arb(current_port):
 	var best_price_diff = 1
-	var good_type
+	var good_type = null
 	
 	for good in port_prices[current_port].keys():
 		var price_diff = float(base_prices[good]) / float(port_prices[current_port][good])
 		if price_diff > best_price_diff:
 			best_price_diff = price_diff
 			good_type = good
+	
+	if not good_type:
+		return null
 	
 	best_price_diff = 1
 	var other_port = ''

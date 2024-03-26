@@ -1,6 +1,6 @@
 extends Node2D
 
-const AI_SHIP = preload("res://ai/ai_ship.tscn")
+const MERCHANT_AI = preload("res://ai/merchant_ai.tscn")
 
 var location : Vector2i
 var gold = 1000
@@ -26,11 +26,12 @@ func set_faction(value):
 
 
 func spawn_ship():
-	var ai_ship = AI_SHIP.instantiate()
-	ai_ship.name = self.name + "_AI_Ship"
-	ai_ship.path = random_path()
-	get_parent().get_parent().add_child(ai_ship)
-	ai_ship.global_position = global_position
+	var merchant = MERCHANT_AI.instantiate()
+	merchant.name = self.name + "_AI_Ship"
+	get_parent().get_parent().add_child(merchant)
+	merchant.global_position = global_position
+	merchant.ai_ship.current_port = self
+	merchant.ai_ship.path = random_path()
 
 
 # Returns the price of a good at a certain quantity
@@ -69,9 +70,9 @@ func execute_purchase(good, quantity, cost):
 		print("Not enough goods in port inventory")
 		return false
 	
-	if Player.gold < cost:
-		print("Not enough player gold")
-		return
+	#if Player.gold < cost:
+		#print("Not enough player gold")
+		#return
 	
 	goods[good] -= quantity
 	gold += cost
