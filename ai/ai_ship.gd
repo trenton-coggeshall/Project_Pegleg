@@ -66,6 +66,7 @@ func _on_detection_radius_body_entered(body):
 		target = body
 
 func _on_detection_radius_body_exited(body):
+	return
 	if body.is_in_group("Player"):
 		target = null
 		path = path_finder.find_path(pathnode.global_position, path[-1])

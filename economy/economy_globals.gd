@@ -28,6 +28,7 @@ const demand_ranges = {
 }
 
 var port_prices : Dictionary
+var price_limit_coef = 5
 
 
 func find_arb(current_port):
@@ -51,5 +52,8 @@ func find_arb(current_port):
 		if price_diff > best_price_diff:
 			best_price_diff = price_diff
 			other_port = p
+	
+	if other_port == '':
+		return null
 	
 	return [good_type, other_port]

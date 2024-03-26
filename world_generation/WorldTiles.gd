@@ -109,15 +109,17 @@ func initialize():
 	
 	find_port_routes()
 	
-	for port in ports:
-		port.spawn_ship()
+	#for port in ports:
+		#port.spawn_ship()
+	
+	ports[0].spawn_ship()
+
 
 func find_port_routes():
 	var names = ports.keys()
 	
 	for i in range(len(ports) - 1):
 		var p_name = names.pop_back()
-		ports[p_name].paths[p_name] = []
 		for n in names:
 			var path = path_finder.find_path(ports[p_name].position, ports[n].position)
 			# Uncomment to draw paths on map

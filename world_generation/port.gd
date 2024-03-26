@@ -39,7 +39,7 @@ func price_check(good, quantity):
 	var base_price = EconomyGlobals.base_prices[good]
 	var flux = float(quantity + 1) / float(demand[good])
 	
-	return int(round(base_price / flux))
+	return clamp(int(round(base_price / flux)), 1, EconomyGlobals.price_limit_coef * base_price)
 
 
 # Sets the price of a good based on the current quantity held by the port
@@ -118,6 +118,10 @@ func _on_area_2d_body_exited(body):
 func random_path():
 	var key = paths.keys()[randi() % len(paths.keys())]
 	return paths[key].duplicate()
+
+
+func get_port_path(port_name):
+	return paths[port_name].duplicate()
 
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
