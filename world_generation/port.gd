@@ -9,6 +9,7 @@ var prices : Dictionary
 var demand : Dictionary
 var production : Dictionary
 var faction = "none"
+var region = "none"
 var paths : Dictionary
 
 
