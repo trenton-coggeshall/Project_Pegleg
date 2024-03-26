@@ -109,10 +109,8 @@ func initialize():
 	
 	find_port_routes()
 	
-	#for port in ports:
-		#port.spawn_ship()
-	
-	ports[0].spawn_ship()
+	for port in ports:
+		port.spawn_ship()
 
 
 func find_port_routes():

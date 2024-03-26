@@ -29,14 +29,14 @@ func make_purchase():
 	var trade_data = EconomyGlobals.find_arb(ai_ship.current_port.name)
 	
 	if not trade_data:
-		print("No trade data")
+		#print("No trade data")
 		ai_ship.path = ai_ship.current_port.random_path()
 		return
 	
 	current_good = trade_data[0]
 	sell_port = trade_data[1]
 	
-	print("Current port: " + ai_ship.current_port.name + " Sell Port: " + sell_port)
+	#print("Current port: " + ai_ship.current_port.name + " Sell Port: " + sell_port)
 	
 	var quantity = 0
 	while ai_ship.current_port.calculate_purchase(current_good, quantity + 1) < ai_ship.gold:
@@ -46,9 +46,9 @@ func make_purchase():
 	
 	ai_ship.current_port.execute_purchase(current_good, quantity, cost)
 	ai_ship.update_inventory(-cost, current_good, quantity)
-	print("Bought " + str(quantity) + ' ' + str(current_good) + ' for ' + str(cost) + ' gold.')
+	#print("Bought " + str(quantity) + ' ' + str(current_good) + ' for ' + str(cost) + ' gold.')
 	ai_ship.path = ai_ship.current_port.get_port_path(sell_port)
-	print("Path to " + sell_port + ": " + str(ai_ship.path))
+	#print("Path to " + sell_port + ": " + str(ai_ship.path))
 	buying = false
 
 
@@ -57,5 +57,5 @@ func make_sale():
 	var net = ai_ship.current_port.calculate_sale(current_good, quantity)
 	ai_ship.current_port.execute_sale(current_good, quantity, net)
 	ai_ship.update_inventory(net, current_good, -quantity)
-	print("Sold " + str(quantity) + ' ' + str(current_good) + ' for ' + str(net) + ' gold.')
+	#print("Sold " + str(quantity) + ' ' + str(current_good) + ' for ' + str(net) + ' gold.')
 	buying = true
