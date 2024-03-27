@@ -31,6 +31,23 @@ var port_prices : Dictionary
 var price_limit_coef = 5
 
 
+func average_prices():
+	var sums : Dictionary
+	var avg : Dictionary
+	
+	for good in GoodType.values():
+		sums[good] = 0
+	
+	for prices in port_prices:
+		for good in GoodType.values():
+			sums[good] += port_prices[prices][good]
+	
+	for good in GoodType.values():
+		avg[good] = sums[good] / len(WorldGlobals.ports)
+	
+	return avg
+
+
 func find_arb(current_port):
 	var best_price_diff = 1
 	var good_type = null
@@ -57,3 +74,15 @@ func find_arb(current_port):
 		return null
 	
 	return [good_type, other_port]
+
+
+func find_highest_price(good_type, exclude=''):
+	var highest_price = 0
+	var port_name = ''
+	
+	for port in port_prices.keys():
+		if port_prices[port][good_type] > highest_price and port != exclude:
+			highest_price = port_prices[port][good_type]
+			port_name = port
+	
+	return port_name

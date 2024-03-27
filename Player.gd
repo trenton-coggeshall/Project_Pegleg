@@ -7,6 +7,8 @@ extends Node
 var health = 100
 var gold = 100
 var inventory : Dictionary
+var inv_limit = 30
+var inv_occupied = 0
 var current_port = null
 
 

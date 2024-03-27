@@ -9,6 +9,8 @@ var tiles
 @onready var PlayerUI = get_node("/root/PlayerUI")
 @onready var player_ship = $PlayerShip
 
+var timer = 0
+
 func _ready():
 	#for i in len(WorldGlobals.chunks):
 		#chunks.append(CHUNK_TILES.instantiate())
@@ -30,4 +32,10 @@ func _ready():
 
 func _process(_delta):
 	pass
+	#print(Engine.get_frames_per_second())
+	#timer += _delta
+	#
+	#if timer >= 5:
+		#print(EconomyGlobals.average_prices())
+		#timer = 0
 

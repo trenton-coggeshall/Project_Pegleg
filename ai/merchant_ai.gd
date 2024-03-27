@@ -39,7 +39,9 @@ func make_purchase():
 	#print("Current port: " + ai_ship.current_port.name + " Sell Port: " + sell_port)
 	
 	var quantity = 0
-	while ai_ship.current_port.calculate_purchase(current_good, quantity + 1) < ai_ship.gold:
+	while ai_ship.current_port.calculate_purchase(current_good, quantity + 1) < ai_ship.gold \
+		  and quantity + ai_ship.inv_occupied < ai_ship.inv_limit \
+		  and quantity < ai_ship.current_port.goods[current_good]:
 		quantity += 1
 	
 	var cost = ai_ship.current_port.calculate_purchase(current_good, quantity)
@@ -55,7 +57,20 @@ func make_purchase():
 func make_sale():
 	var quantity = ai_ship.inventory[current_good]
 	var net = ai_ship.current_port.calculate_sale(current_good, quantity)
+	
+	while net > ai_ship.current_port.gold and quantity > 0:
+		quantity -= 1
+		if quantity > 0:
+			net = ai_ship.current_port.calculate_sale(current_good, quantity)
+		else:
+			net = 0
+	
 	ai_ship.current_port.execute_sale(current_good, quantity, net)
 	ai_ship.update_inventory(net, current_good, -quantity)
 	#print("Sold " + str(quantity) + ' ' + str(current_good) + ' for ' + str(net) + ' gold.')
-	buying = true
+	
+	if quantity < ai_ship.inv_occupied:
+		sell_port = EconomyGlobals.find_highest_price(current_good, ai_ship.current_port.name)
+		ai_ship.path = ai_ship.current_port.get_port_path(sell_port)
+	else:
+		buying = true

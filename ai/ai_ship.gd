@@ -22,6 +22,8 @@ const max_speed = 500
 
 var gold = 100
 var inventory : Dictionary
+var inv_limit = 30
+var inv_occupied = 0
 
 var destination = []
 var path : Array
@@ -63,6 +65,7 @@ func handle_navigation(delta):
 func update_inventory(gold_change, good_type, good_change):
 	gold += gold_change
 	inventory[good_type] += good_change
+	inv_occupied += good_change
 
 
 func _on_detection_radius_body_entered(body):

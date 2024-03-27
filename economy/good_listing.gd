@@ -42,7 +42,7 @@ func _on_sell_1_button_pressed():
 
 
 func _on_buy_10_button_pressed():
-		transaction_screen.make_purchase(id, 10)
+	transaction_screen.make_purchase(id, 10)
 
 
 func _on_sell_10_button_pressed():
