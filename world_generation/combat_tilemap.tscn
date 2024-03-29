@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw77jxc7ufpk3"]
-
-[sub_resource type="TileSet" id="TileSet_gfd1c"]
-
-[node name="CombatTilemap" type="TileMap"]
-tile_set = SubResource("TileSet_gfd1c")
-format = 2
