@@ -9,6 +9,13 @@ extends Control
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 const CHUNK_TILES = preload("res://world_generation/chunk_tiles.tscn")
 
+var thread1 = Thread.new()
+var thread2 = Thread.new()
+var thread3 = Thread.new()
+var thread4 = Thread.new()
+
+var semi = Semaphore.new()
+
 
 var map_width = 256
 var map_height = 256
@@ -44,6 +51,7 @@ func generate_map():
 	
 	var map_tiles : Array
 	
+	"""
 	for x in range(map_width):
 		var y_tiles : Array
 		for y in range(map_height):
@@ -69,14 +77,83 @@ func generate_map():
 		map_tiles.append(y_tiles)
 		map_texture.texture = ImageTexture.create_from_image(img)
 		await get_tree().process_frame
+	"""
+	
+	#threads---------------------------------
+	
+	#thread1.start(thread_generate_map.bind(1, map_tiles))
+	#thread2.start(thread_generate_map.bind(2, map_tiles))
+	#thread3.start(thread_generate_map.bind(3, map_tiles))
+	#thread4.start(thread_generate_map.bind(4, map_tiles))
+	
+	for x in range(map_width/2):
+		thread1.start(thread_generate_map.bind(x, map_tiles))
+		print(x)
+		thread2.start(thread_generate_map.bind(((1*map_width)/4)+x, map_tiles))
+		print(((1*map_width)/4)+x)
+		thread3.start(thread_generate_map.bind(((2*map_width)/4)+x, map_tiles))
+		print(((2*map_width)/4)+x)
+		thread4.start(thread_generate_map.bind(((3*map_width)/4)+x, map_tiles))
+		print(((3*map_width)/4)+x)
+		
+		map_tiles.insert(x, thread1.wait_to_finish())
+		map_tiles.insert((map_width/4)+x, thread2.wait_to_finish())
+		map_tiles.insert((map_width/2)+x, thread3.wait_to_finish())
+		map_tiles.insert((map_width*(3/4))+x, thread4.wait_to_finish())
+		
+		map_texture.texture = ImageTexture.create_from_image(img)
+		await get_tree().process_frame
+	
+	#endThreads------------------------------
+	
+	#map_texture.tee.texture = ImageTexture.create_from_image(img)
+	#await get_tree().process_frame
 	
 	WorldGlobals.tiles = map_tiles
 	place_ports()
-	
 	play_button.disabled = false
+	
+
+func thread_generate_map(x, mapArray):
+	#print("at thread function")
+	water_tiles.clear()
+		
+	var y_tiles : Array
+	for y in range(map_height):
+		var moist = moisture.get_noise_2d(position.x + x, position.y + y)*10
+		var temp = temperature.get_noise_2d(position.x + x, position.y + y)*10
+		var alt = altitude.get_noise_2d(position.x + x, position.y + y)*10
+		
+		if alt < 2:
+			water_tiles.append(Vector2i(x, y))
+			img.set_pixel(x + position.x, y + position.y, Color.BLUE) #water
+			if alt < 1:
+				y_tiles.append(WorldGlobals.TileType.WATER)
+			else:
+				y_tiles.append(WorldGlobals.TileType.SHALLOWS)
+		elif alt < 2.3 and moist < 2:
+			y_tiles.append(WorldGlobals.TileType.SAND)
+			#chunk.possible_ports.append(Vector2i(x, y))
+			img.set_pixel(x + position.x, y + position.y, Color.BURLYWOOD) #sand
+		else:
+			y_tiles.append(tiles[round((moist+10)/5)][round((temp+10)/5)])
+			img.set_pixel(x + position.x, y + position.y, Color.WEB_GREEN) #land
+	
+		
+	return y_tiles
+	
+	
+	#print("Insert tile to WorldGlobal tiles")
+		
+	#WorldGlobals.tiles = map_tiles
+	#place_ports()
+	print("map gen done")
+	#play_button.disabled = false
+	
 
 
 func place_ports():
+	print("at place port")
 	var total_ports = 0
 	var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 	
