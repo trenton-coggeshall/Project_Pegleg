@@ -18,7 +18,7 @@ var current_port = null
 var target = null
 
 # Speed
-const max_speed = 500
+var max_speed = 500
 
 var gold = 100
 var inventory : Dictionary

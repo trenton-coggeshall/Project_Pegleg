@@ -10,6 +10,7 @@ var tiles
 @onready var player_ship = $PlayerShip
 
 var timer = 0
+var avg
 
 func _ready():
 	#for i in len(WorldGlobals.chunks):
@@ -21,6 +22,7 @@ func _ready():
 	tiles.initialize()
 	
 	player_ship.position = tiles.map_to_local(WorldGlobals.ports[0])
+	avg = EconomyGlobals.average_prices()
 
 	
 	#for i in range(len(WorldGlobals.ports)):

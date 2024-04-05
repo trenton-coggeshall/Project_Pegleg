@@ -70,6 +70,7 @@ func spawn_ship():
 	merchant.name = self.name + "_AI_Ship"
 	get_parent().get_parent().add_child(merchant)
 	merchant.global_position = global_position
+	merchant.home_port = self
 	merchant.ai_ship.current_port = self
 	merchant.ai_ship.path = random_path()
 

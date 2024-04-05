@@ -2,7 +2,10 @@ extends Node2D
 
 @onready var ai_ship = $AI_Ship
 
+var home_port
+
 var buying = true
+var returning = false
 var current_good = null
 var sell_port = null
 
@@ -19,10 +22,17 @@ func _process(delta):
 
 func handle_destination():
 	if len(ai_ship.path) == 0 and ai_ship.current_port:
-		if buying:
+		if returning:
+			return_trip()
+		elif buying:
 			make_purchase()
 		elif ai_ship.current_port.name == sell_port:
 			make_sale()
+			
+			if ai_ship.gold > 1500 and buying:
+				returning = true
+				if ai_ship.current_port != home_port:
+					ai_ship.path = ai_ship.current_port.get_port_path(home_port.name)
 
 
 func make_purchase():
@@ -74,3 +84,9 @@ func make_sale():
 		ai_ship.path = ai_ship.current_port.get_port_path(sell_port)
 	else:
 		buying = true
+
+
+func return_trip():
+	ai_ship.current_port.gold += ai_ship.gold - 100
+	ai_ship.gold -= ai_ship.gold - 100
+	returning = false

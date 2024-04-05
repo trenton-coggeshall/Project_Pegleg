@@ -36,14 +36,15 @@ func average_prices():
 	var avg : Dictionary
 	
 	for good in GoodType.values():
-		sums[good] = 0
+		sums[good] = Vector2i(0, 0)
 	
 	for prices in port_prices:
 		for good in GoodType.values():
-			sums[good] += port_prices[prices][good]
+			sums[good][0] += port_prices[prices][good][0]
+			sums[good][1] += port_prices[prices][good][1]
 	
 	for good in GoodType.values():
-		avg[good] = sums[good] / len(WorldGlobals.ports)
+		avg[good] = Vector2i(sums[good][0] / len(WorldGlobals.ports), sums[good][1] / len(WorldGlobals.ports))
 	
 	return avg
 
@@ -51,9 +52,10 @@ func average_prices():
 func find_arb(current_port):
 	var best_price_diff = 1
 	var good_type = null
+	var avg = average_prices()
 	
 	for good in port_prices[current_port].keys():
-		var price_diff = float(base_prices[good]) / float(port_prices[current_port][good][0])
+		var price_diff =avg[good][1] - port_prices[current_port][good][0]
 		if price_diff > best_price_diff:
 			best_price_diff = price_diff
 			good_type = good
@@ -62,13 +64,7 @@ func find_arb(current_port):
 		return null
 	
 	best_price_diff = 1
-	var other_port = ''
-	
-	for p in port_prices.keys():
-		var price_diff = float(port_prices[p][good_type][1]) / float(base_prices[good_type])
-		if price_diff > best_price_diff:
-			best_price_diff = price_diff
-			other_port = p
+	var other_port = find_highest_price(good_type, current_port)
 	
 	if other_port == '':
 		return null
@@ -76,13 +72,34 @@ func find_arb(current_port):
 	return [good_type, other_port]
 
 
+func find_random_deal():
+	var keys = GoodType.keys()
+	var good_type = keys[randi() % len(keys)]
+	var buy_port = find_lowest_price(good_type)
+	var sell_port = find_highest_price(good_type)
+	
+	return [good_type, buy_port, sell_port]
+
+
 func find_highest_price(good_type, exclude=''):
 	var highest_price = 0
 	var port_name = ''
 	
 	for port in port_prices.keys():
-		if port_prices[port][good_type] > highest_price and port != exclude:
-			highest_price = port_prices[port][good_type]
+		if port_prices[port][good_type][1] > highest_price and port != exclude:
+			highest_price = port_prices[port][good_type][1]
+			port_name = port
+	
+	return port_name
+
+
+func find_lowest_price(good_type, exclude=''):
+	var lowest_price = 99999
+	var port_name = ''
+	
+	for port in port_prices.keys():
+		if port_prices[port][good_type][0] < lowest_price and port != exclude:
+			lowest_price = port_prices[port][good_type][0]
 			port_name = port
 	
 	return port_name
