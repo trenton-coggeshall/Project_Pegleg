@@ -19,12 +19,12 @@ const base_prices = {
 }
 
 const demand_ranges = {
-	GoodType.FOOD: [200, 500],
+	GoodType.FOOD: [200, 300],
 	GoodType.FABRIC: [25, 300],
-	GoodType.RUM: [100, 600],
+	GoodType.RUM: [100, 400],
 	GoodType.LEATHER: [50, 400],
 	GoodType.IRON: [75, 450],
-	GoodType.LIVESTOCK: [100, 500]
+	GoodType.LIVESTOCK: [100, 300]
 }
 
 var port_prices : Dictionary
@@ -53,7 +53,7 @@ func find_arb(current_port):
 	var good_type = null
 	
 	for good in port_prices[current_port].keys():
-		var price_diff = float(base_prices[good]) / float(port_prices[current_port][good])
+		var price_diff = float(base_prices[good]) / float(port_prices[current_port][good][0])
 		if price_diff > best_price_diff:
 			best_price_diff = price_diff
 			good_type = good
@@ -65,7 +65,7 @@ func find_arb(current_port):
 	var other_port = ''
 	
 	for p in port_prices.keys():
-		var price_diff = float(port_prices[p][good_type]) / float(base_prices[good_type])
+		var price_diff = float(port_prices[p][good_type][1]) / float(base_prices[good_type])
 		if price_diff > best_price_diff:
 			best_price_diff = price_diff
 			other_port = p

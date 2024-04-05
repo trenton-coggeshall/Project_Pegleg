@@ -25,7 +25,7 @@ layout_mode = 2
 [node name="GoodTitle" type="Label" parent="."]
 layout_mode = 2
 
-[node name="GoodPrice" type="Label" parent="."]
+[node name="BuyPrice" type="Label" parent="."]
 layout_mode = 2
 
 [node name="ButtonContainer" type="HBoxContainer" parent="."]
@@ -54,6 +54,9 @@ text = "10>"
 [node name="SellMaxButton" type="Button" parent="ButtonContainer"]
 layout_mode = 2
 text = ">>>"
+
+[node name="SellPrice" type="Label" parent="."]
+layout_mode = 2
 
 [node name="PortQuantity" type="Label" parent="."]
 layout_mode = 2

@@ -3,18 +3,58 @@ extends Node2D
 const MERCHANT_AI = preload("res://ai/merchant_ai.tscn")
 
 var location : Vector2i
-var gold = 1000
+var gold = 10000
 var goods : Dictionary
 var prices : Dictionary
 var demand : Dictionary
 var production : Dictionary
+var consumption : Dictionary
 var faction = "none"
 var paths : Dictionary
+var max_goods = 500
+
+var production_timer = 0
+var production_rate = 10
+var consumption_timer = 0
+var consumption_rate = 10
 
 
 func _ready():
 	EconomyGlobals.port_prices[name] = prices
 	initialize()
+
+
+func _process(delta):
+	handle_production(delta)
+	handle_consumption(delta)
+
+
+func handle_production(delta):
+	production_timer += delta
+	
+	if production_timer >= production_rate:
+		production_timer = 0
+		
+		for good in EconomyGlobals.GoodType.values():
+			if goods[good] > demand[good]:
+				goods[good] += int(production[good] * min(float(demand[good]) / float(goods[good]), 2))
+			if goods[good] > max_goods:
+				goods[good] = max_goods
+			set_price(good)
+
+
+func handle_consumption(delta):
+	consumption_timer += delta
+	
+	if consumption_timer >= consumption_rate:
+		consumption_timer = 0
+		
+		for good in EconomyGlobals.GoodType.values():
+			if goods[good] < demand[good]:
+				goods[good] -= int(consumption[good] * min(float(goods[good]) / float(demand[good]), 2))
+			if goods[good] < 0:
+				goods[good] = 0
+			set_price(good)
 
 
 func get_faction():
@@ -38,8 +78,11 @@ func spawn_ship():
 func price_check(good, quantity):
 	var base_price = EconomyGlobals.base_prices[good]
 	var flux = float(quantity + 1) / float(demand[good])
+	var price = clamp(int(round(base_price / flux)), 1, EconomyGlobals.price_limit_coef * base_price)
+	var sell_price = max(price - max(base_price * 0.1, 1), 1)
+	var buy_price = price + max(base_price * 0.1, 1)
 	
-	return clamp(int(round(base_price / flux)), 1, EconomyGlobals.price_limit_coef * base_price)
+	return Vector2i(buy_price, sell_price)
 
 
 # Sets the price of a good based on the current quantity held by the port
@@ -53,15 +96,18 @@ func initialize():
 	for good in EconomyGlobals.GoodType.values():
 		goods[good] = randi_range(ranges[good][0], ranges[good][1])
 		demand[good] = randi_range(ranges[good][0], ranges[good][1])
+		production[good] = randi_range(0, 20)
+		consumption[good] = max(production[good] + randi_range(-10, 10), 0)
 		set_price(good)
 
 
 func calculate_purchase(good, quantity):
 	var cost = 0
-	var current_price = prices[good]
+	var current_price = prices[good][0]
 	for i in range(quantity):
 		cost += current_price
-		current_price = price_check(good, goods[good] - (i + 1))
+		var price = price_check(good, goods[good] - (i + 1))
+		current_price = price[0]
 	return cost
 
 
@@ -78,10 +124,11 @@ func execute_purchase(good, quantity, cost):
 
 func calculate_sale(good, quantity):
 	var net = 0
-	var current_price = prices[good]
+	var current_price = prices[good][1]
 	for i in range(quantity):
 		net += current_price
-		current_price = price_check(good, goods[good] + (i + 1))
+		var price = price_check(good, goods[good] - (i + 1))
+		current_price = price[1]
 	return net
 
 
