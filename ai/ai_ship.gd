@@ -1,8 +1,8 @@
 extends Node2D
 
 # Object References
-@onready var world_tiles = $'../WorldTiles'
-@onready var path_finder = $'../WorldTiles/path_finder'
+@onready var world_tiles = $'../../WorldTiles'
+@onready var path_finder = $'../../WorldTiles/path_finder'
 
 @onready var pathnode = $Pathfinding_Node
 @onready var aiship = $Actual_Ship
@@ -18,10 +18,21 @@ var current_port = null
 var target = null
 
 # Speed
-const max_speed = 500
+var max_speed = 500
 
-var destination = WorldGlobals.ports[randi() % len(WorldGlobals.ports)]
+var gold = 100
+var inventory : Dictionary
+var inv_limit = 30
+var inv_occupied = 0
+
+var destination = []
 var path : Array
+var path_index = 0
+
+
+func _ready():
+	for good in EconomyGlobals.GoodType.values():
+		inventory[good] = 0 
 
 
 func _physics_process(delta):
@@ -36,19 +47,25 @@ func handle_navigation(delta):
 		#aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
 		#return
 	
-	if len(path) > 0:
+	if len(path) > path_index:
 		# Move invisible node along A* path
-		pathnode.global_position = pathnode.global_position.move_toward(path[0], max_speed * delta)
+		pathnode.global_position = pathnode.global_position.move_toward(path[path_index], max_speed * delta)
 		
 		# AI ship sprite lerps to node, not the path
 		aiship.look_at(pathnode.global_position)
 		aiship.global_position = aiship.global_position.lerp(pathnode.global_position, 5*delta)
 		
-		if pathnode.global_position.distance_to(path[0]) < 0.5:
-			path.pop_front()
-		
-	elif current_port:
-		path = current_port.random_path()
+		if pathnode.global_position.distance_to(path[path_index]) < 0.5:
+			path_index += 1
+	else:
+		path = []
+		path_index = 0
+
+
+func update_inventory(gold_change, good_type, good_change):
+	gold += gold_change
+	inventory[good_type] += good_change
+	inv_occupied += good_change
 
 
 func _on_detection_radius_body_entered(body):
@@ -56,6 +73,7 @@ func _on_detection_radius_body_entered(body):
 		target = body
 
 func _on_detection_radius_body_exited(body):
+	return
 	if body.is_in_group("Player"):
 		target = null
 		path = path_finder.find_path(pathnode.global_position, path[-1])

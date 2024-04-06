@@ -20,7 +20,8 @@ func set_price_quantity(g_price, po_quantity, pl_quantity):
 	price = g_price
 	$PortQuantity.text = str(port_quantity)
 	$PlayerQuantity.text = str(player_quantity)
-	$GoodPrice.text = str(price) + 'g'
+	$BuyPrice.text = 'Buy: ' + str(price[0]) + 'g'
+	$SellPrice.text = 'Sell: ' + str(price[1]) + 'g'
 	check_buttons()
 
 
@@ -42,7 +43,7 @@ func _on_sell_1_button_pressed():
 
 
 func _on_buy_10_button_pressed():
-		transaction_screen.make_purchase(id, 10)
+	transaction_screen.make_purchase(id, 10)
 
 
 func _on_sell_10_button_pressed():

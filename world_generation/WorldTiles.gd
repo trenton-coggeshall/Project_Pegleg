@@ -111,6 +111,9 @@ func initialize():
 	
 	for port in ports:
 		port.spawn_ship()
+	
+	#ports[0].spawn_ship()
+
 
 func find_port_routes():
 	var names = ports.keys()

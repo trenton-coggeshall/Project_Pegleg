@@ -1,19 +1,60 @@
 extends Node2D
 
-const AI_SHIP = preload("res://ai/ai_ship.tscn")
+const MERCHANT_AI = preload("res://ai/merchant_ai.tscn")
 
 var location : Vector2i
-var gold = 1000
+var gold = 10000
 var goods : Dictionary
 var prices : Dictionary
 var demand : Dictionary
 var production : Dictionary
+var consumption : Dictionary
 var faction = "none"
 var paths : Dictionary
+var max_goods = 500
+
+var production_timer = 0
+var production_rate = 10
+var consumption_timer = 0
+var consumption_rate = 10
 
 
 func _ready():
+	EconomyGlobals.port_prices[name] = prices
 	initialize()
+
+
+func _process(delta):
+	handle_production(delta)
+	handle_consumption(delta)
+
+
+func handle_production(delta):
+	production_timer += delta
+	
+	if production_timer >= production_rate:
+		production_timer = 0
+		
+		for good in EconomyGlobals.GoodType.values():
+			if goods[good] > demand[good]:
+				goods[good] += int(production[good] * min(float(demand[good]) / float(goods[good]), 2))
+			if goods[good] > max_goods:
+				goods[good] = max_goods
+			set_price(good)
+
+
+func handle_consumption(delta):
+	consumption_timer += delta
+	
+	if consumption_timer >= consumption_rate:
+		consumption_timer = 0
+		
+		for good in EconomyGlobals.GoodType.values():
+			if goods[good] < demand[good]:
+				goods[good] -= int(consumption[good] * min(float(goods[good]) / float(demand[good]), 2))
+			if goods[good] < 0:
+				goods[good] = 0
+			set_price(good)
 
 
 func get_faction():
@@ -25,19 +66,24 @@ func set_faction(value):
 
 
 func spawn_ship():
-	var ai_ship = AI_SHIP.instantiate()
-	ai_ship.name = self.name + "_AI_Ship"
-	ai_ship.path = random_path()
-	get_parent().get_parent().add_child(ai_ship)
-	ai_ship.global_position = global_position
+	var merchant = MERCHANT_AI.instantiate()
+	merchant.name = self.name + "_AI_Ship"
+	get_parent().get_parent().add_child(merchant)
+	merchant.global_position = global_position
+	merchant.home_port = self
+	merchant.ai_ship.current_port = self
+	merchant.ai_ship.path = random_path()
 
 
 # Returns the price of a good at a certain quantity
 func price_check(good, quantity):
 	var base_price = EconomyGlobals.base_prices[good]
 	var flux = float(quantity + 1) / float(demand[good])
+	var price = clamp(int(round(base_price / flux)), 1, EconomyGlobals.price_limit_coef * base_price)
+	var sell_price = max(price - max(base_price * 0.1, 1), 1)
+	var buy_price = price + max(base_price * 0.1, 1)
 	
-	return int(round(base_price / flux))
+	return Vector2i(buy_price, sell_price)
 
 
 # Sets the price of a good based on the current quantity held by the port
@@ -51,15 +97,18 @@ func initialize():
 	for good in EconomyGlobals.GoodType.values():
 		goods[good] = randi_range(ranges[good][0], ranges[good][1])
 		demand[good] = randi_range(ranges[good][0], ranges[good][1])
+		production[good] = randi_range(0, 20)
+		consumption[good] = max(production[good] + randi_range(-10, 10), 0)
 		set_price(good)
 
 
 func calculate_purchase(good, quantity):
 	var cost = 0
-	var current_price = prices[good]
+	var current_price = prices[good][0]
 	for i in range(quantity):
 		cost += current_price
-		current_price = price_check(good, goods[good] - (i + 1))
+		var price = price_check(good, goods[good] - (i + 1))
+		current_price = price[0]
 	return cost
 
 
@@ -67,10 +116,6 @@ func execute_purchase(good, quantity, cost):
 	if goods[good] < quantity:
 		print("Not enough goods in port inventory")
 		return false
-	
-	if Player.gold < cost:
-		print("Not enough player gold")
-		return
 	
 	goods[good] -= quantity
 	gold += cost
@@ -80,10 +125,11 @@ func execute_purchase(good, quantity, cost):
 
 func calculate_sale(good, quantity):
 	var net = 0
-	var current_price = prices[good]
+	var current_price = prices[good][1]
 	for i in range(quantity):
 		net += current_price
-		current_price = price_check(good, goods[good] + (i + 1))
+		var price = price_check(good, goods[good] - (i + 1))
+		current_price = price[1]
 	return net
 
 
@@ -115,7 +161,11 @@ func _on_area_2d_body_exited(body):
 
 func random_path():
 	var key = paths.keys()[randi() % len(paths.keys())]
-	return paths[key].duplicate()
+	return paths[key]
+
+
+func get_port_path(port_name):
+	return paths[port_name]
 
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
