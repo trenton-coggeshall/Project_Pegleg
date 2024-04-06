@@ -28,7 +28,7 @@ const demand_ranges = {
 }
 
 var port_prices : Dictionary
-var price_limit_coef = 5
+var price_limit_coef = 3
 
 
 func average_prices():
@@ -73,7 +73,7 @@ func find_arb(current_port):
 
 
 func find_random_deal():
-	var keys = GoodType.keys()
+	var keys = base_prices.keys()
 	var good_type = keys[randi() % len(keys)]
 	var buy_port = find_lowest_price(good_type)
 	var sell_port = find_highest_price(good_type)
