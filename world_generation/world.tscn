@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world_generation/world.gd" id="1_m2roe"]
 [ext_resource type="PackedScene" uid="uid://qjxvca13e7ka" path="res://player/player_ship.tscn" id="2_ec0ey"]
-[ext_resource type="PackedScene" uid="uid://ckam0nnktcllc" path="res://economy/transaction_screen.tscn" id="3_ga37j"]
+[ext_resource type="PackedScene" uid="uid://cr3tdv714msr5" path="res://economy/port_screen.tscn" id="3_wap2k"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_m2roe")
@@ -12,5 +12,5 @@ z_index = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TransactionScreen" parent="CanvasLayer" instance=ExtResource("3_ga37j")]
+[node name="port_screen" parent="CanvasLayer" instance=ExtResource("3_wap2k")]
 visible = false

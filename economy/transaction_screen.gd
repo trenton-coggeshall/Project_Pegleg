@@ -2,6 +2,7 @@ extends Control
 
 const GOOD_LISTING = preload("res://economy/good_listing.tscn")
 
+@onready var home_screen = $"../HomeScreen"
 @onready var goods_container = $GoodsContainer
 
 var good_listings : Dictionary
@@ -60,3 +61,4 @@ func make_sale(good, quantity):
 
 func _on_button_pressed():
 	hide()
+	home_screen.show()
