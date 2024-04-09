@@ -7,7 +7,6 @@ extends Control
 @onready var play_button = $PlayButton
 
 const ChunkData = preload("res://world_generation/chunk_data.gd")
-const CHUNK_TILES = preload("res://world_generation/chunk_tiles.tscn")
 
 
 var map_width = 256

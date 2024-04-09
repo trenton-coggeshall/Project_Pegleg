@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8ontq3hxop3j"]
+
+[ext_resource type="Script" path="res://ai/combat_enemy_template.gd" id="1_orlu5"]
+[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_b3k5j"]
+[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_nbjmj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3u34"]
+radius = 20.0
+height = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8yat2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x12hh"]
+size = Vector2(37, 75)
+
+[node name="CombatEnemyTemplate" type="Node2D"]
+script = ExtResource("1_orlu5")
+
+[node name="Actual_Ship" type="CharacterBody2D" parent="."]
+z_index = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Actual_Ship"]
+modulate = Color(1, 0.356863, 0.352941, 1)
+rotation = 1.5708
+scale = Vector2(5, 5)
+texture = ExtResource("2_b3k5j")
+
+[node name="Anchor" type="Sprite2D" parent="Actual_Ship/Sprite2D"]
+visible = false
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_nbjmj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_o3u34")
+disabled = true
+
+[node name="Pathfinding_Node" type="CharacterBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pathfinding_Node"]
+scale = Vector2(1.28112, 1.24626)
+shape = SubResource("CircleShape2D_8yat2")
+disabled = true
+
+[node name="Node_Radius" type="Area2D" parent="Pathfinding_Node" groups=["ai_ship"]]
+rotation = 1.5708
+scale = Vector2(0.722215, 0.361986)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pathfinding_Node/Node_Radius"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_x12hh")
+
+[node name="Cannons" type="Node2D" parent="."]
+
+[node name="cannonRight" type="Marker2D" parent="Cannons"]
+position = Vector2(0, 30)
+scale = Vector2(0.1, 0.1)

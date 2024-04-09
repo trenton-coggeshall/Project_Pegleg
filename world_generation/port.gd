@@ -1,6 +1,7 @@
 extends Node2D
 
 const MERCHANT_AI = preload("res://ai/merchant_ai.tscn")
+const MILITARY_AI = preload("res://ai/military_ai.tscn")
 
 var location : Vector2i
 var gold = 10000
