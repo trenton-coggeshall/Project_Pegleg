@@ -10,6 +10,7 @@ var demand : Dictionary
 var production : Dictionary
 var consumption : Dictionary
 var faction = "none"
+var region = "none"
 var paths : Dictionary
 var max_goods = 500
 

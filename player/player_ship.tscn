@@ -39,6 +39,8 @@ var cannons:Array
 func _ready():
 	Signals.show_ui.emit()
 	cannons = get_tree().get_nodes_in_group(\"Player_cannons\")
+	
+	Signals.start_combat.connect(start_combat)
 
 func _physics_process(delta):
 	handle_anchor(delta)
@@ -98,6 +100,9 @@ func handle_shooting(delta):
 func set_near_port(is_near, port):
 	near_port = is_near
 	Player.current_port = port
+
+func start_combat(enemyShip):
+	pass
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]

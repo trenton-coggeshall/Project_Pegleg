@@ -16,6 +16,7 @@ var factionColors = {
 
 var ports : Dictionary
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	map_border.size = Vector2(WorldGlobals.map_width * 16 + 640, WorldGlobals.map_height * 16 + 640)
@@ -66,20 +67,25 @@ func initialize():
 		add_child(port)
 
 	var ports = get_tree().get_nodes_in_group("Ports")
+	var regionIterator = 1
 	
 	# Choose a port, assign a faction to it and its X closest neighbors
 	for port in ports:
 		if port.get_faction() != "none": continue
+		if port.region != "none": continue
 		
-		#print("=== " + port.name + " ===")
 		var closest_num = 3 # Number of nearby ports to be assigned
 		var closest_ports = []
+		var regionString = "region" + str(regionIterator)
 		
 		# Choose and assign a random faction from the faction list
 		var thisFaction = factions[RandomNumberGenerator.new().randi_range(0, factions.size()-1)]
 		port.set_faction(thisFaction)
 		port.get_node("Icon").modulate = Color(factionColors[thisFaction])
-		#print("Faction: " + str(port.get_faction()))
+		
+		# Create and assign a region to this port
+		port.region = regionString
+		port.add_to_group(regionString)
 		
 		for subport in ports:
 			if subport.get_faction() != "none": continue
@@ -99,8 +105,14 @@ func initialize():
 					break
 		
 		for i in range (closest_ports.size()):
-			closest_ports[i][0].set_faction(thisFaction)
-			closest_ports[i][0].get_node("Icon").modulate = Color(factionColors[thisFaction])
+			var this_port = closest_ports[i][0]
+			this_port.set_faction(thisFaction)
+			this_port.get_node("Icon").modulate = Color(factionColors[thisFaction])
+			this_port.region = regionString
+			this_port.add_to_group(regionString)
+		
+		regionIterator += 1
+		
 		"""
 		print("Closest ports: ")
 		for i in range(closest_ports.size()):
