@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://3d2cpkmqq3i8"]
+
+[ext_resource type="Script" path="res://ai/military_ai.gd" id="1_div0h"]
+[ext_resource type="PackedScene" uid="uid://dw1v2xxh1xb4f" path="res://ai/ai_ship.tscn" id="2_h83f0"]
+
+[node name="MilitaryAI" type="Node2D"]
+script = ExtResource("1_div0h")
+
+[node name="AI_Ship" parent="." instance=ExtResource("2_h83f0")]

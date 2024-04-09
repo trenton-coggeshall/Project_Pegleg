@@ -38,7 +38,7 @@ var cannons:Array
 
 func _ready():
 	Signals.show_ui.emit()
-	cannons = get_tree().get_nodes_in_group(\"Player_cannons\")
+	cannons = $Cannons.get_children()
 	
 	Signals.start_combat.connect(start_combat)
 
@@ -93,7 +93,7 @@ func handle_shooting(delta):
 		
 		for cannon in cannons:
 			var projectile = Cannonball.instantiate()
-			owner.add_child(projectile)
+			get_parent().add_child(projectile)
 			projectile.velocity = velocity * delta
 			projectile.transform = cannon.global_transform
 
@@ -109,7 +109,7 @@ func start_combat(enemyShip):
 radius = 20.0
 height = 80.0
 
-[node name="PlayerShip2" type="CharacterBody2D" groups=["Player"]]
+[node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_5pico")
 Cannonball = ExtResource("1_7u48p")
 
@@ -130,16 +130,8 @@ shape = SubResource("CapsuleShape2D_ru18s")
 zoom = Vector2(0.25, 0.25)
 script = ExtResource("4_3hkxc")
 
-[node name="cannonRight" type="Marker2D" parent="." groups=["Player_cannons"]]
+[node name="Cannons" type="Node2D" parent="."]
+
+[node name="cannonRight" type="Marker2D" parent="Cannons"]
 position = Vector2(30, 0)
-scale = Vector2(0.1, 0.1)
-
-[node name="cannonTopRight" type="Marker2D" parent="." groups=["Player_cannons"]]
-position = Vector2(30, -20)
-rotation = -0.261799
-scale = Vector2(0.1, 0.1)
-
-[node name="cannonBottomRight" type="Marker2D" parent="." groups=["Player_cannons"]]
-position = Vector2(30, 20)
-rotation = 0.261799
 scale = Vector2(0.1, 0.1)

@@ -11,6 +11,7 @@ var inv_limit = 30
 var inv_occupied = 0
 var current_port = null
 
+var wanted
 
 func _ready():
 	for good in EconomyGlobals.GoodType.values():

@@ -1,6 +1,5 @@
 extends Node2D
 
-const CHUNK_TILES = preload("res://world_generation/chunk_tiles.tscn")
 const WORLD_TILES = preload("res://world_generation/world_tiles.tscn")
 const AI_SHIP = preload("res://ai/ai_ship.tscn")
 var chunks : Array
