@@ -14,8 +14,11 @@ var thread2 = Thread.new()
 var thread3 = Thread.new()
 var thread4 = Thread.new()
 
-var semi = Semaphore.new()
-
+var sem1 = Semaphore.new()
+var sem2 = Semaphore.new()
+var sem3 = Semaphore.new()
+var sem4 = Semaphore.new()
+#var mux = Mutex.new()
 
 var map_width = 256
 var map_height = 256
@@ -50,6 +53,10 @@ func generate_map():
 	water_tiles.clear()
 	
 	var map_tiles : Array
+	var thread1_tiles : Array
+	var thread2_tiles : Array
+	var thread3_tiles : Array
+	var thread4_tiles : Array
 	
 	"""
 	for x in range(map_width):
@@ -86,35 +93,47 @@ func generate_map():
 	#thread3.start(thread_generate_map.bind(3, map_tiles))
 	#thread4.start(thread_generate_map.bind(4, map_tiles))
 	
-	for x in range(map_width/2):
-		thread1.start(thread_generate_map.bind(x, map_tiles))
+	for x in range(map_width/1):
+		thread1.start(thread_generate_map.bind(x, 0))
 		print(x)
-		thread2.start(thread_generate_map.bind(((1*map_width)/4)+x, map_tiles))
-		print(((1*map_width)/4)+x)
-		thread3.start(thread_generate_map.bind(((2*map_width)/4)+x, map_tiles))
-		print(((2*map_width)/4)+x)
-		thread4.start(thread_generate_map.bind(((3*map_width)/4)+x, map_tiles))
-		print(((3*map_width)/4)+x)
+		#thread2.start(thread_generate_map.bind(((1*map_width)/4)+x, 1))
+		#print(((1*map_width)/4)+x)
+		#thread3.start(thread_generate_map.bind(((2*map_width)/4)+x, 2))
+		#print(((2*map_width)/4)+x)
+		#thread4.start(thread_generate_map.bind(((3*map_width)/4)+x, 3))
+		#print(((3*map_width)/4)+x)
 		
-		map_tiles.insert(x, thread1.wait_to_finish())
-		map_tiles.insert((map_width/4)+x, thread2.wait_to_finish())
-		map_tiles.insert((map_width/2)+x, thread3.wait_to_finish())
-		map_tiles.insert((map_width*(3/4))+x, thread4.wait_to_finish())
+		
+		thread1_tiles = thread1.wait_to_finish()
+		#thread2_tiles = thread2.wait_to_finish()
+		#thread3_tiles = thread3.wait_to_finish()
+		#thread4_tiles = thread4.wait_to_finish()
+		
+		sem1.wait()
+		map_tiles.insert(x, thread1_tiles)
+
+		#sem2.wait()
+		#map_tiles.insert((map_width/4)+x, thread2_tiles)
+
+		#sem3.wait()
+		#map_tiles.insert((map_width/2)+x, thread3_tiles)
+
+		#sem4.wait()
+		#map_tiles.insert((map_width*(3/4))+x, thread4_tiles)
+
 		
 		map_texture.texture = ImageTexture.create_from_image(img)
 		await get_tree().process_frame
 	
 	#endThreads------------------------------
 	
-	#map_texture.tee.texture = ImageTexture.create_from_image(img)
-	#await get_tree().process_frame
 	
 	WorldGlobals.tiles = map_tiles
 	place_ports()
 	play_button.disabled = false
 	
 
-func thread_generate_map(x, mapArray):
+func thread_generate_map(x, thread):
 	#print("at thread function")
 	water_tiles.clear()
 		
@@ -139,16 +158,16 @@ func thread_generate_map(x, mapArray):
 			y_tiles.append(tiles[round((moist+10)/5)][round((temp+10)/5)])
 			img.set_pixel(x + position.x, y + position.y, Color.WEB_GREEN) #land
 	
-		
+	if(thread == 0):
+		sem1.post()
+	if(thread == 1):
+		sem2.post()
+	if(thread == 2):
+		sem3.post()
+	if(thread == 3):
+		sem4.post()
+	
 	return y_tiles
-	
-	
-	#print("Insert tile to WorldGlobal tiles")
-		
-	#WorldGlobals.tiles = map_tiles
-	#place_ports()
-	print("map gen done")
-	#play_button.disabled = false
 	
 
 
