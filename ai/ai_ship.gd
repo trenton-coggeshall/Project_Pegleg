@@ -26,7 +26,7 @@ var inv_limit = 30
 var inv_occupied = 0
 
 var destination
-var path : Array
+@export var path : Array
 var path_index = 0
 
 func _ready():
@@ -52,6 +52,7 @@ func handle_navigation(delta):
 	else:
 		path = []
 		path_index = 0
+		destination = null
 
 
 func update_inventory(gold_change, good_type, good_change):
@@ -61,11 +62,12 @@ func update_inventory(gold_change, good_type, good_change):
 
 
 func _on_detection_radius_body_entered(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and len(path) > 0:
 		destination = path[-1]
 		target = body
 
 func _on_detection_radius_body_exited(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and destination:
 		target = null
 		path = path_finder.find_path(pathnode.global_position, destination)
+		path_index = 0
