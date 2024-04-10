@@ -1,5 +1,7 @@
 extends Node
 
+@onready var combat_camera = $CombatCamera
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,3 +11,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func start_combat(enemy):
+	combat_camera.make_current()

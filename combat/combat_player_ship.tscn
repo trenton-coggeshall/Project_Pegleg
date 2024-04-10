@@ -1,15 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://qjxvca13e7ka"]
+[gd_scene load_steps=6 format=3 uid="uid://cpjnr0qkdvy"]
 
-[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://player/cannonball.tscn" id="1_7u48p"]
-[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
-[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_q6hqy"]
-[ext_resource type="Script" path="res://player/Camera2D.gd" id="4_3hkxc"]
+[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://player/cannonball.tscn" id="1_lc7vs"]
+[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_rgcxi"]
+[ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_chj2n"]
 
 [sub_resource type="GDScript" id="GDScript_5pico"]
 script/source = "extends CharacterBody2D
-
-@onready var transaction_screen = $\"../CanvasLayer/TransactionScreen\"
-@onready var combat_scene = $\"../CombatScene\"
 
 #+------------------+
 #| Ship stat values |
@@ -28,8 +24,6 @@ const anchorspeed = 0
 var anchored = false
 var furled = false
 var current_speed = 0
-var near_port = false
-var current_port = null
 
 #+-------------+
 #| Combat info |
@@ -38,20 +32,17 @@ var current_port = null
 var cannons:Array
 
 func _ready():
-	Signals.show_ui.emit()
 	cannons = $Cannons.get_children()
-	
-	Signals.start_combat.connect(start_combat)
+
 
 func _physics_process(delta):
-	if Player.in_combat:
+	if not Player.in_combat:
 		return
 	
 	handle_anchor(delta)
 	handle_shooting(delta)
 	handle_rotation(delta)
 	handle_sails(delta)
-	handle_interact()
 	move_and_slide()
 		
 	#Update speed on player UI
@@ -61,6 +52,7 @@ func _physics_process(delta):
 func handle_rotation(delta):
 	var turn_delta = Input.get_axis('left', 'right') * turn_speed * delta
 	rotate(turn_delta)
+
 
 func handle_sails(delta):
 	
@@ -76,7 +68,8 @@ func handle_sails(delta):
 	if anchored: current_speed = move_toward(current_speed, 0, anchor_acceleration * delta)
 	
 	velocity = -transform.y * current_speed * delta
-	
+
+
 func handle_anchor(delta):
 	if anchored:
 		if Input.is_action_just_pressed('anchor'):
@@ -88,9 +81,6 @@ func handle_anchor(delta):
 			anchored = true
 			$Sprite2D/Anchor.visible = true
 
-func handle_interact():
-	if near_port and Input.is_action_just_pressed('interact'):
-		transaction_screen.show_transaction()
 
 func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
@@ -101,39 +91,28 @@ func handle_shooting(delta):
 			projectile.velocity = velocity * delta
 			projectile.transform = cannon.global_transform
 
-func set_near_port(is_near, port):
-	near_port = is_near
-	Player.current_port = port
-
-func start_combat(enemyShip):
-	Player.in_combat = true
-	combat_scene.start_combat()
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]
 radius = 20.0
 height = 80.0
 
-[node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
+[node name="CombatPlayer" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_5pico")
-Cannonball = ExtResource("1_7u48p")
+Cannonball = ExtResource("1_lc7vs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)
-texture = ExtResource("1_vnj8m")
+texture = ExtResource("2_rgcxi")
 
 [node name="Anchor" type="Sprite2D" parent="Sprite2D"]
 visible = false
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_q6hqy")
+texture = ExtResource("3_chj2n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_ru18s")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.25, 0.25)
-script = ExtResource("4_3hkxc")
 
 [node name="Cannons" type="Node2D" parent="."]
 
