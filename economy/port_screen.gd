@@ -2,8 +2,8 @@ extends Control
 
 @onready var home_screen = $HomeScreen
 @onready var transaction_screen = $TransactionScreen
-
-var port
+@onready var port_text = $HomeScreen/PortText
+@onready var faction_text = $HomeScreen/FactionText
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +17,8 @@ func _process(delta):
 
 
 func show_port_screen():
-	port = Player.current_port
+	port_text.text = Player.current_port.name
+	faction_text.text = Player.current_port.faction
 	show()
 	get_tree().paused = true
 

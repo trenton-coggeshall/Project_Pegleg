@@ -130,13 +130,28 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 546.0
-offset_top = 417.0
-offset_right = 583.0
-offset_bottom = 448.0
+offset_left = 528.0
+offset_top = 466.0
+offset_right = 602.0
+offset_bottom = 497.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Exit"
+text = "Exit Port"
+
+[node name="BackButton" type="Button" parent="TransactionScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 528.0
+offset_top = 432.0
+offset_right = 602.0
+offset_bottom = 463.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(0, 0, 0, 0.152941)
@@ -159,3 +174,4 @@ texture = ExtResource("1_8gykc")
 [connection signal="pressed" from="HomeScreen/OptionContainer/TradeButton" to="." method="_on_trade_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="TransactionScreen/Button" to="TransactionScreen" method="_on_button_pressed"]
+[connection signal="pressed" from="TransactionScreen/BackButton" to="TransactionScreen" method="_on_back_button_pressed"]

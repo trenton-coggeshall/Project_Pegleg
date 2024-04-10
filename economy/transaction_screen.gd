@@ -2,6 +2,7 @@ extends Control
 
 const GOOD_LISTING = preload("res://economy/good_listing.tscn")
 
+@onready var port_screen = $".."
 @onready var home_screen = $"../HomeScreen"
 @onready var goods_container = $GoodsContainer
 
@@ -60,5 +61,12 @@ func make_sale(good, quantity):
 
 
 func _on_button_pressed():
+	hide()
+	home_screen.show()
+	port_screen.hide_port_screen()
+	
+
+
+func _on_back_button_pressed():
 	hide()
 	home_screen.show()
