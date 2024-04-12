@@ -12,10 +12,10 @@ script/source = "extends CharacterBody2D
 #+------------------+
 
 # Speed
-const max_speed = 50000
+const max_speed = 25000
 const acceleration = 10000
 const anchor_acceleration = 50000
-const max_furled_speed = 25000
+const max_furled_speed = 10000
 const furled_acceleration = 5000
 const turn_speed = 3
 const anchorspeed = 0

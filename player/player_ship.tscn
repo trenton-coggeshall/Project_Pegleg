@@ -91,6 +91,9 @@ func handle_anchor(delta):
 func handle_interact():
 	if near_port and Input.is_action_just_pressed('interact'):
 		transaction_screen.show_transaction()
+	
+	if Input.is_action_just_pressed('interact'):
+		combat_scene.start_combat('heehee')
 
 func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
