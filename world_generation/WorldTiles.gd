@@ -19,13 +19,20 @@ var ports : Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	map_border.size = Vector2(WorldGlobals.map_width * 16 + 640, WorldGlobals.map_height * 16 + 640)
-	for n in len(WorldGlobals.ports):
-		portNames.append("Port" + str(n+1))
+	load_names()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+
+func load_names():
+	var f = FileAccess.open("res://world_generation/port_names.txt", FileAccess.READ)
+	while f.get_position() < f.get_length():
+		var name = f.get_line()
+		if name != '':
+			portNames.append(f.get_line())
 
 
 func initialize():
@@ -64,7 +71,7 @@ func initialize():
 		portNames.remove_at(rand)
 		ports[port.name] = port
 		add_child(port)
-
+	portNames.clear()
 	var ports = get_tree().get_nodes_in_group("Ports")
 	
 	# Choose a port, assign a faction to it and its X closest neighbors
