@@ -84,12 +84,12 @@ func handle_anchor(delta):
 
 func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
-		
 		for cannon in cannons:
 			var projectile = Cannonball.instantiate()
 			get_parent().add_child(projectile)
 			projectile.velocity = velocity * delta
 			projectile.transform = cannon.global_transform
+			projectile.global_position = cannon.global_position
 
 "
 
