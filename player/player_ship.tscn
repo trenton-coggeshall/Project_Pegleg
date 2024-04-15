@@ -9,6 +9,7 @@
 script/source = "extends CharacterBody2D
 
 @onready var port_screen = $\"../CanvasLayer/port_screen\"
+@onready var combat_scene = $\"../CombatScene\"
 
 #+------------------+
 #| Ship stat values |
@@ -88,12 +89,7 @@ func handle_interact():
 
 func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
-		
-		for cannon in cannons:
-			var projectile = Cannonball.instantiate()
-			owner.add_child(projectile)
-			projectile.velocity = velocity * delta
-			projectile.transform = cannon.global_transform
+		combat_scene.start_combat('Put ai ship data here')
 
 func set_near_port(is_near, port):
 	near_port = is_near
