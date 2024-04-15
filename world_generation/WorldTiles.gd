@@ -68,9 +68,11 @@ func initialize():
 		var rng = RandomNumberGenerator.new()
 		var rand = rng.randi_range(0, portNames.size()-1)
 		port.name = portNames[rand]
+		print(port.name)
 		portNames.remove_at(rand)
 		ports[port.name] = port
 		add_child(port)
+		
 	portNames.clear()
 	var ports = get_tree().get_nodes_in_group("Ports")
 	

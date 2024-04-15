@@ -3,15 +3,13 @@ extends Control
 const GOOD_LISTING = preload("res://economy/good_listing.tscn")
 
 @onready var goods_container = $GoodsContainer
+@onready var home_screen = $"../HomeScreen"
 
 var good_listings : Dictionary
 var port
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	Signals.player_left_port.connect(_on_button_pressed)
-	
 	for good in EconomyGlobals.GoodType.values():
 		good_listings[good] = GOOD_LISTING.instantiate()
 		good_listings[good].set_title(EconomyGlobals.GoodType.find_key(good), good)
@@ -58,5 +56,6 @@ func make_sale(good, quantity):
 		$PlayerGold.text = 'Your gold: ' + str(Player.gold) + 'g'
 
 
-func _on_button_pressed():
+func _on_back_button_pressed():
 	hide()
+	home_screen.show()
