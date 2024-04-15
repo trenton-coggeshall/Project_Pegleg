@@ -11,9 +11,6 @@ var port
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	Signals.player_left_port.connect(_on_button_pressed)
-	
 	for good in EconomyGlobals.GoodType.values():
 		good_listings[good] = GOOD_LISTING.instantiate()
 		good_listings[good].set_title(EconomyGlobals.GoodType.find_key(good), good)
@@ -58,13 +55,6 @@ func make_sale(good, quantity):
 		good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
 		$PortGold.text = 'Port gold: ' + str(Player.current_port.gold) + 'g'
 		$PlayerGold.text = 'Your gold: ' + str(Player.gold) + 'g'
-
-
-func _on_button_pressed():
-	hide()
-	home_screen.show()
-	port_screen.hide_port_screen()
-	
 
 
 func _on_back_button_pressed():

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world_generation/world.gd" id="1_m2roe"]
 [ext_resource type="PackedScene" uid="uid://qjxvca13e7ka" path="res://player/player_ship.tscn" id="2_ec0ey"]
-[ext_resource type="PackedScene" uid="uid://cr3tdv714msr5" path="res://economy/port_screen.tscn" id="3_wap2k"]
+[ext_resource type="PackedScene" uid="uid://cp03nrg7eexhc" path="res://economy/port_screen.tscn" id="3_wap2k"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_m2roe")

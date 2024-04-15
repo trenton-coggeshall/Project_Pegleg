@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr3tdv714msr5"]
+[gd_scene load_steps=7 format=3 uid="uid://cp03nrg7eexhc"]
 
 [ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="1_8gykc"]
 [ext_resource type="Script" path="res://economy/port_screen.gd" id="1_k8gds"]
+[ext_resource type="Script" path="res://economy/governor_screen.gd" id="2_6t1s0"]
+[ext_resource type="Script" path="res://economy/shipwright_screen.gd" id="2_45fa0"]
+[ext_resource type="Script" path="res://economy/tavern_screen.gd" id="2_mdrpb"]
 [ext_resource type="Script" path="res://economy/transaction_screen.gd" id="2_q3np1"]
 
 [node name="port_screen" type="Control"]
@@ -57,13 +60,107 @@ offset_bottom = 337.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="GovernorButton" type="Button" parent="HomeScreen/OptionContainer"]
+layout_mode = 2
+text = "Governor"
+
+[node name="TavernButton" type="Button" parent="HomeScreen/OptionContainer"]
+layout_mode = 2
+text = "Tavern"
+
 [node name="TradeButton" type="Button" parent="HomeScreen/OptionContainer"]
 layout_mode = 2
 text = "Trade"
 
+[node name="ShipwrightButton" type="Button" parent="HomeScreen/OptionContainer"]
+layout_mode = 2
+text = "Shipwright"
+
 [node name="ExitButton" type="Button" parent="HomeScreen/OptionContainer"]
 layout_mode = 2
 text = "Exit"
+
+[node name="GovernorScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_6t1s0")
+
+[node name="GovernorText" type="Label" parent="GovernorScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 536.0
+offset_top = 120.0
+offset_right = 576.0
+offset_bottom = 143.0
+grow_horizontal = 2
+text = "Tavern"
+
+[node name="OptionContainer" type="VBoxContainer" parent="GovernorScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 529.5
+offset_top = 271.0
+offset_right = 582.5
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="GovernorScreen/OptionContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="TavernScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_mdrpb")
+
+[node name="TavernText" type="Label" parent="TavernScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 536.0
+offset_top = 120.0
+offset_right = 576.0
+offset_bottom = 143.0
+grow_horizontal = 2
+text = "Tavern"
+
+[node name="OptionContainer" type="VBoxContainer" parent="TavernScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 529.5
+offset_top = 271.0
+offset_right = 582.5
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HireButton" type="Button" parent="TavernScreen/OptionContainer"]
+layout_mode = 2
+text = "Hire Crew"
+
+[node name="JobsButton" type="Button" parent="TavernScreen/OptionContainer"]
+layout_mode = 2
+text = "Browse Jobs"
+
+[node name="BackButton" type="Button" parent="TavernScreen/OptionContainer"]
+layout_mode = 2
+text = "Back"
 
 [node name="TransactionScreen" type="Control" parent="."]
 visible = false
@@ -123,21 +220,6 @@ offset_bottom = 325.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="TransactionScreen"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 528.0
-offset_top = 466.0
-offset_right = 602.0
-offset_bottom = 497.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Exit Port"
-
 [node name="BackButton" type="Button" parent="TransactionScreen"]
 layout_mode = 1
 anchors_preset = 7
@@ -151,6 +233,51 @@ offset_right = 602.0
 offset_bottom = 463.0
 grow_horizontal = 2
 grow_vertical = 0
+text = "Back"
+
+[node name="ShipwrightScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_45fa0")
+
+[node name="ShipwrightText" type="Label" parent="ShipwrightScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 536.0
+offset_top = 120.0
+offset_right = 576.0
+offset_bottom = 143.0
+grow_horizontal = 2
+text = "Shipwright"
+
+[node name="OptionContainer" type="VBoxContainer" parent="ShipwrightScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 529.5
+offset_top = 271.0
+offset_right = 582.5
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RepairButton" type="Button" parent="ShipwrightScreen/OptionContainer"]
+layout_mode = 2
+text = "Repair Ship"
+
+[node name="UpgradeButton" type="Button" parent="ShipwrightScreen/OptionContainer"]
+layout_mode = 2
+text = "Upgrade Ship"
+
+[node name="BackButton" type="Button" parent="ShipwrightScreen/OptionContainer"]
+layout_mode = 2
 text = "Back"
 
 [node name="Background" type="TextureRect" parent="."]
@@ -171,7 +298,12 @@ scale = Vector2(6.37781, 3.60581)
 mouse_filter = 2
 texture = ExtResource("1_8gykc")
 
+[connection signal="pressed" from="HomeScreen/OptionContainer/GovernorButton" to="." method="_on_governor_button_pressed"]
+[connection signal="pressed" from="HomeScreen/OptionContainer/TavernButton" to="." method="_on_tavern_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/TradeButton" to="." method="_on_trade_button_pressed"]
+[connection signal="pressed" from="HomeScreen/OptionContainer/ShipwrightButton" to="." method="_on_shipwright_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="TransactionScreen/Button" to="TransactionScreen" method="_on_button_pressed"]
+[connection signal="pressed" from="GovernorScreen/OptionContainer/BackButton" to="GovernorScreen" method="_on_back_button_pressed"]
+[connection signal="pressed" from="TavernScreen/OptionContainer/BackButton" to="TavernScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="TransactionScreen/BackButton" to="TransactionScreen" method="_on_back_button_pressed"]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/BackButton" to="ShipwrightScreen" method="_on_back_button_pressed"]
