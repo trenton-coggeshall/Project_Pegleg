@@ -27,8 +27,6 @@ var anchored = false
 var furled = false
 var current_speed = 0
 
-var last_position:Vector2
-
 #+-------------+
 #| Combat info |
 #+-------------+
@@ -51,8 +49,8 @@ func _physics_process(delta):
 	handle_anchor(delta)
 	handle_rotation(delta)
 	handle_sails(delta)
-	move_and_slide()
-	handle_shooting(delta)	
+	handle_shooting(delta)
+	move_and_slide()	
 	
 	#Update speed on player UI
 	Signals.speed_changed.emit(floor(current_speed/1000.0))
@@ -64,7 +62,6 @@ func handle_rotation(delta):
 
 
 func handle_sails(delta):
-	last_position = global_position
 	if furled:
 		if Input.is_action_just_pressed('up'):
 			furled = false
@@ -111,10 +108,9 @@ func handle_shooting(delta):
 
 
 func get_fire_direction():
-	var player_dir = last_position.direction_to(global_position)
 	enemy_dir = global_position.direction_to(enemy.actual_ship.global_position)
 	
-	if player_dir.angle_to(enemy_dir) >= 0:
+	if (-transform.y).angle_to(enemy_dir) >= 0:
 		return true
 	else:
 		return false
