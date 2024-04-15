@@ -9,23 +9,26 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
+offset_left = -236.5
 offset_top = -15.5
-offset_right = 200.0
+offset_right = 236.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 80
+theme_override_constants/separation = 25
 alignment = 1
 script = ExtResource("1_2oduk")
 
 [node name="PlayerQuantity" type="Label" parent="."]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
 [node name="GoodTitle" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="BuyPrice" type="Label" parent="."]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 
 [node name="ButtonContainer" type="HBoxContainer" parent="."]
@@ -56,9 +59,11 @@ layout_mode = 2
 text = ">>>"
 
 [node name="SellPrice" type="Label" parent="."]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 
 [node name="PortQuantity" type="Label" parent="."]
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 
 [connection signal="pressed" from="ButtonContainer/Buy10Button" to="." method="_on_buy_10_button_pressed"]
