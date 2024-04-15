@@ -34,6 +34,9 @@ func _ready():
 		inventory[good] = 0 
 
 func _physics_process(delta):
+	if Player.in_combat:
+		return
+	
 	handle_navigation(delta)
 	pathnode.move_and_slide()
 

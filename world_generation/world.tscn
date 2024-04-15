@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://da33nildxsf6n"]
+[gd_scene load_steps=6 format=3 uid="uid://da33nildxsf6n"]
 
 [ext_resource type="Script" path="res://world_generation/world.gd" id="1_m2roe"]
 [ext_resource type="PackedScene" uid="uid://qjxvca13e7ka" path="res://player/player_ship.tscn" id="2_ec0ey"]
 [ext_resource type="PackedScene" uid="uid://ckam0nnktcllc" path="res://economy/transaction_screen.tscn" id="3_ga37j"]
+[ext_resource type="PackedScene" uid="uid://5kn0rbdul8kk" path="res://ai/ai_screen.tscn" id="4_0owp3"]
+[ext_resource type="PackedScene" uid="uid://dw77jxc7ufpk3" path="res://combat/combat_scene.tscn" id="4_wougc"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_m2roe")
@@ -14,3 +16,9 @@ z_index = 10
 
 [node name="TransactionScreen" parent="CanvasLayer" instance=ExtResource("3_ga37j")]
 visible = false
+
+[node name="AI_Screen" parent="CanvasLayer" instance=ExtResource("4_0owp3")]
+visible = false
+
+[node name="CombatScene" parent="." instance=ExtResource("4_wougc")]
+position = Vector2(-8585, -1975)
