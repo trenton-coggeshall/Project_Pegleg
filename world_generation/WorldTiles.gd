@@ -16,17 +16,23 @@ var factionColors = {
 
 var ports : Dictionary
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	map_border.size = Vector2(WorldGlobals.map_width * 16 + 640, WorldGlobals.map_height * 16 + 640)
-	for n in len(WorldGlobals.ports):
-		portNames.append("Port" + str(n+1))
+	load_names()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+
+func load_names():
+	var f = FileAccess.open("res://world_generation/port_names.txt", FileAccess.READ)
+	while f.get_position() < f.get_length():
+		var name = f.get_line()
+		if name != '':
+			portNames.append(f.get_line())
 
 
 func initialize():
@@ -65,27 +71,22 @@ func initialize():
 		portNames.remove_at(rand)
 		ports[port.name] = port
 		add_child(port)
-
+	portNames.clear()
 	var ports = get_tree().get_nodes_in_group("Ports")
-	var regionIterator = 1
 	
 	# Choose a port, assign a faction to it and its X closest neighbors
 	for port in ports:
 		if port.get_faction() != "none": continue
-		if port.region != "none": continue
 		
+		#print("=== " + port.name + " ===")
 		var closest_num = 3 # Number of nearby ports to be assigned
 		var closest_ports = []
-		var regionString = "region" + str(regionIterator)
 		
 		# Choose and assign a random faction from the faction list
 		var thisFaction = factions[RandomNumberGenerator.new().randi_range(0, factions.size()-1)]
 		port.set_faction(thisFaction)
 		port.get_node("Icon").modulate = Color(factionColors[thisFaction])
-		
-		# Create and assign a region to this port
-		port.region = regionString
-		port.add_to_group(regionString)
+		#print("Faction: " + str(port.get_faction()))
 		
 		for subport in ports:
 			if subport.get_faction() != "none": continue
@@ -105,14 +106,8 @@ func initialize():
 					break
 		
 		for i in range (closest_ports.size()):
-			var this_port = closest_ports[i][0]
-			this_port.set_faction(thisFaction)
-			this_port.get_node("Icon").modulate = Color(factionColors[thisFaction])
-			this_port.region = regionString
-			this_port.add_to_group(regionString)
-		
-		regionIterator += 1
-		
+			closest_ports[i][0].set_faction(thisFaction)
+			closest_ports[i][0].get_node("Icon").modulate = Color(factionColors[thisFaction])
 		"""
 		print("Closest ports: ")
 		for i in range(closest_ports.size()):
