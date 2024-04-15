@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://5kn0rbdul8kk"]
+
+[ext_resource type="Script" path="res://ai/ai_screen.gd" id="1_jhwan"]
+[ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="2_ty2ra"]
+
+[node name="AI_Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jhwan")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.152941)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.0
+offset_top = -235.0
+offset_right = -268.0
+offset_bottom = -107.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.37781, 3.60581)
+mouse_filter = 2
+texture = ExtResource("2_ty2ra")
+
+[node name="OptionsContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GreetButton" type="Button" parent="OptionsContainer"]
+layout_mode = 2
+text = "Say Hello"
+
+[node name="AttackButton" type="Button" parent="OptionsContainer"]
+layout_mode = 2
+text = "Attack!"
+
+[node name="LeaveButton" type="Button" parent="OptionsContainer"]
+layout_mode = 2
+text = "Leave"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -192.0
+offset_right = 68.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "What will you do?"
