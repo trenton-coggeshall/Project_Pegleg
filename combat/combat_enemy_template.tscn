@@ -65,6 +65,7 @@ shape = SubResource("RectangleShape2D_113fh")
 
 [node name="cannonRight" type="Marker2D" parent="Actual_Ship/Cannons"]
 position = Vector2(0, 30)
+rotation = 3.14159
 scale = Vector2(0.1, 0.1)
 
 [node name="cannonLeft" type="Marker2D" parent="Actual_Ship/Cannons"]

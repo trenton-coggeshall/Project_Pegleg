@@ -60,21 +60,18 @@ func handle_shooting(delta):
 		projectile.global_position = cannonLeft.global_position
 
 func _on_range_entered_right(area):
-	print("Entered right: " + str(area))
 	if area.name == "CombatHitbox":
 		print("PLAYER IN RANGE: RIGHT")
 		playerInRange = true
 		side = "right"
 
 func _on_range_entered_left(area):
-	print("Entered left: " + str(area))
 	if area.name == "CombatHitbox":
 		print("PLAYER IN RANGE: LEFT")
 		playerInRange = true
 		side = "left"
 
 func _on_range_exited(area):
-	print("Exited: " + str(area))
 	if area.name == "CombatHitbox":
 		print("PLAYER OUT OF RANGE")
 		playerInRange = false
