@@ -4,6 +4,9 @@ extends Node2D
 @onready var actual_ship = $Actual_Ship
 @onready var pathnode = $Pathfinding_Node
 
+@export var Cannonball:PackedScene
+@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
+@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
 var range = 800
 var speed = 500
@@ -22,6 +25,7 @@ func _process(delta):
 		return
 	
 	handle_sailing(delta)
+	handle_shooting(delta)
 
 
 func handle_sailing(delta):
@@ -37,33 +41,36 @@ func handle_sailing(delta):
 
 
 func handle_shooting(delta):
-	pass
 	
-
-func _on_player_detection_area_entered(area):
-	if area.typeof(RayCast2D):
-		print("PLAYER IN RANGE")
-		playerInRange = true
-
-
-func _on_player_detection_area_exited(area):
-	if area.typeof(RayCast2D):
-		print("PLAYER OUT OF RANGE")
-		playerInRange = false
-
+	if playerInRange == false: return
+	
+	if side == "right":
+		print("FIRING RIGHT")
+		var projectile = Cannonball.instantiate()
+		get_parent().add_child(projectile)
+		projectile.velocity = actual_ship.velocity * delta
+		projectile.transform = cannonRight.global_transform
+		projectile.global_position = cannonRight.global_position
+	elif side == "left":
+		print("FIRING LEFT)")
+		var projectile = Cannonball.instantiate()
+		get_parent().add_child(projectile)
+		projectile.velocity = actual_ship.velocity * delta
+		projectile.transform = cannonLeft.global_transform
+		projectile.global_position = cannonLeft.global_position
 
 func _on_range_entered_right(area):
 	print("Entered right: " + str(area))
 	if area.name == "CombatHitbox":
 		print("PLAYER IN RANGE: RIGHT")
-		playerInRange = false
+		playerInRange = true
 		side = "right"
 
 func _on_range_entered_left(area):
-	print("Entered lefft: " + str(area))
+	print("Entered left: " + str(area))
 	if area.name == "CombatHitbox":
 		print("PLAYER IN RANGE: LEFT")
-		playerInRange = false
+		playerInRange = true
 		side = "left"
 
 func _on_range_exited(area):
