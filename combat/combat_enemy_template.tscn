@@ -9,12 +9,11 @@
 radius = 20.0
 height = 80.0
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_rvpcj"]
-b = Vector2(0, 80)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obrqm"]
+size = Vector2(8, 85)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_h0jx2"]
-a = Vector2(80, 0)
-b = Vector2(0, 0)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_113fh"]
+size = Vector2(8, 85)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8yat2"]
 
@@ -48,16 +47,19 @@ shape = SubResource("CapsuleShape2D_o3u34")
 rotation = -1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship/Detection_Right"]
+position = Vector2(-425, 0)
 rotation = 1.5708
 scale = Vector2(10, 10)
-shape = SubResource("SegmentShape2D_rvpcj")
+shape = SubResource("RectangleShape2D_obrqm")
 
 [node name="Detection_Left" type="Area2D" parent="Actual_Ship"]
 rotation = -1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship/Detection_Left"]
+position = Vector2(425, 0)
+rotation = 1.5708
 scale = Vector2(10, 10)
-shape = SubResource("SegmentShape2D_h0jx2")
+shape = SubResource("RectangleShape2D_113fh")
 
 [node name="Cannons" type="Node2D" parent="Actual_Ship"]
 

@@ -5,6 +5,7 @@ extends Control
 @onready var temp_seed_text = $Seeds/TempSeedText
 @onready var moisture_seed_text = $Seeds/MoistureSeedText
 @onready var play_button = $PlayButton
+@onready var generate_button = $GenerateButton
 
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 
@@ -104,6 +105,7 @@ func place_ports():
 
 
 func _on_generate_button_pressed():
+	generate_button.disabled = true
 	#WorldGlobals.chunks.clear()
 	img = Image.create(map_width, map_height, false, Image.FORMAT_RGBA8)
 	moisture.seed = int(moisture_seed_text.text)
