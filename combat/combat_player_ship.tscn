@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpjnr0qkdvy"]
 
-[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://player/cannonball.tscn" id="1_lc7vs"]
+[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://world_generation/cannonball.tscn" id="1_ba37d"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_rgcxi"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_chj2n"]
 
@@ -126,7 +126,7 @@ b = Vector2(0, 15)
 
 [node name="CombatPlayer" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_5pico")
-Cannonball = ExtResource("1_lc7vs")
+Cannonball = ExtResource("1_ba37d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)

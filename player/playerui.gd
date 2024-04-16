@@ -43,7 +43,10 @@ func set_username(value):
 func player_damaged(value):
 	var tween = create_tween()
 	
-	Player.health -= value
+	if Player.health > 0:
+		Player.health -= value
+		if Player.health == 0:
+			Signals.end_combat.emit()
 	
 	tween.tween_property(healthBar, "value", Player.health, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(damageBar, "value", Player.health, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

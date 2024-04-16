@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var combat_scene = get_parent()
 @onready var combat_player = $"../CombatPlayer"
 @onready var actual_ship = $Actual_Ship
 @onready var pathnode = $Pathfinding_Node
@@ -10,6 +11,8 @@ extends Node2D
 
 var range = 800
 var speed = 500
+var max_health = 100
+var health = 5
 
 var playerInRange = false
 var side
@@ -45,14 +48,12 @@ func handle_shooting(delta):
 	if playerInRange == false: return
 	
 	if side == "right":
-		print("FIRING RIGHT")
 		var projectile = Cannonball.instantiate()
 		get_parent().add_child(projectile)
 		projectile.velocity = actual_ship.velocity * delta
 		projectile.transform = cannonRight.global_transform
 		projectile.global_position = cannonRight.global_position
 	elif side == "left":
-		print("FIRING LEFT)")
 		var projectile = Cannonball.instantiate()
 		get_parent().add_child(projectile)
 		projectile.velocity = actual_ship.velocity * delta
@@ -61,18 +62,22 @@ func handle_shooting(delta):
 
 func _on_range_entered_right(area):
 	if area.name == "CombatHitbox":
-		print("PLAYER IN RANGE: RIGHT")
 		playerInRange = true
 		side = "right"
 
 func _on_range_entered_left(area):
 	if area.name == "CombatHitbox":
-		print("PLAYER IN RANGE: LEFT")
 		playerInRange = true
 		side = "left"
 
 func _on_range_exited(area):
 	if area.name == "CombatHitbox":
-		print("PLAYER OUT OF RANGE")
 		playerInRange = false
 		side = null
+
+func take_damage(damage):
+	if health > 0:
+		health -= damage
+		if health == 0:
+			Signals.end_combat.emit()
+			health = max_health

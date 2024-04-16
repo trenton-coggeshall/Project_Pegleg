@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c8ontq3hxop3j"]
 
 [ext_resource type="Script" path="res://combat/combat_enemy_template.gd" id="1_orlu5"]
-[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://player/cannonball.tscn" id="2_68icc"]
+[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://world_generation/cannonball.tscn" id="2_0euum"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_b3k5j"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_nbjmj"]
 
@@ -22,7 +22,7 @@ size = Vector2(37, 75)
 
 [node name="CombatEnemyTemplate" type="Node2D"]
 script = ExtResource("1_orlu5")
-Cannonball = ExtResource("2_68icc")
+Cannonball = ExtResource("2_0euum")
 
 [node name="Actual_Ship" type="CharacterBody2D" parent="."]
 z_index = 5
@@ -38,7 +38,7 @@ visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_nbjmj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship"]
+[node name="Actual_Ship_Hitbox" type="CollisionShape2D" parent="Actual_Ship"]
 position = Vector2(0, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_o3u34")
