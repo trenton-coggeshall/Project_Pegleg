@@ -24,6 +24,7 @@ EconomyGlobals="*res://economy/economy_globals.gd"
 PlayerUI="*res://Player/playerui.tscn"
 Signals="*res://Signals.gd"
 Player="*res://Player.gd"
+UpgradeGlobals="*res://player/upgrade_globals.gd"
 
 [display]
 

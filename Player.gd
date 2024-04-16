@@ -12,6 +12,18 @@ var inv_occupied = 0
 var current_port = null
 var in_combat = false
 
+#+-----------------+
+#| Player Upgrades |
+#+-----------------+
+
+var upgrades : Dictionary
+var modifiers = {
+	"health" : 0,
+	"cargo" : 0,
+	"speed" : 0,
+	"steering" : 0,
+}
+
 var wanted
 
 func _ready():
