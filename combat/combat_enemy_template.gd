@@ -8,6 +8,8 @@ extends Node2D
 var range = 800
 var speed = 500
 
+var playerInRange = false
+var side
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,3 +38,37 @@ func handle_sailing(delta):
 
 func handle_shooting(delta):
 	pass
+	
+
+func _on_player_detection_area_entered(area):
+	if area.typeof(RayCast2D):
+		print("PLAYER IN RANGE")
+		playerInRange = true
+
+
+func _on_player_detection_area_exited(area):
+	if area.typeof(RayCast2D):
+		print("PLAYER OUT OF RANGE")
+		playerInRange = false
+
+
+func _on_range_entered_right(area):
+	print("Entered right: " + str(area))
+	if area.name == "CombatHitbox":
+		print("PLAYER IN RANGE: RIGHT")
+		playerInRange = false
+		side = "right"
+
+func _on_range_entered_left(area):
+	print("Entered lefft: " + str(area))
+	if area.name == "CombatHitbox":
+		print("PLAYER IN RANGE: LEFT")
+		playerInRange = false
+		side = "left"
+
+func _on_range_exited(area):
+	print("Exited: " + str(area))
+	if area.name == "CombatHitbox":
+		print("PLAYER OUT OF RANGE")
+		playerInRange = false
+		side = null
