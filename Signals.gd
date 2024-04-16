@@ -15,3 +15,4 @@ signal player_damaged(value)
 signal player_left_port()
 
 signal start_combat(enemyShip)
+signal end_combat()

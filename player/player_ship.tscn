@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://qjxvca13e7ka"]
 
-[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://player/cannonball.tscn" id="1_7u48p"]
+[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://world_generation/cannonball.tscn" id="1_7u48p"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_q6hqy"]
 [ext_resource type="Script" path="res://player/Camera2D.gd" id="4_3hkxc"]
@@ -100,7 +100,7 @@ func set_near_port(is_near, port):
 radius = 20.0
 height = 80.0
 
-[node name="PlayerShip2" type="CharacterBody2D" groups=["Player"]]
+[node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_5pico")
 Cannonball = ExtResource("1_7u48p")
 

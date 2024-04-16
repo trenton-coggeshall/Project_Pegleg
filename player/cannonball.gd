@@ -11,6 +11,8 @@ var distance_traveled = 0
 var sunk = false
 var sink_rate = 0.8
 
+var damage = 5
+
 func _physics_process(delta):
 	var direction = Vector2.RIGHT.rotated(rotation)
 	var dist = direction * speed * delta
@@ -29,9 +31,11 @@ func _physics_process(delta):
 		sprite.modulate.a -= sink_rate * delta
 
 func _on_body_entered(body):
-	if body.is_in_group("enemy"):
-		#body.queue_free() -- Damage Enemy
-		print("Hit enemy")
+	if body.name == "Actual_Ship":
+		body.get_parent().take_damage(damage)
+		print("Enemy hit. Damage: " + str(damage) + ". New health: " + str(body.get_parent().health))
+	elif body.name == "CombatPlayer":
+		Signals.player_damaged.emit(damage)
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
