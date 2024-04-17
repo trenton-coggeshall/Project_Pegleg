@@ -32,7 +32,7 @@ func load_names():
 	while f.get_position() < f.get_length():
 		var name = f.get_line()
 		if name != '':
-			portNames.append(f.get_line())
+			portNames.append(name)
 
 
 func initialize():
@@ -87,7 +87,7 @@ func initialize():
 		# Choose and assign a random faction from the faction list
 		var thisFaction = factions[RandomNumberGenerator.new().randi_range(0, factions.size()-1)]
 		port.set_faction(thisFaction)
-		port.get_node("Icon").modulate = Color(factionColors[thisFaction])
+		port.get_node("Port_Flag").modulate = Color(factionColors[thisFaction])
 		#print("Faction: " + str(port.get_faction()))
 		
 		for subport in ports:
@@ -109,7 +109,7 @@ func initialize():
 		
 		for i in range (closest_ports.size()):
 			closest_ports[i][0].set_faction(thisFaction)
-			closest_ports[i][0].get_node("Icon").modulate = Color(factionColors[thisFaction])
+			closest_ports[i][0].get_node("Port_Flag").modulate = Color(factionColors[thisFaction])
 		"""
 		print("Closest ports: ")
 		for i in range(closest_ports.size()):
