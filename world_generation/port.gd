@@ -20,6 +20,8 @@ var production_rate = 10
 var consumption_timer = 0
 var consumption_rate = 10
 
+var upgrade_types = []
+
 
 func _ready():
 	EconomyGlobals.port_prices[name] = prices

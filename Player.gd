@@ -16,7 +16,12 @@ var in_combat = false
 #| Player Upgrades |
 #+-----------------+
 
-var upgrades : Dictionary
+var upgrades = {
+	"health" : [],
+	"cargo" : [],
+	"speed" : [],
+	"steering" : [],
+}
 var modifiers = {
 	"health" : 0,
 	"cargo" : 0,

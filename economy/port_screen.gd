@@ -8,7 +8,6 @@ extends Control
 @onready var tavern_screen = $TavernScreen
 @onready var governor_screen = $GovernorScreen
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.player_left_port.connect(_on_exit_button_pressed)
@@ -43,7 +42,7 @@ func _on_trade_button_pressed():
 
 
 func _on_shipwright_button_pressed():
-	shipwright_screen.show()
+	shipwright_screen.show_shipwright_screen()
 	home_screen.hide()
 
 

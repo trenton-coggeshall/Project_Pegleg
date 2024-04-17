@@ -18,7 +18,6 @@ grow_vertical = 2
 script = ExtResource("1_k8gds")
 
 [node name="HomeScreen" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -237,6 +236,7 @@ grow_vertical = 0
 text = "Back"
 
 [node name="ShipwrightScreen" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -294,30 +294,30 @@ theme_override_constants/separation = 100
 [node name="VBoxContainer" type="VBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Button1" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
+[node name="Upgrade1Button1" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Upgrade1"
 
-[node name="Button2" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
+[node name="Upgrade1Button2" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Upgrade1"
 
-[node name="Button3" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
+[node name="Upgrade1Button3" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Upgrade1"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Button1" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
+[node name="Upgrade2Button1" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Upgrade1"
 
-[node name="Button2" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
+[node name="Upgrade2Button2" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Upgrade1"
 
-[node name="Button3" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
+[node name="Upgrade2Button3" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Upgrade1"
 
