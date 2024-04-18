@@ -1,16 +1,24 @@
 extends Node
 
+@onready var normal_camera = $"../PlayerShip/Camera2D"
 @onready var combat_camera = $CombatCamera
 @onready var combat_player = $CombatPlayer
 
+@onready var combat_enemy_ship = $CombatEnemyTemplate/Actual_Ship
+@onready var combat_enemy_node = $CombatEnemyTemplate/Pathfinding_Node
+
 var player_start
-var ai_start
+var ai_start_ship
+var ai_start_node
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Signals.start_combat.connect(start_combat)
+	Signals.end_combat.connect(end_combat)
 	player_start = combat_player.position
-
+	ai_start_ship = combat_enemy_ship.position
+	ai_start_node = combat_enemy_node.position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -20,3 +28,10 @@ func _process(delta):
 func start_combat(enemy):
 	Player.in_combat = true
 	combat_camera.make_current()
+
+func end_combat():
+	Player.in_combat = false
+	normal_camera.make_current()
+	$CombatPlayer.position = player_start
+	$CombatEnemyTemplate/Actual_Ship.position = ai_start_ship
+	$CombatEnemyTemplate/Pathfinding_Node.position = ai_start_node

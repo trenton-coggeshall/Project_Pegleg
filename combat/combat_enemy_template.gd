@@ -1,13 +1,21 @@
 extends Node2D
 
+@onready var combat_scene = get_parent()
 @onready var combat_player = $"../CombatPlayer"
 @onready var actual_ship = $Actual_Ship
 @onready var pathnode = $Pathfinding_Node
 
+@export var Cannonball:PackedScene
+@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
+@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
 var range = 800
 var speed = 500
+var max_health = 100
+var health = 5
 
+var playerInRange = false
+var side
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +28,7 @@ func _process(delta):
 		return
 	
 	handle_sailing(delta)
+	handle_shooting(delta)
 
 
 func handle_sailing(delta):
@@ -35,4 +44,40 @@ func handle_sailing(delta):
 
 
 func handle_shooting(delta):
-	pass
+	
+	if playerInRange == false: return
+	
+	if side == "right":
+		var projectile = Cannonball.instantiate()
+		get_parent().add_child(projectile)
+		projectile.velocity = actual_ship.velocity * delta
+		projectile.transform = cannonRight.global_transform
+		projectile.global_position = cannonRight.global_position
+	elif side == "left":
+		var projectile = Cannonball.instantiate()
+		get_parent().add_child(projectile)
+		projectile.velocity = actual_ship.velocity * delta
+		projectile.transform = cannonLeft.global_transform
+		projectile.global_position = cannonLeft.global_position
+
+func _on_range_entered_right(area):
+	if area.name == "CombatHitbox":
+		playerInRange = true
+		side = "right"
+
+func _on_range_entered_left(area):
+	if area.name == "CombatHitbox":
+		playerInRange = true
+		side = "left"
+
+func _on_range_exited(area):
+	if area.name == "CombatHitbox":
+		playerInRange = false
+		side = null
+
+func take_damage(damage):
+	if health > 0:
+		health -= damage
+		if health == 0:
+			Signals.end_combat.emit()
+			health = max_health
