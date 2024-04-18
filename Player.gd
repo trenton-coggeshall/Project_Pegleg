@@ -5,7 +5,7 @@ extends Node
 #+--------------+
 
 var health = 100
-var gold = 100
+var gold = 10000000
 var inventory : Dictionary
 var inv_limit = 30
 var inv_occupied = 0
@@ -42,10 +42,14 @@ func add_gold(amt):
 	Signals.gold_changed.emit(gold)
 	DiscordSDK.state = "Money: " + str(Player.gold) + "g"
 	DiscordSDK.refresh()
-	
-	
+
+
 func remove_gold(amt):
 	gold -= amt
 	Signals.gold_changed.emit(gold)
 	DiscordSDK.state = "Money: " + str(Player.gold) + "g"
 	DiscordSDK.refresh()
+
+
+func add_upgrade(type, upgrade):
+	upgrades[type].append(upgrade)
