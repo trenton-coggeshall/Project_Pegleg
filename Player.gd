@@ -4,6 +4,7 @@ extends Node
 #| Player stats |
 #+--------------+
 
+var max_health = 100
 var health = 100
 var gold = 10000000
 var inventory : Dictionary
