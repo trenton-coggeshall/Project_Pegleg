@@ -29,7 +29,7 @@ func make_purchase(good, quantity):
 	if total > Player.gold:
 		print("Player does not have enough gold")
 		return
-	elif Player.inv_occupied + quantity > Player.inv_limit:
+	elif Player.inv_occupied + quantity > Player.inv_limit + Player.modifiers['cargo']:
 		print("Not enough space in player inventory")
 		return
 	

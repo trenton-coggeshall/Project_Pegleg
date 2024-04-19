@@ -25,15 +25,6 @@ var upgrades_1 : Array
 var upgrades_2 : Array
 var repair_cost : int
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 
 func show_shipwright_screen():
 	var upgrade_type_1 = UpgradeGlobals.UPGRADE_LIST[Player.current_port.upgrade_types[0]]

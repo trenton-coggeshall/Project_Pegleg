@@ -52,5 +52,11 @@ func remove_gold(amt):
 	DiscordSDK.refresh()
 
 
-func add_upgrade(type, upgrade):
-	upgrades[type].append(upgrade)
+func add_upgrade(type, upgrade_name):
+	upgrades[type].append(upgrade_name)
+	
+	var upgrade = UpgradeGlobals.UPGRADE_LIST[type][upgrade_name]
+	var modifier_keys = upgrade['stat_changes'].keys()
+	
+	for m in modifier_keys:
+		modifiers[m] += upgrade['stat_changes'][m]
