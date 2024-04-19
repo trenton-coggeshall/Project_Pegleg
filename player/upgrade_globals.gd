@@ -56,7 +56,7 @@ const UPGRADE_LIST =  {
 	},
 	"speed" : {
 		"speed_up_1" : {
-			"icon" : '',
+			"icon" : 'Gotta go fast!',
 			"display_name": 'Faster Sails I',
 			"details" : '',
 			"prerequisite" : [],
@@ -66,7 +66,7 @@ const UPGRADE_LIST =  {
 		"speed_up_2" : {
 			"icon" : '',
 			"display_name": 'Faster Sails II',
-			"details" : '',
+			"details" : 'Gotta go fast!',
 			"prerequisite" : ["speed_up_1"],
 			"stat_changes" : {'speed' : 200},
 			"cost" : 1000
@@ -74,7 +74,7 @@ const UPGRADE_LIST =  {
 		"speed_up_3" : {
 			"icon" : '',
 			"display_name": 'Faster Sails III',
-			"details" : '',
+			"details" : 'Gotta go fast!',
 			"prerequisite" : ["speed_up_2"],
 			"stat_changes" : {'speed' : 200},
 			"cost" : 2000
@@ -107,3 +107,12 @@ const UPGRADE_LIST =  {
 		},
 	}
 }
+
+func check_prereqs(upgrade_type : String, other_upgrade : String):
+	var prereqs = UPGRADE_LIST[upgrade_type][other_upgrade]['prerequisite']
+	
+	for upgrade in prereqs:
+		if upgrade not in Player.upgrades[upgrade_type]:
+			return false
+	
+	return true

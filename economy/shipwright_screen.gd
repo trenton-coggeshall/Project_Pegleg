@@ -15,7 +15,7 @@ var upgrades_2 : Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +32,10 @@ func show_shipwright_screen():
 	
 	for i in len(upgrade_1_buttons):
 		upgrade_1_buttons[i].text = upgrade_type_1[upgrades_1[i]]["display_name"]
+		upgrade_1_buttons[i].tooltip_text = upgrade_type_1[upgrades_1[i]]["details"]
+		
 		upgrade_2_buttons[i].text = upgrade_type_2[upgrades_2[i]]["display_name"]
+		upgrade_2_buttons[i].tooltip_text = upgrade_type_2[upgrades_2[i]]["details"]
 	
 	check_player_upgrades()
 	
@@ -49,8 +52,8 @@ func check_player_upgrades():
 	var player_upgrades_2 = Player.upgrades[Player.current_port.upgrade_types[1]]
 	
 	for i in len(upgrades_1):
-		upgrade_1_buttons[i].disabled = player_upgrades_1.has(upgrades_1[i])
-		upgrade_2_buttons[i].disabled = player_upgrades_2.has(upgrades_2[i])
+		upgrade_1_buttons[i].disabled = player_upgrades_1.has(upgrades_1[i]) or not UpgradeGlobals.check_prereqs(Player.current_port.upgrade_types[0], upgrades_1[i])
+		upgrade_2_buttons[i].disabled = player_upgrades_2.has(upgrades_2[i]) or not UpgradeGlobals.check_prereqs(Player.current_port.upgrade_types[1], upgrades_2[i])
 
 
 func _on_upgrade_button_pressed(upgrade_type_num, upgrade_num):
