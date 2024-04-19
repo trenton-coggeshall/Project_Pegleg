@@ -106,7 +106,7 @@ func _on_upgrade_button_pressed(upgrade_type_num, upgrade_num):
 		return
 	
 	Player.add_upgrade(upgrade_type, upgrade_list[upgrade_num])
-	Player.gold -= upgrade['cost']
+	Player.remove_gold(upgrade['cost'])
 	check_player_upgrades()
 
 
