@@ -6,7 +6,6 @@ const GOOD_LISTING = preload("res://economy/good_listing.tscn")
 @onready var home_screen = $"../HomeScreen"
 
 var good_listings : Dictionary
-var port
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,11 +16,10 @@ func _ready():
 
 
 func show_transaction():
-	port = Player.current_port
-	$PortGold.text = 'Port gold: ' + str(port.gold) + 'g'
+	$PortGold.text = 'Port gold: ' + str(Player.current_port.gold) + 'g'
 	$PlayerGold.text = 'Your gold: ' + str(Player.gold) + 'g'
 	for good in EconomyGlobals.GoodType.values():
-		good_listings[good].set_price_quantity(port.prices[good], port.goods[good], Player.inventory[good])
+		good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
 	show()
 
 
@@ -31,7 +29,7 @@ func make_purchase(good, quantity):
 	if total > Player.gold:
 		print("Player does not have enough gold")
 		return
-	elif Player.inv_occupied + quantity > Player.inv_limit:
+	elif Player.inv_occupied + quantity > Player.inv_limit + Player.modifiers['cargo']:
 		print("Not enough space in player inventory")
 		return
 	

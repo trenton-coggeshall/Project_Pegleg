@@ -254,6 +254,14 @@ offset_bottom = 143.0
 grow_horizontal = 2
 text = "Shipwright"
 
+[node name="BackButton" type="Button" parent="ShipwrightScreen"]
+layout_mode = 2
+offset_left = 528.0
+offset_top = 479.0
+offset_right = 624.0
+offset_bottom = 510.0
+text = "Back"
+
 [node name="OptionContainer" type="VBoxContainer" parent="ShipwrightScreen"]
 layout_mode = 1
 anchors_preset = 8
@@ -267,18 +275,95 @@ offset_right = 582.5
 offset_bottom = 337.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="RepairCost" type="Label" parent="ShipwrightScreen/OptionContainer"]
+layout_mode = 2
+text = "Cost to repair: "
+horizontal_alignment = 1
 
 [node name="RepairButton" type="Button" parent="ShipwrightScreen/OptionContainer"]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 text = "Repair Ship"
 
-[node name="UpgradeButton" type="Button" parent="ShipwrightScreen/OptionContainer"]
+[node name="UpgradeLabel" type="Label" parent="ShipwrightScreen/OptionContainer"]
 layout_mode = 2
-text = "Upgrade Ship"
+text = "Ship Upgrades:"
+horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="ShipwrightScreen/OptionContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipwrightScreen/OptionContainer"]
 layout_mode = 2
-text = "Back"
+theme_override_constants/separation = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Upgrade1Price1" type="Label" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Upgrade1Button1" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Upgrade1"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Upgrade1Price2" type="Label" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Upgrade1Button2" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Upgrade1"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Upgrade1Price3" type="Label" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Upgrade1Button3" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Upgrade1"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Upgrade2Button1" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Upgrade1"
+
+[node name="Upgrade2Price1" type="Label" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Upgrade2Button2" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "Upgrade1"
+
+[node name="Upgrade2Price2" type="Label" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Upgrade2Button3" type="Button" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+text = "Upgrade1"
+
+[node name="Upgrade2Price3" type="Label" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(0, 0, 0, 0.152941)
@@ -306,4 +391,11 @@ texture = ExtResource("1_8gykc")
 [connection signal="pressed" from="GovernorScreen/OptionContainer/BackButton" to="GovernorScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="TavernScreen/OptionContainer/BackButton" to="TavernScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="TransactionScreen/BackButton" to="TransactionScreen" method="_on_back_button_pressed"]
-[connection signal="pressed" from="ShipwrightScreen/OptionContainer/BackButton" to="ShipwrightScreen" method="_on_back_button_pressed"]
+[connection signal="pressed" from="ShipwrightScreen/BackButton" to="ShipwrightScreen" method="_on_back_button_pressed"]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/RepairButton" to="ShipwrightScreen" method="_on_repair_button_pressed"]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer/Upgrade1Button1" to="ShipwrightScreen" method="_on_upgrade_button_pressed" binds= [0, 0]]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Upgrade1Button2" to="ShipwrightScreen" method="_on_upgrade_button_pressed" binds= [0, 1]]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Upgrade1Button3" to="ShipwrightScreen" method="_on_upgrade_button_pressed" binds= [0, 2]]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Upgrade2Button1" to="ShipwrightScreen" method="_on_upgrade_button_pressed" binds= [1, 0]]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Upgrade2Button2" to="ShipwrightScreen" method="_on_upgrade_button_pressed" binds= [1, 1]]
+[connection signal="pressed" from="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/Upgrade2Button3" to="ShipwrightScreen" method="_on_upgrade_button_pressed" binds= [1, 2]]

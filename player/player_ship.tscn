@@ -54,7 +54,7 @@ func _physics_process(delta):
 
 
 func handle_rotation(delta):
-	var turn_delta = Input.get_axis('left', 'right') * turn_speed * delta
+	var turn_delta = Input.get_axis('left', 'right') * (turn_speed + Player.modifiers['steering']) * delta
 	rotate(turn_delta)
 
 func handle_sails(delta):
@@ -66,7 +66,7 @@ func handle_sails(delta):
 	else:
 		if Input.is_action_just_pressed('down'):
 			furled = true
-		current_speed = move_toward(current_speed, max_speed, acceleration * delta)
+		current_speed = move_toward(current_speed, max_speed + Player.modifiers['speed']*100, acceleration * delta)
 		
 	if anchored: current_speed = move_toward(current_speed, 0, anchor_acceleration * delta)
 	
@@ -109,6 +109,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("1_vnj8m")
 
 [node name="Anchor" type="Sprite2D" parent="Sprite2D"]
+visible = false
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("3_uh856")
 

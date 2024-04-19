@@ -61,6 +61,8 @@ func initialize():
 				WorldGlobals.TileType.SHALLOWS:
 					set_cell(0, Vector2i(x, y), 0, Vector2i(3, 3))
 	
+	var upgrade_types = UpgradeGlobals.UPGRADE_LIST.keys()
+	upgrade_types.shuffle()
 	for loc in WorldGlobals.ports:
 		var port = PORT.instantiate()
 		port.position = loc * 16
@@ -68,9 +70,16 @@ func initialize():
 		var rng = RandomNumberGenerator.new()
 		var rand = rng.randi_range(0, portNames.size()-1)
 		port.name = portNames[rand]
-		print(port.name)
 		portNames.remove_at(rand)
 		ports[port.name] = port
+		
+		if len(upgrade_types) == 0:
+			upgrade_types = UpgradeGlobals.UPGRADE_LIST.keys()
+			upgrade_types.shuffle()
+		
+		port.upgrade_types.append(upgrade_types.pop_back())
+		port.upgrade_types.append(upgrade_types.pop_back())
+		
 		add_child(port)
 		
 	portNames.clear()
