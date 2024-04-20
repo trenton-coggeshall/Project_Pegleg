@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp03nrg7eexhc"]
+[gd_scene load_steps=8 format=3 uid="uid://cp03nrg7eexhc"]
 
 [ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="1_8gykc"]
 [ext_resource type="Script" path="res://economy/port_screen.gd" id="1_k8gds"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://economy/shipwright_screen.gd" id="2_45fa0"]
 [ext_resource type="Script" path="res://economy/tavern_screen.gd" id="2_mdrpb"]
 [ext_resource type="Script" path="res://economy/transaction_screen.gd" id="2_q3np1"]
+[ext_resource type="Script" path="res://economy/crew_screen.gd" id="4_kf1mb"]
 
 [node name="port_screen" type="Control"]
 process_mode = 2
@@ -16,6 +17,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k8gds")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.392157)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -230.0
+offset_right = -260.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.37781, 3.60581)
+mouse_filter = 2
+texture = ExtResource("1_8gykc")
 
 [node name="HomeScreen" type="Control" parent="."]
 anchors_preset = 0
@@ -161,6 +180,95 @@ text = "Browse Jobs"
 [node name="BackButton" type="Button" parent="TavernScreen/OptionContainer"]
 layout_mode = 2
 text = "Back"
+
+[node name="CrewScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_kf1mb")
+
+[node name="TitleText" type="Label" parent="CrewScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 536.0
+offset_top = 120.0
+offset_right = 576.0
+offset_bottom = 143.0
+grow_horizontal = 2
+text = "Crew for Hire!"
+
+[node name="HireCountText" type="Label" parent="CrewScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 505.0
+offset_top = 344.0
+offset_right = 613.0
+offset_bottom = 367.0
+grow_horizontal = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="CrewText" type="Label" parent="CrewScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 217.0
+offset_top = 200.0
+offset_right = 911.0
+offset_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "There are x amount of dudes who will join your crew for y gold each"
+horizontal_alignment = 1
+
+[node name="OptionContainer" type="VBoxContainer" parent="CrewScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 514.0
+offset_top = 385.0
+offset_right = 599.0
+offset_bottom = 451.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CostText" type="Label" parent="CrewScreen/OptionContainer"]
+layout_mode = 2
+text = "Cost: "
+horizontal_alignment = 1
+
+[node name="HireButton" type="Button" parent="CrewScreen/OptionContainer"]
+layout_mode = 2
+text = "Hire Crew"
+
+[node name="BackButton" type="Button" parent="CrewScreen/OptionContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="CrewSlider" type="HSlider" parent="CrewScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 391.0
+offset_top = 307.0
+offset_right = 722.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TransactionScreen" type="Control" parent="."]
 visible = false
@@ -365,31 +473,17 @@ text = "Upgrade1"
 [node name="Upgrade2Price3" type="Label" parent="ShipwrightScreen/OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
 layout_mode = 2
 
-[node name="Background" type="TextureRect" parent="."]
-modulate = Color(0, 0, 0, 0.152941)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -396.0
-offset_top = -235.0
-offset_right = -268.0
-offset_bottom = -107.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(6.37781, 3.60581)
-mouse_filter = 2
-texture = ExtResource("1_8gykc")
-
 [connection signal="pressed" from="HomeScreen/OptionContainer/GovernorButton" to="." method="_on_governor_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/TavernButton" to="." method="_on_tavern_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/TradeButton" to="." method="_on_trade_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/ShipwrightButton" to="." method="_on_shipwright_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="GovernorScreen/OptionContainer/BackButton" to="GovernorScreen" method="_on_back_button_pressed"]
+[connection signal="pressed" from="TavernScreen/OptionContainer/HireButton" to="TavernScreen" method="_on_hire_button_pressed"]
 [connection signal="pressed" from="TavernScreen/OptionContainer/BackButton" to="TavernScreen" method="_on_back_button_pressed"]
+[connection signal="pressed" from="CrewScreen/OptionContainer/HireButton" to="CrewScreen" method="_on_hire_button_pressed"]
+[connection signal="pressed" from="CrewScreen/OptionContainer/BackButton" to="CrewScreen" method="_on_back_button_pressed"]
+[connection signal="value_changed" from="CrewScreen/CrewSlider" to="CrewScreen" method="_on_crew_slider_value_changed"]
 [connection signal="pressed" from="TransactionScreen/BackButton" to="TransactionScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="ShipwrightScreen/BackButton" to="ShipwrightScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="ShipwrightScreen/OptionContainer/RepairButton" to="ShipwrightScreen" method="_on_repair_button_pressed"]

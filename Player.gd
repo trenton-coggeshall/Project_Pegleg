@@ -10,6 +10,10 @@ var gold = 10000000
 var inventory : Dictionary
 var inv_limit = 30
 var inv_occupied = 0
+var crew_count = 60
+var crew_max = 80
+var crew_optimal = 60
+var crew_modifier
 var current_port = null
 var in_combat = false
 
@@ -36,6 +40,7 @@ func _ready():
 	for good in EconomyGlobals.GoodType.values():
 		inventory[good] = 0 
 	Signals.gold_changed.emit(gold)
+	crew_check()
 
 
 func add_gold(amt):
@@ -60,3 +65,24 @@ func add_upgrade(type, upgrade_name):
 	
 	for m in modifier_keys:
 		modifiers[m] += upgrade['stat_changes'][m]
+
+
+func add_crew(amt):
+	crew_count += amt
+	if crew_count > crew_max:
+		crew_count = crew_max
+	crew_check()
+
+
+func remove_crew(amt):
+	crew_count -= amt
+	if crew_count < 0:
+		crew_count = 0
+	crew_check()
+
+
+func crew_check():
+	if crew_count < crew_optimal:
+		crew_modifier = max(float(crew_count) / float(crew_optimal), 0.1)
+	else:
+		crew_modifier = 1

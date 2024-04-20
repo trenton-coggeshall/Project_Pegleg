@@ -14,6 +14,10 @@ var faction = "none"
 var region = "none"
 var paths : Dictionary
 var max_goods = 500
+var hireable_crew = 0
+var crew_refresh_delay = 10
+var crew_refresh_timer = 10
+var crew_cost = 0
 
 var production_timer = 0
 var production_rate = 10
@@ -31,6 +35,7 @@ func _ready():
 func _process(delta):
 	handle_production(delta)
 	handle_consumption(delta)
+	handle_crew_hires(delta)
 
 
 func handle_production(delta):
@@ -59,6 +64,15 @@ func handle_consumption(delta):
 			if goods[good] < 0:
 				goods[good] = 0
 			set_price(good)
+
+
+func handle_crew_hires(delta):
+	crew_refresh_timer += delta
+	
+	if crew_refresh_timer >= crew_refresh_delay:
+		crew_refresh_timer = 0
+		hireable_crew = randi_range(5, 15)
+		crew_cost = randi_range(1, 5)
 
 
 func get_faction():
