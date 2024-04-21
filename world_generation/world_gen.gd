@@ -13,7 +13,7 @@ const ChunkData = preload("res://world_generation/chunk_data.gd")
 var map_width = 256
 var map_height = 256
 
-var chunk_size = 512
+var gen_portions = 32
 
 var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
@@ -50,10 +50,11 @@ func generate_map():
 			var moist = moisture.get_noise_2d(position.x + x, position.y + y)*10
 			var temp = temperature.get_noise_2d(position.x + x, position.y + y)*10
 			var alt = altitude.get_noise_2d(position.x + x, position.y + y)*10
+			var test = Color.BLUE
 			
 			if alt < 2:
 				water_tiles.append(Vector2i(x, y))
-				img.set_pixel(x + position.x, y + position.y, Color.BLUE) #water
+				#img.set_pixel(x + position.x, map_height - 1 - y, Color.BLUE) #water
 				if alt < 1:
 					y_tiles.append(WorldGlobals.TileType.WATER)
 				else:
@@ -61,19 +62,39 @@ func generate_map():
 			elif alt < 2.3 and moist < 2:
 				y_tiles.append(WorldGlobals.TileType.SAND)
 				#chunk.possible_ports.append(Vector2i(x, y))
-				img.set_pixel(x + position.x, y + position.y, Color.BURLYWOOD) #sand
+				#img.set_pixel(x + position.x, map_height - 1 - y, Color.BURLYWOOD) #sand
 			else:
 				y_tiles.append(tiles[round((moist+10)/5)][round((temp+10)/5)])
-				img.set_pixel(x + position.x, y + position.y, Color.WEB_GREEN) #land
+				#img.set_pixel(x + position.x, map_height - 1 - y, Color.WEB_GREEN) #land
+			
+			var pixel_color
+			match y_tiles[y]:
+				WorldGlobals.TileType.WATER:
+					pixel_color = Color.DODGER_BLUE
+				WorldGlobals.TileType.SAND:
+					pixel_color = Color.BURLYWOOD
+				WorldGlobals.TileType.LIGHT_GRASS:
+					pixel_color = Color.LIME_GREEN
+				WorldGlobals.TileType.MED_GRASS:
+					pixel_color = Color.WEB_GREEN
+				WorldGlobals.TileType.DARK_GRASS:
+					pixel_color = Color.DARK_GREEN
+				WorldGlobals.TileType.SHALLOWS:
+					pixel_color = Color.SKY_BLUE
+			img.set_pixel(x + position.x, map_height - 1 - y, pixel_color)
 		
 		map_tiles.append(y_tiles)
-		map_texture.texture = ImageTexture.create_from_image(img)
-		await get_tree().process_frame
+		
+		if x % gen_portions == 0:
+			map_texture.texture = ImageTexture.create_from_image(img)
+			await get_tree().process_frame
 	
+	map_texture.texture = ImageTexture.create_from_image(img)
 	WorldGlobals.tiles = map_tiles
 	place_ports()
 	
 	play_button.disabled = false
+	generate_button.disabled = false
 
 
 func place_ports():
@@ -106,7 +127,7 @@ func place_ports():
 
 func _on_generate_button_pressed():
 	generate_button.disabled = true
-	#WorldGlobals.chunks.clear()
+	WorldGlobals.ports.clear()
 	img = Image.create(map_width, map_height, false, Image.FORMAT_RGBA8)
 	moisture.seed = int(moisture_seed_text.text)
 	temperature.seed = int(temp_seed_text.text)
