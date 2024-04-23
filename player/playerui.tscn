@@ -29,6 +29,7 @@ outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Control2" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "goldLabel", "healthBar", "damageBar", "settingsButton", "settingsWindow")]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0
