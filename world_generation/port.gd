@@ -3,6 +3,8 @@ extends Node2D
 const MERCHANT_AI = preload("res://ai/merchant_ai.tscn")
 const MILITARY_AI = preload("res://ai/military_ai.tscn")
 
+@onready var path_finder = $"../path_finder"
+
 var location : Vector2i
 var gold = 10000
 var goods : Dictionary
@@ -178,12 +180,25 @@ func _on_area_2d_body_exited(body):
 
 
 func random_path():
-	var key = paths.keys()[randi() % len(paths.keys())]
-	return paths[key]
+	return []
+	pass
+	#var key = paths.keys()[randi() % len(paths.keys())]
+	#return paths[key]
 
 
 func get_port_path(port_name):
-	return paths[port_name]
+	if paths.has(port_name):
+		return paths[port_name]
+	
+	var other_port = WorldGlobals.ports[port_name]
+	
+	var path = path_finder.find_path(position, other_port.position)
+	paths[other_port.name] = path
+	var other_path = path.duplicate()
+	other_path.reverse()
+	other_port.paths[name] = other_path
+	
+	return path
 
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):

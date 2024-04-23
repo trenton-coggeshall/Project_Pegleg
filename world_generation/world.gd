@@ -20,7 +20,7 @@ func _ready():
 	add_child(tiles)
 	tiles.initialize()
 	
-	player_ship.position = tiles.map_to_local(WorldGlobals.ports[0])
+	player_ship.position = WorldGlobals.random_port().position
 	avg = EconomyGlobals.average_prices()
 
 	

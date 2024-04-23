@@ -49,7 +49,7 @@ func find_deal():
 	sell_port = trade_data[2]
 	
 	if buy_port != ai_ship.current_port.name:
-		ai_ship.path = ai_ship.current_port.paths[buy_port]
+		ai_ship.path = ai_ship.current_port.get_port_path(buy_port)
 
 
 func deal_purchase():

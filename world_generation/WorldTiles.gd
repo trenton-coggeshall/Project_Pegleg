@@ -63,6 +63,9 @@ func initialize():
 	
 	var upgrade_types = UpgradeGlobals.UPGRADE_LIST.keys()
 	upgrade_types.shuffle()
+	
+	var temp_ports = {}
+	
 	for loc in WorldGlobals.ports:
 		var port = PORT.instantiate()
 		port.position = loc * 16
@@ -80,10 +83,14 @@ func initialize():
 		port.upgrade_types.append(upgrade_types.pop_back())
 		port.upgrade_types.append(upgrade_types.pop_back())
 		
+		temp_ports[port.name] = port
+		
 		add_child(port)
 		
 	portNames.clear()
 	var ports = get_tree().get_nodes_in_group("Ports")
+	WorldGlobals.ports.clear()
+	WorldGlobals.ports = temp_ports
 	
 	# Choose a port, assign a faction to it and its X closest neighbors
 	for port in ports:
@@ -125,7 +132,7 @@ func initialize():
 			print(closest_ports[i][0].name + " - " + str(closest_ports[i][1]) + " - " + closest_ports[i][0].get_faction())
 		"""
 	
-	find_port_routes()
+	#find_port_routes()
 	
 	for port in ports:
 		port.spawn_ship()

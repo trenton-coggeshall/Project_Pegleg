@@ -36,6 +36,7 @@ func _ready():
 	Signals.hide_ui.emit()
 	WorldGlobals.map_width = map_width
 	WorldGlobals.map_height = map_height
+	WorldGlobals.ports = []
 
 
 func generate_map():
@@ -159,8 +160,8 @@ func _on_world_size_options_item_selected(index):
 			map_height = 512
 			port_count = 20
 		3: 
-			map_width = 2048
-			map_height = 1024
+			map_width = 1536
+			map_height = 768
 			port_count = 40
 	
 	WorldGlobals.map_width = map_width

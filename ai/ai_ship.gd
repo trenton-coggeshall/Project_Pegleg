@@ -30,6 +30,7 @@ var destination
 var path_index = 0
 
 func _ready():
+	path = []
 	for good in EconomyGlobals.GoodType.values():
 		inventory[good] = 0 
 
