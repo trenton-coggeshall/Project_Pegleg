@@ -19,6 +19,7 @@ func _ready():
 	Signals.username_changed.connect(set_username)
 	
 	Signals.player_damaged.connect(player_damaged)
+	Signals.player_healed.connect(player_healed)
 
 
 #+------------------+
@@ -41,13 +42,26 @@ func set_username(value):
 	usernameLabel.text = value
 	
 func player_damaged(value):
-	var tween = create_tween()
-	
 	if Player.health > 0:
 		Player.health -= value
 		if Player.health == 0:
 			Signals.end_combat.emit()
 	
+	tween_health()
+
+func player_healed(value):
+	Player.health += value
+	if Player.health > Player.max_health:
+		Player.health = Player.max_health
+	
+	tween_health()
+
+func player_full_healed():
+	Player.health = Player.max_health
+	tween_health()
+
+func tween_health():
+	var tween = create_tween()
 	tween.tween_property(healthBar, "value", Player.health, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(damageBar, "value", Player.health, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
