@@ -6,7 +6,8 @@ const PORT = preload("res://world_generation/port.tscn")
 @onready var map_border = $map_border
 @onready var border_tiles = $border_tiles
 
-var portNames:Array
+@onready var portNames:Array = Names.port_names
+@onready var shipNames:Array = Names.ship_names
 var factions = ["RedTeam", "GreenTeam", "BlueTeam"]
 var factionColors = {
 	"RedTeam" = "#d82452",
@@ -19,21 +20,11 @@ var ports : Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	map_border.size = Vector2(WorldGlobals.map_width * 16 + 640, WorldGlobals.map_height * 16 + 640)
-	load_names()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
-
-func load_names():
-	var f = FileAccess.open("res://world_generation/port_names.txt", FileAccess.READ)
-	while f.get_position() < f.get_length():
-		var name = f.get_line()
-		if name != '':
-			portNames.append(name)
-
 
 func initialize():
 	for x in range(-1, WorldGlobals.map_width):

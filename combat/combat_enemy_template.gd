@@ -12,7 +12,7 @@ extends Node2D
 var range = 800
 var speed = 500
 var max_health = 100
-var health = 5
+var health = 100
 
 var playerInRange = false
 var side
