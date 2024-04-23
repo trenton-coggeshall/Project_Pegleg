@@ -14,6 +14,9 @@ var speed = 500
 var max_health = 100
 var health = 5
 
+var reload_delay = 0.75
+var reload_timer = 0
+
 var playerInRange = false
 var side
 
@@ -44,9 +47,9 @@ func handle_sailing(delta):
 
 
 func handle_shooting(delta):
-	
-	if playerInRange == false: return
-	
+	reload_timer += delta
+	if playerInRange == false or reload_timer < reload_delay: return
+	reload_timer = 0
 	if side == "right":
 		var projectile = Cannonball.instantiate()
 		get_parent().add_child(projectile)
@@ -60,20 +63,24 @@ func handle_shooting(delta):
 		projectile.transform = cannonLeft.global_transform
 		projectile.global_position = cannonLeft.global_position
 
+
 func _on_range_entered_right(area):
 	if area.name == "CombatHitbox":
 		playerInRange = true
 		side = "right"
+
 
 func _on_range_entered_left(area):
 	if area.name == "CombatHitbox":
 		playerInRange = true
 		side = "left"
 
+
 func _on_range_exited(area):
 	if area.name == "CombatHitbox":
 		playerInRange = false
 		side = null
+
 
 func take_damage(damage):
 	if health > 0:
