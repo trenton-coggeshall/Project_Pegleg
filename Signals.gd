@@ -13,6 +13,7 @@ signal username_changed(value)
 
 signal player_damaged(value)
 signal player_healed(value)
+signal player_full_healed()
 signal player_left_port()
 
 signal start_combat(enemyShip)

@@ -20,6 +20,7 @@ func _ready():
 	
 	Signals.player_damaged.connect(player_damaged)
 	Signals.player_healed.connect(player_healed)
+	Signals.player_full_healed.connect(player_full_healed)
 
 
 #+------------------+
