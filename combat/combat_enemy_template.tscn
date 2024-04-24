@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8ontq3hxop3j"]
+[gd_scene load_steps=11 format=3 uid="uid://c8ontq3hxop3j"]
 
 [ext_resource type="Script" path="res://combat/combat_enemy_template.gd" id="1_orlu5"]
 [ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://world_generation/cannonball.tscn" id="2_0euum"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_b3k5j"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_nbjmj"]
+[ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="5_eybuj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3u34"]
 radius = 20.0
@@ -26,6 +27,7 @@ Cannonball = ExtResource("2_0euum")
 
 [node name="Actual_Ship" type="CharacterBody2D" parent="."]
 z_index = 5
+rotation = 3.14159
 
 [node name="Sprite2D" type="Sprite2D" parent="Actual_Ship"]
 modulate = Color(1, 0.356863, 0.352941, 1)
@@ -88,6 +90,9 @@ scale = Vector2(0.722215, 0.361986)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pathfinding_Node/Node_Radius"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_x12hh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pathfinding_Node"]
+texture = ExtResource("5_eybuj")
 
 [connection signal="area_entered" from="Actual_Ship/Detection_Right" to="." method="_on_range_entered_right"]
 [connection signal="area_exited" from="Actual_Ship/Detection_Right" to="." method="_on_range_exited"]

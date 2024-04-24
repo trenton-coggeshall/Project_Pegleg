@@ -10,9 +10,14 @@ extends Node2D
 @onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
 var range = 800
-var speed = 500
+var max_speed = 25000
+var acceleration = 10000
+var steer_speed = 3
 var max_health = 100
-var health = 5
+var health = 100
+
+var current_speed = 0
+var pathnode_speed = 600
 
 var reload_delay = 0.75
 var reload_timer = 0
@@ -26,24 +31,44 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if not Player.in_combat:
 		return
 	
 	handle_sailing(delta)
 	handle_shooting(delta)
+	actual_ship.move_and_slide()
 
 
 func handle_sailing(delta):
-	actual_ship.look_at(pathnode.global_position)
-	actual_ship.global_position = actual_ship.global_position.lerp(pathnode.global_position, 5*delta)
+	current_speed += acceleration * delta
+	if current_speed > max_speed:
+		current_speed = max_speed
+	
+	var dir_to_path_node = actual_ship.global_position.direction_to(pathnode.global_position)
+	#actual_ship.rotation = move_toward(actual_ship.rotation, dir_to_path_node, steer_speed * delta) + PI
+	print(dir_to_path_node)
+	var steer_dir
+	if (actual_ship.transform.x).angle_to(dir_to_path_node) >= 0:
+		steer_dir = 1
+	else:
+		steer_dir = -1
+	var turn_delta = steer_dir * steer_speed * delta
+	actual_ship.rotate(turn_delta)
+	actual_ship.velocity = actual_ship.transform.x * current_speed * delta
+	
+	#print("current_speed: " + str(current_speed))
+	#print("velocity: " + str(actual_ship.velocity))
+	
+	#actual_ship.look_at(pathnode.global_position)
+	#actual_ship.global_position = actual_ship.global_position.lerp(pathnode.global_position, 5*delta)
 	
 	if pathnode.global_position.distance_to(combat_player.global_position) > range:
-		pathnode.global_position = pathnode.global_position.move_toward(combat_player.global_position, speed * delta)
+		pathnode.global_position = pathnode.global_position.move_toward(combat_player.global_position, pathnode_speed * delta)
 	else:
 		var dir_to_player = (pathnode.global_position - combat_player.global_position).normalized()
 		var move_dir = Vector2(dir_to_player.y, -dir_to_player.x) * 10
-		pathnode.global_position = pathnode.global_position.move_toward(pathnode.global_position + move_dir, speed * delta)
+		pathnode.global_position = pathnode.global_position.move_toward(pathnode.global_position + move_dir, pathnode_speed * delta)
 
 
 func handle_shooting(delta):
