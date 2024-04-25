@@ -8,6 +8,8 @@
 script/source = "extends CharacterBody2D
 
 @onready var enemy = $\"../CombatEnemyTemplate\"
+@onready var cannons_right_group = $CannonsRight
+@onready var cannons_left_group = $CannonsLeft
 
 #+------------------+
 #| Ship stat values |
@@ -31,15 +33,37 @@ var current_speed = 0
 #| Combat info |
 #+-------------+
 @export var Cannonball:PackedScene
+var cannon_count = 3
+var loaded_cannons
 var cannons_right:Array
 var cannons_left:Array
 
 var enemy_dir:Vector2
 
 func _ready():
-	cannons_right = $CannonsRight.get_children()
-	cannons_left = $CannonsLeft.get_children()
+	var cannon_offset = 60.0 / cannon_count
+	var y_pos = -(cannon_offset * cannon_count / 2)
 	
+	for i in cannon_count:
+		var new_cannon_right = Marker2D.new()
+		cannons_right_group.add_child(new_cannon_right)
+		new_cannon_right.position.y = y_pos
+		new_cannon_right.position.x = 30
+		new_cannon_right.scale = Vector2(0.1, 0.1)
+		
+		var new_cannon_left = Marker2D.new()
+		cannons_left_group.add_child(new_cannon_left)
+		new_cannon_left.position.y = y_pos
+		new_cannon_left.position.x = -30
+		new_cannon_left.scale = Vector2(0.1, 0.1)
+		new_cannon_left.rotation_degrees = 180
+		
+		y_pos += cannon_offset
+		
+	
+	cannons_right = cannons_right_group.get_children()
+	cannons_left = cannons_left_group.get_children()
+	loaded_cannons = cannon_count
 
 
 func _physics_process(delta):
@@ -98,12 +122,21 @@ func handle_shooting(delta):
 		else:
 			cannons = cannons_left
 		
+		var shot_delay = 0
+		
+		loaded_cannons = 0
+		
+		cannons.shuffle()
 		for cannon in cannons:
 			var projectile = Cannonball.instantiate()
 			get_parent().add_child(projectile)
 			projectile.velocity = velocity * delta
 			projectile.transform = cannon.global_transform
 			projectile.global_position = cannon.global_position
+			await get_tree().create_timer(shot_delay).timeout
+			shot_delay = randf_range(0.01, 0.02)
+
+
 
 
 
@@ -143,16 +176,7 @@ shape = SubResource("CapsuleShape2D_ru18s")
 
 [node name="CannonsRight" type="Node2D" parent="."]
 
-[node name="cannon" type="Marker2D" parent="CannonsRight"]
-position = Vector2(30, 0)
-scale = Vector2(0.1, 0.1)
-
 [node name="CannonsLeft" type="Node2D" parent="."]
-
-[node name="cannon" type="Marker2D" parent="CannonsLeft"]
-position = Vector2(-30, 0)
-rotation = 3.14159
-scale = Vector2(0.1, 0.1)
 
 [node name="CombatHitbox" type="Area2D" parent="."]
 
