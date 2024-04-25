@@ -107,7 +107,8 @@ func _on_repair_button_pressed():
 		return
 	
 	Player.remove_gold(repair_cost)
-	Player.health = Player.max_health
+	Signals.player_full_healed.emit()
+	
 	repair_cost = 0
 	repair_cost_label.text = "She's all patched up!"
 	repair_button.disabled = true

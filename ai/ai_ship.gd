@@ -25,6 +25,8 @@ var inventory : Dictionary
 var inv_limit = 30
 var inv_occupied = 0
 
+var faction
+
 var destination
 @export var path : Array
 var path_index = 0

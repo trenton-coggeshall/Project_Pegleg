@@ -91,6 +91,7 @@ func spawn_ship():
 	merchant.home_port = self
 	merchant.ai_ship.current_port = self
 	merchant.ai_ship.path = random_path()
+	merchant.ai_ship.faction = self.faction
 
 
 # Returns the price of a good at a certain quantity

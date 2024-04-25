@@ -6,6 +6,7 @@ extends Control
 @onready var moisture_seed_text = $Seeds/MoistureSeedText
 @onready var play_button = $PlayButton
 @onready var generate_button = $GenerateButton
+@onready var world_size_options = $WorldSizeOptions
 
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 
@@ -40,6 +41,7 @@ func _ready():
 
 func generate_map():
 	play_button.disabled = true
+	world_size_options.disabled = true
 	water_tiles.clear()
 	
 	var map_tiles : Array
@@ -94,7 +96,6 @@ func generate_map():
 	place_ports()
 	
 	play_button.disabled = false
-	generate_button.disabled = false
 
 
 func place_ports():
