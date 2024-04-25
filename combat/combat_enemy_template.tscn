@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8ontq3hxop3j"]
+[gd_scene load_steps=9 format=3 uid="uid://c8ontq3hxop3j"]
 
 [ext_resource type="Script" path="res://combat/combat_enemy_template.gd" id="1_orlu5"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_b3k5j"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_nbjmj"]
 [ext_resource type="PackedScene" uid="uid://coa286iw0bqab" path="res://combat/cannon_controller.tscn" id="5_c2erk"]
+[ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="5_mc8q2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3u34"]
 radius = 20.0
@@ -61,6 +62,13 @@ rotation = 3.14159
 
 [node name="CannonController" parent="Actual_Ship" instance=ExtResource("5_c2erk")]
 rotation = 3.14159
+
+[node name="AimMarker" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="AimMarker"]
+position = Vector2(0, -76)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_mc8q2")
 
 [connection signal="area_entered" from="Actual_Ship/Detection_Right" to="." method="_on_range_entered_right"]
 [connection signal="area_exited" from="Actual_Ship/Detection_Right" to="." method="_on_range_exited"]

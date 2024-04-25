@@ -1,14 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpjnr0qkdvy"]
+[gd_scene load_steps=8 format=3 uid="uid://cpjnr0qkdvy"]
 
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_rgcxi"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_chj2n"]
 [ext_resource type="PackedScene" uid="uid://coa286iw0bqab" path="res://combat/cannon_controller.tscn" id="4_tq2ws"]
+[ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="4_wqqi3"]
 
 [sub_resource type="GDScript" id="GDScript_5pico"]
 script/source = "extends CharacterBody2D
 
 @onready var enemy = $\"../CombatEnemyTemplate\"
 @onready var cannon_controller = $CannonController
+@onready var aim_marker = $AimMarker
 
 #+------------------+
 #| Ship stat values |
@@ -135,3 +137,10 @@ scale = Vector2(10, 10)
 shape = SubResource("SegmentShape2D_1ld45")
 
 [node name="CannonController" parent="." instance=ExtResource("4_tq2ws")]
+
+[node name="AimMarker" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="AimMarker"]
+position = Vector2(0, -76)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_wqqi3")

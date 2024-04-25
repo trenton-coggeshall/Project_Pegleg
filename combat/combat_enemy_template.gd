@@ -5,13 +5,14 @@ extends Node2D
 @onready var actual_ship = $Actual_Ship
 
 @onready var cannon_controller = $Actual_Ship/CannonController
+@onready var aim_marker = $AimMarker
 
 
 #@export var Cannonball:PackedScene
 #@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
 #@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
-var range = 800
+var range = 600
 var max_speed = 25000
 var acceleration = 10000
 var steer_speed = 3

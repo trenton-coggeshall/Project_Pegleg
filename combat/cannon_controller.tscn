@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://coa286iw0bqab"]
 
 [ext_resource type="Script" path="res://combat/cannon_controller.gd" id="1_wi22n"]
-[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://world_generation/cannonball.tscn" id="2_2fe16"]
+[ext_resource type="PackedScene" uid="uid://y3yoed01w4a7" path="res://world_generation/cannonball.tscn" id="2_2fe16"]
 
 [node name="CannonController" type="Node2D"]
 script = ExtResource("1_wi22n")

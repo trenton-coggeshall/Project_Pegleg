@@ -50,9 +50,9 @@ func _process(delta):
 	handle_reloading(delta)
 
 
-func fire(shoot_right, delta):
+func fire(shoot_right, delta, angle=0):
 	var cannons:Array
-		
+	
 	if shoot_right:
 		cannons = cannons_right
 	else:
@@ -71,9 +71,9 @@ func fire(shoot_right, delta):
 	for i in shots:
 		var projectile = Cannonball.instantiate()
 		parent.get_parent().add_child(projectile)
-		projectile.velocity = parent.velocity * delta
 		projectile.transform = cannons[i].global_transform
 		projectile.global_position = cannons[i].global_position
+		projectile.initialize(parent.velocity * delta)
 		await get_tree().create_timer(shot_delay).timeout
 		shot_delay = randf_range(0.01, 0.02)
 	
