@@ -8,6 +8,8 @@
 script/source = "extends CharacterBody2D
 
 @onready var enemy = $\"../CombatEnemyTemplate\"
+#@onready var cannons_right_group = $CannonsRight
+#@onready var cannons_left_group = $CannonsLeft
 @onready var cannon_controller = $CannonController
 
 #+------------------+
@@ -31,12 +33,43 @@ var current_speed = 0
 #+-------------+
 #| Combat info |
 #+-------------+
-
+#@export var Cannonball:PackedScene
+#var cannon_count = 3
+#var loaded_cannons
+#var cannons_right:Array
+#var cannons_left:Array
+#
+#var reload_timer = 0
+#var reload_delay = 0.5
+#var reload_amount = 1
 
 var enemy_dir:Vector2
 
 func _ready():
 	pass
+	#var cannon_offset = 60.0 / cannon_count
+	#var y_pos = -(cannon_offset * cannon_count / 2)
+	#
+	#for i in cannon_count:
+		#var new_cannon_right = Marker2D.new()
+		#cannons_right_group.add_child(new_cannon_right)
+		#new_cannon_right.position.y = y_pos
+		#new_cannon_right.position.x = 30
+		#new_cannon_right.scale = Vector2(0.1, 0.1)
+		#
+		#var new_cannon_left = Marker2D.new()
+		#cannons_left_group.add_child(new_cannon_left)
+		#new_cannon_left.position.y = y_pos
+		#new_cannon_left.position.x = -30
+		#new_cannon_left.scale = Vector2(0.1, 0.1)
+		#new_cannon_left.rotation_degrees = 180
+		#
+		#y_pos += cannon_offset
+		#
+	#
+	#cannons_right = cannons_right_group.get_children()
+	#cannons_left = cannons_left_group.get_children()
+	#loaded_cannons = cannon_count
 
 
 func _physics_process(delta):
@@ -46,6 +79,7 @@ func _physics_process(delta):
 	handle_anchor(delta)
 	handle_rotation(delta)
 	handle_sails(delta)
+	#handle_reloading(delta)
 	handle_shooting(delta)
 	move_and_slide()
 	
@@ -87,7 +121,41 @@ func handle_anchor(delta):
 
 func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
-		cannon_controller.fire(get_fire_direction(), delta)
+		cannon_controller.fire(get_fire_direction())
+		
+		#var shoot_right = get_fire_direction()
+		#var cannons:Array
+		#
+		#if shoot_right:
+			#cannons = cannons_right
+		#else:
+			#cannons = cannons_left
+		#
+		#
+		#var shots = loaded_cannons
+		#loaded_cannons = 0
+		#reload_timer = 0
+		#
+		#cannons.shuffle()
+		#var shot_delay = 0
+		#for i in shots:
+			#var projectile = Cannonball.instantiate()
+			#get_parent().add_child(projectile)
+			#projectile.velocity = velocity * delta
+			#projectile.transform = cannons[i].global_transform
+			#projectile.global_position = cannons[i].global_position
+			#await get_tree().create_timer(shot_delay).timeout
+			#shot_delay = randf_range(0.01, 0.02)
+
+
+#func handle_reloading(delta):
+	#if loaded_cannons == cannon_count:
+		#return
+	#
+	#reload_timer += delta
+	#if reload_timer >= reload_delay:
+		#loaded_cannons = min(loaded_cannons + reload_amount, cannon_count)
+		#reload_timer = 0
 
 
 func get_fire_direction():

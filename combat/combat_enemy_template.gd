@@ -4,9 +4,12 @@ extends Node2D
 @onready var combat_player = $"../CombatPlayer"
 @onready var actual_ship = $Actual_Ship
 
-@export var Cannonball:PackedScene
-@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
-@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
+@onready var cannon_controller = $Actual_Ship/CannonController
+
+
+#@export var Cannonball:PackedScene
+#@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
+#@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
 var range = 800
 var max_speed = 25000
@@ -52,31 +55,20 @@ func handle_sailing(delta):
 		target_dir = Vector2(dir_to_player.y, -dir_to_player.x) * 10
 	
 	var steer_dir
-	if (actual_ship.transform.x).angle_to(target_dir) >= 0:
+	if (-actual_ship.transform.y).angle_to(target_dir) >= 0:
 		steer_dir = 1
 	else:
 		steer_dir = -1
 	
 	var turn_delta = steer_dir * steer_speed * delta
 	actual_ship.rotate(turn_delta)
-	actual_ship.velocity = actual_ship.transform.x * current_speed * delta
+	actual_ship.velocity = -actual_ship.transform.y * current_speed * delta
+
 
 func handle_shooting(delta):
-	reload_timer += delta
-	if playerInRange == false or reload_timer < reload_delay: return
-	reload_timer = 0
-	if side == "right":
-		var projectile = Cannonball.instantiate()
-		get_parent().add_child(projectile)
-		projectile.velocity = actual_ship.velocity * delta
-		projectile.transform = cannonRight.global_transform
-		projectile.global_position = cannonRight.global_position
-	elif side == "left":
-		var projectile = Cannonball.instantiate()
-		get_parent().add_child(projectile)
-		projectile.velocity = actual_ship.velocity * delta
-		projectile.transform = cannonLeft.global_transform
-		projectile.global_position = cannonLeft.global_position
+	if playerInRange == false : return
+	# For some reason when side = 'left' it shoots right
+	cannon_controller.fire(side == 'left', delta)
 
 
 func _on_range_entered_right(area):
