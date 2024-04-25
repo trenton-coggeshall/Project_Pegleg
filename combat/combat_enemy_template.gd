@@ -50,9 +50,11 @@ func handle_sailing(delta):
 	
 	if actual_ship.global_position.distance_to(combat_player.global_position) > range:
 		target_dir = actual_ship.global_position.direction_to(combat_player.global_position)
-	else:
+	elif cannon_controller.loaded_cannons >= cannon_controller.cannon_count/2.0 or cannon_controller.firing:
 		var dir_to_player = (actual_ship.global_position - combat_player.global_position).normalized()
 		target_dir = Vector2(dir_to_player.y, -dir_to_player.x) * 10
+	else:
+		target_dir = combat_player.global_position.direction_to(actual_ship.global_position)
 	
 	var steer_dir
 	if (-actual_ship.transform.y).angle_to(target_dir) >= 0:
@@ -66,7 +68,7 @@ func handle_sailing(delta):
 
 
 func handle_shooting(delta):
-	if playerInRange == false : return
+	if playerInRange == false or cannon_controller.firing : return
 	# For some reason when side = 'left' it shoots right
 	cannon_controller.fire(side == 'left', delta)
 

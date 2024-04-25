@@ -5,7 +5,7 @@ extends Node2D
 @export var Cannonball:PackedScene
 
 
-var cannon_count = 3
+var cannon_count = 5
 var loaded_cannons
 var cannons_right:Array
 var cannons_left:Array
@@ -13,6 +13,8 @@ var cannons_left:Array
 var reload_timer = 0
 var reload_delay = 0.5
 var reload_amount = 1
+
+var firing = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -49,7 +51,6 @@ func _process(delta):
 
 
 func fire(shoot_right, delta):
-	print("FIRE")
 	var cannons:Array
 		
 	if shoot_right:
@@ -66,6 +67,7 @@ func fire(shoot_right, delta):
 	
 	cannons.shuffle()
 	var shot_delay = 0
+	firing = true
 	for i in shots:
 		var projectile = Cannonball.instantiate()
 		parent.get_parent().add_child(projectile)
@@ -74,7 +76,8 @@ func fire(shoot_right, delta):
 		projectile.global_position = cannons[i].global_position
 		await get_tree().create_timer(shot_delay).timeout
 		shot_delay = randf_range(0.01, 0.02)
-
+	
+	firing = false
 
 func handle_reloading(delta):
 	if loaded_cannons == cannon_count:
