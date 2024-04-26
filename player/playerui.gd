@@ -49,7 +49,7 @@ func player_damaged(value):
 		Player.health -= value
 		if Player.health == 0:
 			Signals.end_combat.emit()
-			combat_end_screen_lost.show_lose_screen()
+			Signals.show_end_screen_lose.emit()
 	
 	tween_health()
 

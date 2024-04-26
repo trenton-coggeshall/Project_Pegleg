@@ -27,7 +27,7 @@ var livestock = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	#pass # Replace with function body.
 	Signals.show_end_screen_win.connect(show_win_screen)
 	
 	
