@@ -18,3 +18,5 @@ signal player_left_port()
 
 signal start_combat(enemyShip)
 signal end_combat()
+
+signal show_end_screen_win()

@@ -10,6 +10,8 @@ extends Control
 @export var settingsButton:Button
 @export var settingsWindow:Panel
 
+@onready var combat_end_screen_lost = $"../combat/combat_end_screen_lost"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.hide_ui.connect(hide_UI)
@@ -47,6 +49,7 @@ func player_damaged(value):
 		Player.health -= value
 		if Player.health == 0:
 			Signals.end_combat.emit()
+			combat_end_screen_lost.show_lose_screen()
 	
 	tween_health()
 

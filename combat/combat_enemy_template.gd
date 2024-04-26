@@ -6,7 +6,7 @@ extends Node2D
 
 @onready var cannon_controller = $Actual_Ship/CannonController
 
-
+@onready var combat_end_screen_won = $"../combat/combat_end_screen_won"
 
 #@export var Cannonball:PackedScene
 #@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
@@ -96,4 +96,5 @@ func take_damage(damage):
 		health -= damage
 		if health == 0:
 			Signals.end_combat.emit()
+			Signals.show_end_screen_win.emit()
 			health = max_health
