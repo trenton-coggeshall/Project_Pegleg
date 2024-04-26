@@ -29,6 +29,9 @@ Names="*res://Names.gd"
 
 [display]
 
+window/size/viewport_width=1792
+window/size/viewport_height=1008
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
