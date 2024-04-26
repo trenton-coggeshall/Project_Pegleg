@@ -34,9 +34,11 @@ func end_combat():
 	Player.in_combat = false
 	if combat_enemy_ship.get_parent().health <= 0:
 		ai_node.get_parent().queue_free()
+		Signals.show_end_screen_win.emit()
 	
 	if Player.health <= 0:
 		Signals.player_healed.emit(10)
+		Signals.show_end_screen_lose.emit()
 	
 	normal_camera.make_current()
 	$CombatPlayer.position = player_start

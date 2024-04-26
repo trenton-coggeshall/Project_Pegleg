@@ -13,6 +13,8 @@ extends Control
 @export var reloadTimerBar:TextureProgressBar
 var cannonPips
 
+var worldGenScene = preload("res://world_generation/world_gen.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.hide_ui.connect(hide_UI)
@@ -31,6 +33,7 @@ func _ready():
 	
 	settingsWindow.get_node("CloseButton").pressed.connect(_on_settings_button_pressed)
 	settingsWindow.get_node("QuitButton").pressed.connect(quit_game)
+	settingsWindow.get_node("MainMenuButton").pressed.connect(to_main_menu)
 	
 	cannonPips = reloadTimerBar.get_children()
 
@@ -79,8 +82,8 @@ func tween_health():
 
 func _on_settings_button_pressed():
 	
-	var closedPosition = Vector2(450, -500)
-	var openPosition = Vector2(450, 60)
+	var closedPosition = Vector2(800, -500)
+	var openPosition = Vector2(800, 270)
 	var tween = get_tree().create_tween()
 	
 	if !settingsWindow.visible: # Open settings
@@ -119,3 +122,8 @@ func hide_reload_timer():
 
 func quit_game():
 	get_tree().quit()
+
+func to_main_menu():
+	get_parent().get_node("World").queue_free()
+	_on_settings_button_pressed()
+	get_parent().add_child(worldGenScene)
