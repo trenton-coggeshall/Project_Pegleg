@@ -14,6 +14,15 @@ func _ready():
 	limit_right = (WorldGlobals.map_width + edge_buffer) * 16
 	limit_top = -edge_buffer * 16
 	limit_bottom = (WorldGlobals.map_height + edge_buffer) * 16
+	
+	var view_port = get_viewport().size
+	var zoom_lim = max(1.0/(limit_right / view_port.x), 1.0/(limit_bottom / view_port.y))
+	min_zoom = Vector2(zoom_lim, zoom_lim)
+	
+	if zoom.x < min_zoom.x:
+		print("W")
+		current_zoom = min_zoom
+		zoom = min_zoom
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
