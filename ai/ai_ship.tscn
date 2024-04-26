@@ -18,7 +18,7 @@ size = Vector2(37, 75)
 [node name="AI_Ship" type="Node2D" groups=["ai_ship"]]
 script = ExtResource("1_t4vct")
 
-[node name="Actual_Ship" type="CharacterBody2D" parent="."]
+[node name="Actual_Ship" type="CharacterBody2D" parent="." groups=["ai_ship_body"]]
 z_index = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Actual_Ship"]
@@ -35,6 +35,7 @@ texture = ExtResource("2_ojbtm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship"]
 position = Vector2(0, 1)
 rotation = 1.5708
+scale = Vector2(0.25, 0.25)
 shape = SubResource("CapsuleShape2D_j40ts")
 disabled = true
 
@@ -45,6 +46,8 @@ scale = Vector2(20, 20)
 shape = SubResource("CircleShape2D_pnrlq")
 
 [node name="Sprite2D" type="Sprite2D" parent="Actual_Ship/Detection_Radius"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Actual_Ship"]
 
 [node name="Pathfinding_Node" type="CharacterBody2D" parent="."]
 visible = false
@@ -64,3 +67,5 @@ shape = SubResource("RectangleShape2D_4gclm")
 
 [connection signal="body_entered" from="Actual_Ship/Detection_Radius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="Actual_Ship/Detection_Radius" to="." method="_on_detection_radius_body_exited"]
+[connection signal="screen_entered" from="Actual_Ship/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="Actual_Ship/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

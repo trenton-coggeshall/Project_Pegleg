@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuglm7jkc13n3"]
+
+[ext_resource type="Script" path="res://interaction_screen.gd" id="1_yr023"]
+[ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="2_qr8rq"]
+
+[node name="InteractionScreen" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yr023")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.392157)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -230.0
+offset_right = -260.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.37781, 3.60581)
+mouse_filter = 2
+texture = ExtResource("2_qr8rq")
+
+[node name="OptionContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PortButton" type="Button" parent="OptionContainer"]
+visible = false
+layout_mode = 2
+text = "Enter Port"
+
+[node name="ShipButton" type="Button" parent="OptionContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ShipButton2" type="Button" parent="OptionContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ShipButton3" type="Button" parent="OptionContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ShipButton4" type="Button" parent="OptionContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ShipButton5" type="Button" parent="OptionContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ShipButton6" type="Button" parent="OptionContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="OptionContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="OptionContainer/PortButton" to="." method="_on_port_button_pressed"]
+[connection signal="pressed" from="OptionContainer/ShipButton" to="." method="_on_ship_button_pressed" binds= [0]]
+[connection signal="pressed" from="OptionContainer/ShipButton2" to="." method="_on_ship_button_pressed" binds= [1]]
+[connection signal="pressed" from="OptionContainer/ShipButton3" to="." method="_on_ship_button_pressed" binds= [2]]
+[connection signal="pressed" from="OptionContainer/ShipButton4" to="." method="_on_ship_button_pressed" binds= [3]]
+[connection signal="pressed" from="OptionContainer/ShipButton5" to="." method="_on_ship_button_pressed" binds= [4]]
+[connection signal="pressed" from="OptionContainer/ShipButton6" to="." method="_on_ship_button_pressed" binds= [5]]
+[connection signal="pressed" from="OptionContainer/Button" to="." method="_on_button_pressed"]
