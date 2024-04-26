@@ -17,6 +17,7 @@ var reload_amount = 1
 var firing = false
 var target
 var target_dir : Vector2
+var cannonball_speed = 1200
 
 
 # Called when the node enters the scene tree for the first time.
@@ -52,7 +53,7 @@ func _process(delta):
 	handle_reloading(delta)
 
 
-func fire(angle=0):
+func fire():
 	var cannons:Array
 	
 	if get_fire_direction():
@@ -70,16 +71,28 @@ func fire(angle=0):
 	cannons.shuffle()
 	var shot_delay = 0
 	firing = true
+	var angle = get_fire_angle(cannons) - parent.rotation
+	
+	
+	var original_angle = cannons[0].rotation
+	
+	if abs(angle) > PI/4:
+		angle = original_angle
+	
+	
 	for i in shots:
+		#cannons[i].rotation = angle
 		var projectile = Cannonball.instantiate()
 		parent.get_parent().add_child(projectile)
 		projectile.transform = cannons[i].global_transform
 		projectile.global_position = cannons[i].global_position
 		projectile.initialize(parent.velocity)
+		#cannons[i].rotation = original_angle
 		await get_tree().create_timer(shot_delay).timeout
 		shot_delay = randf_range(0.01, 0.02)
 	
 	firing = false
+
 
 func handle_reloading(delta):
 	if loaded_cannons == cannon_count:
@@ -98,3 +111,15 @@ func get_fire_direction():
 		return true
 	else:
 		return false
+
+
+func get_fire_angle(cannons):
+	var projectile_position = cannons[0].global_position
+	var target_relative_position = target.global_position - projectile_position
+	var distance_to_target = target_relative_position.length()
+	var projectile_velocity = parent.velocity + transform.x * cannonball_speed
+	var time_of_flight = distance_to_target / projectile_velocity.length()
+	var relative_velocity = target.velocity - parent.velocity
+	var predicted_position = target.global_position + relative_velocity * time_of_flight
+	
+	return (predicted_position - projectile_position).angle()

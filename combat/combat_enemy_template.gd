@@ -5,7 +5,6 @@ extends Node2D
 @onready var actual_ship = $Actual_Ship
 
 @onready var cannon_controller = $Actual_Ship/CannonController
-@onready var aim_marker = $Actual_Ship/AimMarker
 
 
 
@@ -14,8 +13,8 @@ extends Node2D
 #@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
 var range = 600
-var max_speed = 25000
-var acceleration = 10000
+var max_speed = 17500
+var acceleration = 5000
 var steer_speed = 3
 var max_health = 100
 var health = 100
@@ -55,8 +54,8 @@ func handle_sailing(delta):
 	elif cannon_controller.loaded_cannons >= cannon_controller.cannon_count/2.0 or cannon_controller.firing:
 		var dir_to_player = (actual_ship.global_position - combat_player.global_position).normalized()
 		target_dir = Vector2(dir_to_player.y, -dir_to_player.x) * 10
-	else:
-		target_dir = combat_player.global_position.direction_to(actual_ship.global_position)
+	#else:
+		#target_dir = combat_player.global_position.direction_to(actual_ship.global_position)
 	
 	var steer_dir
 	if (-actual_ship.transform.y).angle_to(target_dir) >= 0:
@@ -71,7 +70,6 @@ func handle_sailing(delta):
 
 func handle_shooting(delta):
 	if playerInRange == false or cannon_controller.firing : return
-	# For some reason when side = 'left' it shoots right
 	cannon_controller.fire()
 
 
