@@ -93,6 +93,12 @@ cancel={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="ai_ship"
+2d_physics/layer_3="land"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
