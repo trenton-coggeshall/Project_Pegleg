@@ -49,16 +49,20 @@ func _ready():
 	
 	Player.add_gold(gold)
 	
-	
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func _on_button_leave_pressed():
-	pass # Replace with function body.
-	
+	#pass # Replace with function body.
+	button_food.disabled = false
+	button_fabric.disabled = false
+	button_rum.disabled = false
+	button_leather.disabled = false
+	button_iron.disabled = false
+	button_livestock.disabled = false
+	hide()
 
 
 func _on_button_food_pressed():
