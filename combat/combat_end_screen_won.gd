@@ -77,7 +77,7 @@ func _on_button_leave_pressed():
 
 func _on_button_food_pressed():
 	#pass # Replace with function body.
-	if(Player.inv_occupied + food < Player.inv_limit + Player.modifiers['cargo']):
+	if(Player.inv_occupied + food <= Player.inv_limit + Player.modifiers['cargo']):
 		button_food.disabled = true
 		Player.inventory[EconomyGlobals.GoodType.FOOD] += food
 		Player.inv_occupied += food
@@ -86,7 +86,7 @@ func _on_button_food_pressed():
 
 func _on_button_fabric_pressed():
 	#pass # Replace with function body.
-	if(Player.inv_occupied + fabric < Player.inv_limit + Player.modifiers['cargo']):
+	if(Player.inv_occupied + fabric <= Player.inv_limit + Player.modifiers['cargo']):
 		button_fabric.disabled = true
 		Player.inventory[EconomyGlobals.GoodType.FABRIC] += fabric
 		Player.inv_occupied += fabric
@@ -95,7 +95,7 @@ func _on_button_fabric_pressed():
 
 func _on_button_rum_pressed():
 	#pass # Replace with function body.
-	if(Player.inv_occupied + rum < Player.inv_limit + Player.modifiers['cargo']):
+	if(Player.inv_occupied + rum <= Player.inv_limit + Player.modifiers['cargo']):
 		button_rum.disabled = true
 		Player.inventory[EconomyGlobals.GoodType.RUM] += rum
 		Player.inv_occupied += rum
@@ -105,7 +105,7 @@ func _on_button_rum_pressed():
 
 func _on_button_leather_pressed():
 	#pass # Replace with function body.
-	if(Player.inv_occupied + leather < Player.inv_limit + Player.modifiers['cargo']):
+	if(Player.inv_occupied + leather <= Player.inv_limit + Player.modifiers['cargo']):
 		button_leather.disabled = true
 		Player.inventory[EconomyGlobals.GoodType.LEATHER] += leather
 		Player.inv_occupied += leather
@@ -114,7 +114,7 @@ func _on_button_leather_pressed():
 
 func _on_button_iron_pressed():
 	#pass # Replace with function body.
-	if(Player.inv_occupied + iron < Player.inv_limit + Player.modifiers['cargo']):
+	if(Player.inv_occupied + iron <= Player.inv_limit + Player.modifiers['cargo']):
 		button_iron.disabled = true
 		Player.inventory[EconomyGlobals.GoodType.IRON] += iron
 		Player.inv_occupied += iron
@@ -123,7 +123,7 @@ func _on_button_iron_pressed():
 
 func _on_button_livestock_pressed():
 	#pass # Replace with function body.
-	if(Player.inv_occupied + livestock < Player.inv_limit + Player.modifiers['cargo']):
+	if(Player.inv_occupied + livestock <= Player.inv_limit + Player.modifiers['cargo']):
 		button_livestock.disabled = true
 		Player.inventory[EconomyGlobals.GoodType.LIVESTOCK] += livestock
 		Player.inv_occupied += livestock

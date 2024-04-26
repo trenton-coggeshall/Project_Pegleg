@@ -5,7 +5,6 @@ const AI_SHIP = preload("res://ai/ai_ship.tscn")
 var chunks : Array
 var tiles
 
-@onready var PlayerUI = get_node("/root/PlayerUI")
 @onready var player_ship = $PlayerShip
 
 var timer = 0
