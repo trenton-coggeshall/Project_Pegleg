@@ -126,4 +126,6 @@ func quit_game():
 func to_main_menu():
 	get_parent().get_node("World").queue_free()
 	_on_settings_button_pressed()
-	get_parent().add_child(worldGenScene)
+	Signals.hide_ui.emit()
+	var test = worldGenScene.instantiate()
+	get_tree().root.add_child(test)
