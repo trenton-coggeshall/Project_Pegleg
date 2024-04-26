@@ -86,7 +86,7 @@ func handle_anchor(delta):
 
 
 func handle_shooting(delta):
-	if Input.is_action_just_pressed('shoot') and not cannon_controller.firing:
+	if Input.is_action_just_pressed('interact') and not cannon_controller.firing:
 		cannon_controller.fire()
 
 

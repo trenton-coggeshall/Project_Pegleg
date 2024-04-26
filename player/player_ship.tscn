@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://qjxvca13e7ka"]
+[gd_scene load_steps=8 format=3 uid="uid://qjxvca13e7ka"]
 
 [ext_resource type="PackedScene" uid="uid://y3yoed01w4a7" path="res://world_generation/cannonball.tscn" id="1_7u48p"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
@@ -8,8 +8,10 @@
 [sub_resource type="GDScript" id="GDScript_5pico"]
 script/source = "extends CharacterBody2D
 
+@onready var interaction_screen = $\"../CanvasLayer/InteractionScreen\"
 @onready var port_screen = $\"../CanvasLayer/port_screen\"
 @onready var combat_scene = $\"../CombatScene\"
+@onready var detection_radius = $Detection_Radius
 
 #+------------------+
 #| Ship stat values |
@@ -92,13 +94,24 @@ func handle_anchor(delta):
 
 
 func handle_interact():
-	if near_port and Input.is_action_just_pressed('interact'):
-		port_screen.show_port_screen()
+	if Input.is_action_just_pressed('interact'):
+		var bodies = detection_radius.get_overlapping_bodies()
+		var ships = []
+		
+		for body in bodies:
+			if body.is_in_group('ai_ship_body'):
+				ships.append(body)
+		
+		if len(ships) > 0:
+			interaction_screen.show_interaction_screen(ships, near_port)
+		elif near_port:
+			port_screen.show_port_screen()
 
 
 func handle_shooting(delta):
-	if Input.is_action_just_pressed('shoot'):
-		combat_scene.start_combat('Put ai ship data here')
+	pass
+	#if Input.is_action_just_pressed('shoot'):
+		#combat_scene.start_combat('Put ai ship data here')
 
 
 func set_near_port(is_near, port):
@@ -109,6 +122,8 @@ func set_near_port(is_near, port):
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]
 radius = 20.0
 height = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2jsi1"]
 
 [node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
 script = SubResource("GDScript_5pico")
@@ -144,3 +159,9 @@ scale = Vector2(0.1, 0.1)
 position = Vector2(30, 20)
 rotation = 0.261799
 scale = Vector2(0.1, 0.1)
+
+[node name="Detection_Radius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Radius"]
+scale = Vector2(20, 20)
+shape = SubResource("CircleShape2D_2jsi1")
