@@ -3,6 +3,8 @@ extends Node2D
 const MERCHANT_AI = preload("res://ai/merchant_ai.tscn")
 const MILITARY_AI = preload("res://ai/military_ai.tscn")
 
+@onready var shipNames:Array = Names.ship_names
+
 var location : Vector2i
 var gold = 10000
 var goods : Dictionary
@@ -85,7 +87,8 @@ func set_faction(value):
 
 func spawn_ship():
 	var merchant = MERCHANT_AI.instantiate()
-	merchant.name = self.name + "_AI_Ship"
+	merchant.name = str(shipNames[0])
+	shipNames.remove_at(0)
 	get_parent().get_parent().add_child(merchant)
 	merchant.global_position = global_position
 	merchant.home_port = self

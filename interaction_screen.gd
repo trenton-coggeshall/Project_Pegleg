@@ -27,7 +27,7 @@ func show_interaction_screen(ships, near_port):
 		port_button.show()
 	
 	for i in len(ships):
-		ship_buttons[i].text = 'Fight ' + ships[i].get_parent().name
+		ship_buttons[i].text = 'Fight ' + ships[i].get_parent().get_parent().name
 		ship_buttons[i].show()
 	
 	show()
