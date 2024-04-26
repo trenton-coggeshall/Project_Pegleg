@@ -107,8 +107,6 @@ func update_reload_timer(value, loaded, total):
 			numPips -= 1
 		else:
 			pip.visible = false
-	
-	print("bar value" + str(value))
 
 func show_reload_timer():
 	reloadTimerBar.visible = true
