@@ -63,9 +63,9 @@ rotation = 3.14159
 [node name="CannonController" parent="Actual_Ship" instance=ExtResource("5_c2erk")]
 rotation = 3.14159
 
-[node name="AimMarker" type="Marker2D" parent="."]
+[node name="AimMarker" type="Marker2D" parent="Actual_Ship"]
 
-[node name="Sprite2D" type="Sprite2D" parent="AimMarker"]
+[node name="Sprite2D" type="Sprite2D" parent="Actual_Ship/AimMarker"]
 position = Vector2(0, -76)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_mc8q2")

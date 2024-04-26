@@ -3,7 +3,7 @@ extends Area2D
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 
-var speed = 200
+var speed = 12000
 var velocity = Vector2.ZERO
 var range = 800
 var distance_traveled = 0
@@ -18,13 +18,13 @@ func initialize(ship_velocity):
 	velocity += transform.x * speed
 
 func _physics_process(delta):
-	distance_traveled += velocity.length()
-	global_position += velocity
+	var movement = velocity * delta
+	distance_traveled += movement.length()
+	global_position += movement
 	
 	if distance_traveled >= range and not sunk:
 		sunk = true
 		collision_shape_2d.disabled = true
-		speed = speed / 10
 		velocity = velocity / 10
 		sprite.modulate.a = 0.25
 	

@@ -38,7 +38,7 @@ var current_speed = 0
 var enemy_dir:Vector2
 
 func _ready():
-	pass
+	cannon_controller.target = enemy.actual_ship
 
 
 func _physics_process(delta):
@@ -89,7 +89,7 @@ func handle_anchor(delta):
 
 func handle_shooting(delta):
 	if Input.is_action_just_pressed('shoot'):
-		cannon_controller.fire(get_fire_direction(), delta)
+		cannon_controller.fire()
 
 
 func get_fire_direction():

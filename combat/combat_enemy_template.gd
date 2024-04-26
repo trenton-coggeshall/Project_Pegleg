@@ -5,7 +5,8 @@ extends Node2D
 @onready var actual_ship = $Actual_Ship
 
 @onready var cannon_controller = $Actual_Ship/CannonController
-@onready var aim_marker = $AimMarker
+@onready var aim_marker = $Actual_Ship/AimMarker
+
 
 
 #@export var Cannonball:PackedScene
@@ -31,7 +32,7 @@ var target_dir
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	cannon_controller.target = combat_player
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,7 +72,7 @@ func handle_sailing(delta):
 func handle_shooting(delta):
 	if playerInRange == false or cannon_controller.firing : return
 	# For some reason when side = 'left' it shoots right
-	cannon_controller.fire(side == 'left', delta)
+	cannon_controller.fire()
 
 
 func _on_range_entered_right(area):

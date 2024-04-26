@@ -15,6 +15,8 @@ var reload_delay = 0.5
 var reload_amount = 1
 
 var firing = false
+var target
+var target_dir : Vector2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,10 +52,10 @@ func _process(delta):
 	handle_reloading(delta)
 
 
-func fire(shoot_right, delta, angle=0):
+func fire(angle=0):
 	var cannons:Array
 	
-	if shoot_right:
+	if get_fire_direction():
 		cannons = cannons_right
 	else:
 		cannons = cannons_left
@@ -73,7 +75,7 @@ func fire(shoot_right, delta, angle=0):
 		parent.get_parent().add_child(projectile)
 		projectile.transform = cannons[i].global_transform
 		projectile.global_position = cannons[i].global_position
-		projectile.initialize(parent.velocity * delta)
+		projectile.initialize(parent.velocity)
 		await get_tree().create_timer(shot_delay).timeout
 		shot_delay = randf_range(0.01, 0.02)
 	
@@ -87,3 +89,12 @@ func handle_reloading(delta):
 	if reload_timer >= reload_delay:
 		loaded_cannons = min(loaded_cannons + reload_amount, cannon_count)
 		reload_timer = 0
+
+
+func get_fire_direction():
+	target_dir = parent.global_position.direction_to(target.global_position)
+	
+	if (-parent.transform.y).angle_to(target_dir) >= 0:
+		return true
+	else:
+		return false
