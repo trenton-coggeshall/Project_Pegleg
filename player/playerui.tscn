@@ -1,7 +1,6 @@
-
 [gd_scene load_steps=16 format=3 uid="uid://cuxwd0df8q1fx"]
 
-[ext_resource type="Script" path="res://player/playerui.gd" id="1_imq6e"]
+[ext_resource type="Script" path="res://Player/playerui.gd" id="1_imq6e"]
 [ext_resource type="Texture2D" uid="uid://d1tkv0ct4q5cq" path="res://Assets/Images/testsprites.png" id="2_pmj14"]
 [ext_resource type="Texture2D" uid="uid://bcc4tti4kgnnd" path="res://Assets/Images/Icons/coin.png" id="3_3ubaa"]
 [ext_resource type="FontFile" uid="uid://cwmq4inr7mebx" path="res://Assets/Fonts/rainyhearts.ttf" id="3_ajvr5"]
@@ -10,11 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://6kq13j2y4s6d" path="res://Assets/Images/Progress Bars/healthprog2.png" id="7_7dlcc"]
 [ext_resource type="Texture2D" uid="uid://nl4h6ub6vhqo" path="res://Assets/Images/Progress Bars/healthred.png" id="8_4748d"]
 [ext_resource type="PackedScene" uid="uid://blcn84hidsyyp" path="res://player/player_settings.tscn" id="9_ciqn1"]
-
 [ext_resource type="Texture2D" uid="uid://dj0rdsanbn5lt" path="res://Assets/Images/cannonball_background.png" id="10_l2806"]
 [ext_resource type="Texture2D" uid="uid://dweff8uxgnoua" path="res://Assets/Images/cannonball_better_frame.png" id="11_awygx"]
 [ext_resource type="Texture2D" uid="uid://bvpu2jw4rdcys" path="res://Assets/Images/cannonball_cropped.png" id="12_xlcvh"]
-
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lamf"]
 bg_color = Color(0, 0, 0, 0.196078)
@@ -175,12 +172,6 @@ text = "Settings"
 [node name="settingsWindow" parent="CanvasLayer" instance=ExtResource("9_ciqn1")]
 visible = false
 
-
-[node name="CombatEndScreenWon" parent="CanvasLayer" instance=ExtResource("10_jnqb8")]
-visible = false
-offset_top = -164.0
-offset_bottom = -164.0
-
 [node name="ReloadTimerBar" type="TextureProgressBar" parent="CanvasLayer"]
 visible = false
 anchors_preset = 3
@@ -249,6 +240,5 @@ offset_right = 436.0
 offset_bottom = 480.0
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("12_xlcvh")
-
 
 [connection signal="pressed" from="CanvasLayer/SettingsButton" to="." method="_on_settings_button_pressed"]
