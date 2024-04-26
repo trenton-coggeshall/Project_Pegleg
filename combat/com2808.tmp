@@ -43,7 +43,7 @@ func _physics_process(delta):
 	if not Player.in_combat:
 		return
 	
-	Signals.updateReloadTimer.emit(cannon_controller.reload_timer, cannon_controller.loaded_cannons, cannon_controller.cannon_count)
+	Signals.updateReloadTimer.emit(value, cannon_controller.loaded_cannons == cannon_controller.cannon_count)
 	handle_anchor(delta)
 	handle_rotation(delta)
 	handle_sails(delta)

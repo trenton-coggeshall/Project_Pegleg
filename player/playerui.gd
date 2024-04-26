@@ -10,6 +10,9 @@ extends Control
 @export var settingsButton:Button
 @export var settingsWindow:Panel
 
+@export var reloadTimerBar:TextureProgressBar
+var cannonPips
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.hide_ui.connect(hide_UI)
@@ -18,10 +21,15 @@ func _ready():
 	Signals.gold_changed.connect(update_gold)
 	Signals.username_changed.connect(set_username)
 	
+	Signals.updateReloadTimer.connect(update_reload_timer)
+	Signals.hideReloadTimer.connect(hide_reload_timer)
+	Signals.showReloadTimer.connect(show_reload_timer)
+	
 	Signals.player_damaged.connect(player_damaged)
 	Signals.player_healed.connect(player_healed)
 	Signals.player_full_healed.connect(player_full_healed)
-
+	
+	cannonPips = reloadTimerBar.get_children()
 
 #+------------------+
 #| Signal Functions |
@@ -84,3 +92,26 @@ func _on_settings_button_pressed():
 		await tween.finished
 		settingsWindow.visible = false
 		settingsButton.disabled = false
+
+func update_reload_timer(value, loaded, total):
+	if loaded == total:
+		reloadTimerBar.value = 0.5
+	else:
+		reloadTimerBar.value = value
+	
+	var numPips = loaded
+	
+	for pip in cannonPips:
+		if numPips > 0:
+			pip.visible = true
+			numPips -= 1
+		else:
+			pip.visible = false
+	
+	print("bar value" + str(value))
+
+func show_reload_timer():
+	reloadTimerBar.visible = true
+
+func hide_reload_timer():
+	reloadTimerBar.visible = false
