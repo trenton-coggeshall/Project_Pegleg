@@ -154,10 +154,14 @@ value = 100.0
 texture_progress = ExtResource("8_4748d")
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer"]
-offset_left = 26.0
-offset_top = 346.0
-offset_right = 96.0
-offset_bottom = 377.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -307.0
+offset_right = 90.0
+offset_bottom = -276.0
+grow_vertical = 0
 focus_mode = 0
 text = "Settings"
 

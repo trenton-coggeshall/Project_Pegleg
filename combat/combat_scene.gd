@@ -5,7 +5,6 @@ extends Node
 @onready var combat_player = $CombatPlayer
 
 @onready var combat_enemy_ship = $CombatEnemyTemplate/Actual_Ship
-@onready var combat_enemy_node = $CombatEnemyTemplate/Pathfinding_Node
 
 var player_start
 var ai_start_ship
@@ -18,7 +17,6 @@ func _ready():
 	Signals.end_combat.connect(end_combat)
 	player_start = combat_player.position
 	ai_start_ship = combat_enemy_ship.position
-	ai_start_node = combat_enemy_node.position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -34,4 +32,3 @@ func end_combat():
 	normal_camera.make_current()
 	$CombatPlayer.position = player_start
 	$CombatEnemyTemplate/Actual_Ship.position = ai_start_ship
-	$CombatEnemyTemplate/Pathfinding_Node.position = ai_start_node

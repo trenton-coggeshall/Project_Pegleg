@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8ontq3hxop3j"]
+[gd_scene load_steps=8 format=3 uid="uid://c8ontq3hxop3j"]
 
 [ext_resource type="Script" path="res://combat/combat_enemy_template.gd" id="1_orlu5"]
-[ext_resource type="PackedScene" uid="uid://bugv85t5urbot" path="res://world_generation/cannonball.tscn" id="2_0euum"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_b3k5j"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_nbjmj"]
+[ext_resource type="PackedScene" uid="uid://coa286iw0bqab" path="res://combat/cannon_controller.tscn" id="5_c2erk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3u34"]
 radius = 20.0
@@ -15,21 +15,15 @@ size = Vector2(8, 85)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_113fh"]
 size = Vector2(8, 85)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8yat2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x12hh"]
-size = Vector2(37, 75)
-
 [node name="CombatEnemyTemplate" type="Node2D"]
 script = ExtResource("1_orlu5")
-Cannonball = ExtResource("2_0euum")
 
 [node name="Actual_Ship" type="CharacterBody2D" parent="."]
 z_index = 5
+rotation = -1.5708
 
 [node name="Sprite2D" type="Sprite2D" parent="Actual_Ship"]
 modulate = Color(1, 0.356863, 0.352941, 1)
-rotation = 1.5708
 scale = Vector2(5, 5)
 texture = ExtResource("2_b3k5j")
 
@@ -40,11 +34,10 @@ texture = ExtResource("3_nbjmj")
 
 [node name="Actual_Ship_Hitbox" type="CollisionShape2D" parent="Actual_Ship"]
 position = Vector2(0, 1)
-rotation = 1.5708
 shape = SubResource("CapsuleShape2D_o3u34")
 
 [node name="Detection_Right" type="Area2D" parent="Actual_Ship"]
-rotation = -1.5708
+rotation = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship/Detection_Right"]
 position = Vector2(-425, 0)
@@ -53,7 +46,7 @@ scale = Vector2(10, 10)
 shape = SubResource("RectangleShape2D_obrqm")
 
 [node name="Detection_Left" type="Area2D" parent="Actual_Ship"]
-rotation = -1.5708
+rotation = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actual_Ship/Detection_Left"]
 position = Vector2(425, 0)
@@ -61,33 +54,12 @@ rotation = 1.5708
 scale = Vector2(10, 10)
 shape = SubResource("RectangleShape2D_113fh")
 
-[node name="Cannons" type="Node2D" parent="Actual_Ship"]
+[node name="CannonsRight" type="Node2D" parent="Actual_Ship"]
 
-[node name="cannonRight" type="Marker2D" parent="Actual_Ship/Cannons"]
-position = Vector2(0, 30)
+[node name="CannonsLeft" type="Node2D" parent="Actual_Ship"]
+
+[node name="CannonController" parent="Actual_Ship" instance=ExtResource("5_c2erk")]
 rotation = 3.14159
-scale = Vector2(0.1, 0.1)
-
-[node name="cannonLeft" type="Marker2D" parent="Actual_Ship/Cannons"]
-position = Vector2(0, -30)
-rotation = 4.71239
-scale = Vector2(0.1, 0.1)
-
-[node name="Pathfinding_Node" type="CharacterBody2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pathfinding_Node"]
-scale = Vector2(1.28112, 1.24626)
-shape = SubResource("CircleShape2D_8yat2")
-disabled = true
-
-[node name="Node_Radius" type="Area2D" parent="Pathfinding_Node" groups=["ai_ship"]]
-rotation = 1.5708
-scale = Vector2(0.722215, 0.361986)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pathfinding_Node/Node_Radius"]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_x12hh")
 
 [connection signal="area_entered" from="Actual_Ship/Detection_Right" to="." method="_on_range_entered_right"]
 [connection signal="area_exited" from="Actual_Ship/Detection_Right" to="." method="_on_range_exited"]
