@@ -22,6 +22,3 @@ signal showReloadTimer()
 
 signal start_combat(enemyShip)
 signal end_combat()
-
-signal show_end_screen_win()
-signal show_end_screen_lose()

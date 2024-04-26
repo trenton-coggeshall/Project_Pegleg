@@ -5,10 +5,8 @@ extends Node2D
 @onready var actual_ship = $Actual_Ship
 
 @onready var cannon_controller = $Actual_Ship/CannonController
-
 @onready var healthBar = $HealthBar
 @onready var damageBar = $HealthBar/DamageBar
-
 
 #@export var Cannonball:PackedScene
 #@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
@@ -108,6 +106,5 @@ func take_damage(damage):
 		tween_health()
 		if health == 0:
 			Signals.end_combat.emit()
-			Signals.show_end_screen_win.emit()
 			health = max_health
 			tween_health()
