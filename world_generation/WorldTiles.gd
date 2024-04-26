@@ -9,9 +9,9 @@ const PORT = preload("res://world_generation/port.tscn")
 @onready var portNames:Array = Names.port_names
 var factions = ["Crimson Corsairs", "Emerald Enclave", "Sapphire Navigators"]
 var factionColors = {
-	"RedTeam" = "#d82452",
-	"GreenTeam" = "#2fb26e",
-	"BlueTeam" = "#547ee7"
+	"Crimson Corsairs" = "#d82452",
+	"Emerald Enclave" = "#2fb26e",
+	"Sapphire Navigators" = "#547ee7"
 }
 
 var ports : Dictionary
