@@ -6,7 +6,7 @@ extends Node
 
 var max_health = 100
 var health = 100
-var gold = 10000000
+var gold = 500
 var inventory : Dictionary
 var inv_limit = 30
 var inv_occupied = 0

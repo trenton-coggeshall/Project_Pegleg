@@ -6,6 +6,8 @@ extends Node
 
 @onready var combat_enemy_ship = $CombatEnemyTemplate/Actual_Ship
 
+var ai_node
+
 var player_start
 var ai_start_ship
 var ai_start_node
@@ -22,13 +24,21 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func start_combat(enemy):
 	Player.in_combat = true
+	ai_node = enemy
 	combat_camera.make_current()
+	Signals.showReloadTimer.emit()
 
 func end_combat():
 	Player.in_combat = false
+	if combat_enemy_ship.get_parent().health <= 0:
+		ai_node.get_parent().queue_free()
+	
+	if Player.health <= 0:
+		Signals.player_healed.emit(10)
+	
 	normal_camera.make_current()
 	$CombatPlayer.position = player_start
 	$CombatEnemyTemplate/Actual_Ship.position = ai_start_ship
+	Signals.hideReloadTimer.emit()

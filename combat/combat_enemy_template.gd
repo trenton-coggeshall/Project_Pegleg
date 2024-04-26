@@ -6,7 +6,9 @@ extends Node2D
 
 @onready var cannon_controller = $Actual_Ship/CannonController
 
-@onready var combat_end_screen_won = $"../combat/combat_end_screen_won"
+@onready var healthBar = $HealthBar
+@onready var damageBar = $HealthBar/DamageBar
+
 
 #@export var Cannonball:PackedScene
 #@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
@@ -32,6 +34,10 @@ var target_dir
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	cannon_controller.target = combat_player
+	healthBar.max_value = max_health
+	damageBar.max_value = max_health
+	
+	tween_health()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,6 +45,7 @@ func _physics_process(delta):
 	if not Player.in_combat:
 		return
 	
+	healthBar.global_position = actual_ship.global_position - Vector2(50, -60)
 	handle_sailing(delta)
 	handle_shooting(delta)
 	actual_ship.move_and_slide()
@@ -90,11 +97,17 @@ func _on_range_exited(area):
 		playerInRange = false
 		side = null
 
+func tween_health():
+	var tween = create_tween()
+	tween.tween_property(healthBar, "value", health, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	#tween.tween_property(damageBar, "value", health, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func take_damage(damage):
-	if health > 0:
+	if health > 0 and Player.in_combat:
 		health -= damage
+		tween_health()
 		if health == 0:
 			Signals.end_combat.emit()
 			Signals.show_end_screen_win.emit()
 			health = max_health
+			tween_health()

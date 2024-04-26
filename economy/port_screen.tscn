@@ -38,8 +38,10 @@ texture = ExtResource("1_8gykc")
 
 [node name="HomeScreen" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 345.0
+offset_top = 229.0
+offset_right = 385.0
+offset_bottom = 269.0
 
 [node name="PortText" type="Label" parent="HomeScreen"]
 layout_mode = 1
@@ -102,8 +104,10 @@ text = "Exit"
 [node name="GovernorScreen" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 342.0
+offset_top = 227.0
+offset_right = 382.0
+offset_bottom = 267.0
 script = ExtResource("2_6t1s0")
 
 [node name="GovernorText" type="Label" parent="GovernorScreen"]
@@ -139,8 +143,10 @@ text = "Back"
 [node name="TavernScreen" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 344.0
+offset_top = 225.0
+offset_right = 384.0
+offset_bottom = 265.0
 script = ExtResource("2_mdrpb")
 
 [node name="TavernText" type="Label" parent="TavernScreen"]
@@ -184,8 +190,10 @@ text = "Back"
 [node name="CrewScreen" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 344.0
+offset_top = 195.0
+offset_right = 384.0
+offset_bottom = 235.0
 script = ExtResource("4_kf1mb")
 
 [node name="TitleText" type="Label" parent="CrewScreen"]
@@ -273,8 +281,10 @@ grow_vertical = 2
 [node name="TransactionScreen" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 338.0
+offset_top = 184.0
+offset_right = 378.0
+offset_bottom = 224.0
 script = ExtResource("2_q3np1")
 
 [node name="Trade" type="Label" parent="TransactionScreen"]
@@ -346,8 +356,10 @@ text = "Back"
 [node name="ShipwrightScreen" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 328.0
+offset_top = 189.0
+offset_right = 368.0
+offset_bottom = 229.0
 script = ExtResource("2_45fa0")
 
 [node name="ShipwrightText" type="Label" parent="ShipwrightScreen"]
