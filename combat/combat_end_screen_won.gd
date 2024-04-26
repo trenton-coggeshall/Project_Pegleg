@@ -27,7 +27,13 @@ var livestock = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#pass # Replace with function body.
+	pass # Replace with function body.
+	
+	
+
+func show_win_screen():
+	show()
+	
 	rng.randomize()
 	
 	gold = rng.randi_range(300, 1000)
@@ -48,7 +54,6 @@ func _ready():
 	button_livestock.text += "Livestock: " + str(livestock) + "\n"
 	
 	Player.add_gold(gold)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

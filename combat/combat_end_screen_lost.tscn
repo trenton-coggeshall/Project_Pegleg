@@ -46,6 +46,7 @@ grow_vertical = 2
 text = "We tried captain, see you on the other side"
 
 [node name="Button_leave" type="Button" parent="."]
+layout_mode = 0
 offset_left = 552.0
 offset_top = 432.0
 offset_right = 605.0

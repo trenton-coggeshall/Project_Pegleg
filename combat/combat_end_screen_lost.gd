@@ -10,6 +10,8 @@ func _ready():
 func _process(delta):
 	pass
 
+func show_lose_screen():
+	show()
 
 func _on_button_leave_pressed():
 	pass # Replace with function body.
