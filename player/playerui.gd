@@ -10,10 +10,8 @@ extends Control
 @export var settingsButton:Button
 @export var settingsWindow:Panel
 
-
 @export var reloadTimerBar:TextureProgressBar
 var cannonPips
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -60,7 +58,6 @@ func player_damaged(value):
 		Player.health -= value
 		if Player.health == 0:
 			Signals.end_combat.emit()
-			Signals.show_end_screen_lose.emit()
 	
 	tween_health()
 
