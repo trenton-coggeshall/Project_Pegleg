@@ -8,6 +8,7 @@ extends Node2D
 @onready var actual_ship = $Actual_Ship
 @onready var detect_radius = $Actual_Ship/Detection_Radius
 @onready var node_radius = $Pathfinding_Node/Node_Radius
+@onready var collision_shape_2d = $Actual_Ship/CollisionShape2D
 
 # Status
 var anchored = false
@@ -76,3 +77,11 @@ func _on_detection_radius_body_exited(body):
 		target = null
 		path = path_finder.find_path(pathnode.global_position, destination)
 		path_index = 0
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	collision_shape_2d.disabled = false
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	collision_shape_2d.disabled = true
