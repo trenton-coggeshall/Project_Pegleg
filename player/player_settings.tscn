@@ -7,6 +7,7 @@ offset_right = 687.0
 offset_bottom = -354.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 51.0
 offset_right = 125.0
@@ -19,6 +20,7 @@ Setting 2:
 Setting 3:"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 126.0
 offset_top = 35.0
@@ -40,7 +42,7 @@ layout_mode = 2
 focus_mode = 0
 flat = true
 
-[node name="closeButton" type="Button" parent="."]
+[node name="CloseButton" type="Button" parent="."]
 modulate = Color(1, 0.0862745, 0.0627451, 1)
 layout_mode = 0
 offset_left = 211.0
@@ -48,3 +50,11 @@ offset_top = -21.0
 offset_right = 261.0
 offset_bottom = 29.0
 text = "X"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 50.0
+offset_right = 189.0
+offset_bottom = 91.0
+text = "Quit Game"

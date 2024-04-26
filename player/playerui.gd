@@ -29,6 +29,9 @@ func _ready():
 	Signals.player_healed.connect(player_healed)
 	Signals.player_full_healed.connect(player_full_healed)
 	
+	settingsWindow.get_node("CloseButton").pressed.connect(_on_settings_button_pressed)
+	settingsWindow.get_node("QuitButton").pressed.connect(quit_game)
+	
 	cannonPips = reloadTimerBar.get_children()
 
 #+------------------+
@@ -113,3 +116,6 @@ func show_reload_timer():
 
 func hide_reload_timer():
 	reloadTimerBar.visible = false
+
+func quit_game():
+	get_tree().quit()
