@@ -7,7 +7,7 @@ const PORT = preload("res://world_generation/port.tscn")
 @onready var border_tiles = $border_tiles
 
 @onready var portNames:Array = Names.port_names
-var factions = ["RedTeam", "GreenTeam", "BlueTeam"]
+var factions = ["Crimson Corsairs", "Emerald Enclave", "Sapphire Navigators"]
 var factionColors = {
 	"RedTeam" = "#d82452",
 	"GreenTeam" = "#2fb26e",
