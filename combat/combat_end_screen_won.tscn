@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=3 uid="uid://pssao33pdg2w"]
+
+[ext_resource type="Script" path="res://combat/combat_end_screen_won.gd" id="1_1y47l"]
+[ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="2_2asw3"]
+
+[node name="CombatEndScreenWon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1y47l")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.152941)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.0
+offset_top = -235.0
+offset_right = -268.0
+offset_bottom = -107.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.37781, 3.60581)
+mouse_filter = 2
+texture = ExtResource("2_2asw3")
+
+[node name="victory_text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -192.0
+offset_right = 68.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Their ship has been taken by the sea"
+
+[node name="Button_leave" type="Button" parent="."]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 432.0
+offset_right = 605.0
+offset_bottom = 463.0
+text = "Leave"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 204.0
+offset_right = 824.0
+offset_bottom = 416.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="loot_gold_text" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button_food" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Food: "
+
+[node name="Button_fabric" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fabric: "
+
+[node name="Button_rum" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Rum: "
+
+[node name="Button_leather" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Leather: "
+
+[node name="Button_iron" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Iron: "
+
+[node name="Button_livestock" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Livestock: "
+
+[node name="loot_found_text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -120.0
+offset_right = -255.0
+offset_bottom = -97.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loot found:"
+
+[node name="inventory_text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -354.0
+offset_top = 114.0
+offset_right = -143.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Remaining inventory room: "
+
+[connection signal="pressed" from="Button_leave" to="." method="_on_button_leave_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button_food" to="." method="_on_button_food_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button_fabric" to="." method="_on_button_fabric_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button_rum" to="." method="_on_button_rum_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button_leather" to="." method="_on_button_leather_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button_iron" to="." method="_on_button_iron_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button_livestock" to="." method="_on_button_livestock_pressed"]
