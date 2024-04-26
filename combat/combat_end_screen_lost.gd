@@ -11,8 +11,9 @@ func _process(delta):
 	pass
 
 func show_lose_screen():
+	get_tree().paused = true
 	show()
 
 func _on_button_leave_pressed():
-	pass # Replace with function body.
+	get_tree().paused = false
 	hide()

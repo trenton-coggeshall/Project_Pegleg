@@ -34,7 +34,8 @@ func _ready():
 
 func show_win_screen():
 	
-	print("SHOW")
+	get_tree().paused = true
+	
 	show()
 	
 	rng.randomize()
@@ -48,13 +49,13 @@ func show_win_screen():
 	livestock = rng.randi_range(1, 10)
 	
 	inventory_text.text += str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
-	loot_gold_text.text += "Gold: " + str(gold) + "\n"
-	button_food.text += "Food: " + str(food) + "\n"
-	button_fabric.text += "Fabric: " + str(fabric) + "\n"
-	button_rum.text += "Rum: " + str(rum) + "\n"
-	button_leather.text += "Leather: " + str(leather) + "\n"
-	button_iron.text += "Iron: " + str(iron) + "\n"
-	button_livestock.text += "Livestock: " + str(livestock) + "\n"
+	loot_gold_text.text = "Gold: " + str(gold) + "\n"
+	button_food.text = "Food: " + str(food) + "\n"
+	button_fabric.text = "Fabric: " + str(fabric) + "\n"
+	button_rum.text = "Rum: " + str(rum) + "\n"
+	button_leather.text = "Leather: " + str(leather) + "\n"
+	button_iron.text = "Iron: " + str(iron) + "\n"
+	button_livestock.text = "Livestock: " + str(livestock) + "\n"
 	
 	Player.add_gold(gold)
 
@@ -70,6 +71,7 @@ func _on_button_leave_pressed():
 	button_leather.disabled = false
 	button_iron.disabled = false
 	button_livestock.disabled = false
+	get_tree().paused = false
 	hide()
 
 
