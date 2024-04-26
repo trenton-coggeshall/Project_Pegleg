@@ -16,8 +16,8 @@ var range = 600
 var max_speed = 17500
 var acceleration = 5000
 var steer_speed = 3
-var max_health = 100
-var health = 100
+var max_health = 50
+var health = 50
 
 var current_speed = 0
 

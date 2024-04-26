@@ -33,6 +33,8 @@ func _ready():
 	
 
 func show_win_screen():
+	
+	print("SHOW")
 	show()
 	
 	rng.randomize()
