@@ -10,7 +10,6 @@ extends Control
 
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 
-
 var map_width = 256
 var map_height = 256
 
@@ -96,6 +95,8 @@ func generate_map():
 	place_ports()
 	
 	play_button.disabled = false
+	generate_button.disabled = false
+	world_size_options.disabled = false
 
 
 func place_ports():

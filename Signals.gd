@@ -20,5 +20,8 @@ signal updateReloadTimer(value)
 signal hideReloadTimer()
 signal showReloadTimer()
 
+signal show_end_screen_win()
+signal show_end_screen_lose()
+
 signal start_combat(enemyShip)
 signal end_combat()
