@@ -12,7 +12,7 @@ extends Node2D
 #@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
 #@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
-var range = 600
+var ship_range = 600
 var max_speed = 17500
 var acceleration = 5000
 var steer_speed = 3
@@ -45,7 +45,7 @@ func _physics_process(delta):
 	
 	healthBar.global_position = actual_ship.global_position - Vector2(50, -60)
 	handle_sailing(delta)
-	handle_shooting(delta)
+	handle_shooting()
 	actual_ship.move_and_slide()
 
 
@@ -54,7 +54,7 @@ func handle_sailing(delta):
 	if current_speed > max_speed:
 		current_speed = max_speed
 	
-	if actual_ship.global_position.distance_to(combat_player.global_position) > range:
+	if actual_ship.global_position.distance_to(combat_player.global_position) > ship_range:
 		target_dir = actual_ship.global_position.direction_to(combat_player.global_position)
 	elif cannon_controller.loaded_cannons >= cannon_controller.cannon_count/2.0 or cannon_controller.firing:
 		var dir_to_player = (actual_ship.global_position - combat_player.global_position).normalized()
@@ -73,7 +73,7 @@ func handle_sailing(delta):
 	actual_ship.velocity = -actual_ship.transform.y * current_speed * delta
 
 
-func handle_shooting(delta):
+func handle_shooting():
 	if playerInRange == false or cannon_controller.firing : return
 	cannon_controller.fire()
 

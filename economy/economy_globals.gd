@@ -32,8 +32,8 @@ var price_limit_coef = 3
 
 
 func average_prices():
-	var sums : Dictionary
-	var avg : Dictionary
+	var sums : Dictionary = {}
+	var avg : Dictionary = {}
 	
 	for good in GoodType.values():
 		sums[good] = Vector2i(0, 0)

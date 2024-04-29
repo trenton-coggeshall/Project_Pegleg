@@ -5,7 +5,7 @@ extends Area2D
 
 var speed = 12000
 var velocity = Vector2.ZERO
-var range = 800
+var cannon_range = 800
 var distance_traveled = 0
 
 var sunk = false
@@ -22,7 +22,7 @@ func _physics_process(delta):
 	distance_traveled += movement.length()
 	global_position += movement
 	
-	if distance_traveled >= range and not sunk:
+	if distance_traveled >= cannon_range and not sunk:
 		sunk = true
 		collision_shape_2d.disabled = true
 		velocity = velocity / 10

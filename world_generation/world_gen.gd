@@ -43,15 +43,14 @@ func generate_map():
 	world_size_options.disabled = true
 	water_tiles.clear()
 	
-	var map_tiles : Array
+	var map_tiles : Array = []
 	
 	for x in range(map_width):
-		var y_tiles : Array
+		var y_tiles : Array = []
 		for y in range(map_height):
 			var moist = moisture.get_noise_2d(position.x + x, position.y + y)*10
 			var temp = temperature.get_noise_2d(position.x + x, position.y + y)*10
 			var alt = altitude.get_noise_2d(position.x + x, position.y + y)*10
-			var test = Color.BLUE
 			
 			if alt < 2:
 				water_tiles.append(Vector2i(x, y))
@@ -82,7 +81,7 @@ func generate_map():
 					pixel_color = Color.DARK_GREEN
 				WorldGlobals.TileType.SHALLOWS:
 					pixel_color = Color.SKY_BLUE
-			img.set_pixel(x + position.x, map_height - 1 - y, pixel_color)
+			img.set_pixel(x, map_height - 1 - y, pixel_color)
 		
 		map_tiles.append(y_tiles)
 		
