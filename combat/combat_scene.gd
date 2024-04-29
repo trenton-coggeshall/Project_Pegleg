@@ -20,9 +20,11 @@ func _ready():
 	player_start = combat_player.position
 	ai_start_ship = combat_enemy_ship.position
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
+
 
 func start_combat(enemy):
 	Player.in_combat = true

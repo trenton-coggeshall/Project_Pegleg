@@ -73,10 +73,9 @@ func initialize():
 		add_child(port)
 		
 	portNames.clear()
-	var ports = get_tree().get_nodes_in_group("Ports")
-	
+
 	# Choose a port, assign a faction to it and its X closest neighbors
-	for port in ports:
+	for port in ports.values():
 		if port.get_faction() != "none": continue
 		
 		#print("=== " + port.name + " ===")
@@ -89,7 +88,7 @@ func initialize():
 		port.get_node("Port_Flag").modulate = Color(factionColors[thisFaction])
 		#print("Faction: " + str(port.get_faction()))
 		
-		for subport in ports:
+		for subport in ports.values():
 			if subport.get_faction() != "none": continue
 			
 			#Calculate distance between chosen port and current iteration
@@ -117,7 +116,7 @@ func initialize():
 	
 	find_port_routes()
 	
-	for port in ports:
+	for port in ports.values():
 		port.spawn_ship()
 	
 	#ports[0].spawn_ship()

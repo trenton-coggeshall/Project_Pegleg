@@ -20,7 +20,6 @@ func _ready():
 	min_zoom = Vector2(zoom_lim, zoom_lim)
 	
 	if zoom.x < min_zoom.x:
-		print("W")
 		current_zoom = min_zoom
 		zoom = min_zoom
 

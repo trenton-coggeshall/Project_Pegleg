@@ -1,7 +1,6 @@
 extends Control
 
 @onready var victory_text = $victory_text
-@onready var lost_text = $lost_text
 @onready var button_leave = $Button_leave
 @onready var loot_gold_text = $ScrollContainer/VBoxContainer/loot_gold_text
 @onready var button_food = $ScrollContainer/VBoxContainer/Button_food
@@ -12,7 +11,6 @@ extends Control
 @onready var button_livestock = $ScrollContainer/VBoxContainer/Button_livestock
 @onready var loot_found_text = $loot_found_text
 @onready var inventory_text = $inventory_text
-@onready var player = $"../Player"
 
 var won = true
 var rng = RandomNumberGenerator.new()
@@ -59,9 +57,6 @@ func show_win_screen():
 	
 	Player.add_gold(gold)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _on_button_leave_pressed():
 	#pass # Replace with function body.
