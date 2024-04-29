@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cp03nrg7eexhc"]
+[gd_scene load_steps=9 format=3 uid="uid://cp03nrg7eexhc"]
 
 [ext_resource type="Texture2D" uid="uid://dnyyvfnh4uwdj" path="res://icon.svg" id="1_8gykc"]
 [ext_resource type="Script" path="res://economy/port_screen.gd" id="1_k8gds"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://economy/tavern_screen.gd" id="2_mdrpb"]
 [ext_resource type="Script" path="res://economy/transaction_screen.gd" id="2_q3np1"]
 [ext_resource type="Script" path="res://economy/crew_screen.gd" id="4_kf1mb"]
+[ext_resource type="PackedScene" uid="uid://ceow473w3bwfx" path="res://economy/good_listing_header.tscn" id="7_vdy0e"]
 
 [node name="port_screen" type="Control"]
 process_mode = 2
@@ -324,7 +325,6 @@ grow_horizontal = 0
 text = "Port Gold: "
 
 [node name="GoodsContainer" type="VBoxContainer" parent="TransactionScreen"]
-custom_minimum_size = Vector2(400, 25)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -337,6 +337,9 @@ offset_right = 781.0
 offset_bottom = 325.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="GoodListing" parent="TransactionScreen/GoodsContainer" instance=ExtResource("7_vdy0e")]
+layout_mode = 2
 
 [node name="BackButton" type="Button" parent="TransactionScreen"]
 layout_mode = 1
