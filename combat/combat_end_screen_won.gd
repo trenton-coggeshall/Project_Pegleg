@@ -12,23 +12,28 @@ extends Control
 @onready var loot_found_text = $loot_found_text
 @onready var inventory_text = $inventory_text
 
+var buttons
+
 var won = true
 var rng = RandomNumberGenerator.new()
 
 var gold = 0
-var food = 0
-var fabric = 0
-var rum = 0
-var leather = 0
-var iron = 0
-var livestock = 0
+
+var goods = {
+	EconomyGlobals.GoodType.FOOD: 0,
+	EconomyGlobals.GoodType.FABRIC: 0,
+	EconomyGlobals.GoodType.RUM: 0,
+	EconomyGlobals.GoodType.LEATHER: 0,
+	EconomyGlobals.GoodType.IRON: 0,
+	EconomyGlobals.GoodType.LIVESTOCK: 0,
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#pass # Replace with function body.
 	Signals.show_end_screen_win.connect(show_win_screen)
 	
-	
+	buttons = [button_food, button_fabric, button_rum, button_leather, button_iron, button_livestock]
 
 func show_win_screen(enemyShip):
 	get_tree().paused = true
@@ -38,21 +43,19 @@ func show_win_screen(enemyShip):
 	rng.randomize()
 	
 	gold = enemyShip.gold
-	food = rng.randi_range(3, 10)
-	fabric = rng.randi_range(1, 10)
-	rum = rng.randi_range(1, 10)
-	leather = rng.randi_range(1, 10)
-	iron = rng.randi_range(1, 10)
-	livestock = rng.randi_range(1, 10)
+	
+	for key in goods.keys():
+		goods[key] = randi_range(1, 10)
+	
 	
 	inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
 	loot_gold_text.text = "Gold: " + str(gold) + "\n"
-	button_food.text = "Food: " + str(food) + "\n"
-	button_fabric.text = "Fabric: " + str(fabric) + "\n"
-	button_rum.text = "Rum: " + str(rum) + "\n"
-	button_leather.text = "Leather: " + str(leather) + "\n"
-	button_iron.text = "Iron: " + str(iron) + "\n"
-	button_livestock.text = "Livestock: " + str(livestock) + "\n"
+	button_food.text = "Food: " + str(goods[EconomyGlobals.GoodType.FOOD]) + "\n"
+	button_fabric.text = "Fabric: " + str(goods[EconomyGlobals.GoodType.FABRIC]) + "\n"
+	button_rum.text = "Rum: " + str(goods[EconomyGlobals.GoodType.RUM]) + "\n"
+	button_leather.text = "Leather: " + str(goods[EconomyGlobals.GoodType.LEATHER]) + "\n"
+	button_iron.text = "Iron: " + str(goods[EconomyGlobals.GoodType.IRON]) + "\n"
+	button_livestock.text = "Livestock: " + str(goods[EconomyGlobals.GoodType.LIVESTOCK]) + "\n"
 	
 	Player.add_gold(gold)
 
@@ -69,56 +72,16 @@ func _on_button_leave_pressed():
 	hide()
 
 
-func _on_button_food_pressed():
-	#pass # Replace with function body.
-	if(Player.inv_occupied + food <= Player.inv_limit + Player.modifiers['cargo']):
-		button_food.disabled = true
-		Player.inventory[EconomyGlobals.GoodType.FOOD] += food
-		Player.inv_occupied += food
-		inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
+func _on_button_good_pressed(good_type):
+	var good_change = min(goods[good_type], Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
+	Player.inventory[good_type] += good_change
+	Player.inv_occupied += good_change
+	buttons[good_type].disabled = true
+	inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
+	if Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'] <= 0:
+		disable_buttons()
 
 
-func _on_button_fabric_pressed():
-	#pass # Replace with function body.
-	if(Player.inv_occupied + fabric <= Player.inv_limit + Player.modifiers['cargo']):
-		button_fabric.disabled = true
-		Player.inventory[EconomyGlobals.GoodType.FABRIC] += fabric
-		Player.inv_occupied += fabric
-		inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
-
-
-func _on_button_rum_pressed():
-	#pass # Replace with function body.
-	if(Player.inv_occupied + rum <= Player.inv_limit + Player.modifiers['cargo']):
-		button_rum.disabled = true
-		Player.inventory[EconomyGlobals.GoodType.RUM] += rum
-		Player.inv_occupied += rum
-		inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
-
-
-
-func _on_button_leather_pressed():
-	#pass # Replace with function body.
-	if(Player.inv_occupied + leather <= Player.inv_limit + Player.modifiers['cargo']):
-		button_leather.disabled = true
-		Player.inventory[EconomyGlobals.GoodType.LEATHER] += leather
-		Player.inv_occupied += leather
-		inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
-
-
-func _on_button_iron_pressed():
-	#pass # Replace with function body.
-	if(Player.inv_occupied + iron <= Player.inv_limit + Player.modifiers['cargo']):
-		button_iron.disabled = true
-		Player.inventory[EconomyGlobals.GoodType.IRON] += iron
-		Player.inv_occupied += iron
-		inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
-		
-
-func _on_button_livestock_pressed():
-	#pass # Replace with function body.
-	if(Player.inv_occupied + livestock <= Player.inv_limit + Player.modifiers['cargo']):
-		button_livestock.disabled = true
-		Player.inventory[EconomyGlobals.GoodType.LIVESTOCK] += livestock
-		Player.inv_occupied += livestock
-		inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
+func disable_buttons():
+	for button in buttons:
+			button.disabled = true
