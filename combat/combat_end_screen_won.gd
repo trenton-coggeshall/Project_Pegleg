@@ -30,15 +30,14 @@ func _ready():
 	
 	
 
-func show_win_screen():
-	
+func show_win_screen(enemyShip):
 	get_tree().paused = true
 	
 	show()
 	
 	rng.randomize()
 	
-	gold = rng.randi_range(300, 1000)
+	gold = enemyShip.gold
 	food = rng.randi_range(3, 10)
 	fabric = rng.randi_range(1, 10)
 	rum = rng.randi_range(1, 10)
@@ -46,7 +45,7 @@ func show_win_screen():
 	iron = rng.randi_range(1, 10)
 	livestock = rng.randi_range(1, 10)
 	
-	inventory_text.text += str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
+	inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
 	loot_gold_text.text = "Gold: " + str(gold) + "\n"
 	button_food.text = "Food: " + str(food) + "\n"
 	button_fabric.text = "Fabric: " + str(fabric) + "\n"
