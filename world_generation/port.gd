@@ -124,10 +124,29 @@ func initialize():
 		set_price(good)
 
 
+func get_refund(good, quantity):
+	print("Refund" + str(quantity))
+	var total = 0
+	
+	for i in range(quantity):
+		total += price_check(good, goods[good] + quantity - i)[0]
+	
+	return total
+
+
+func buy_back(good, quantity):
+	print("Buy back" + str(quantity))
+	var total = 0
+	
+	for i in range(quantity):
+		total += price_check(good, goods[good] - quantity + i)[1]
+	
+	return total
+
+
 func get_next_buy_price_quant(good):
 	var count = 0
 	var start_price = prices[good][0]
-	print(start_price)
 	var current_price = start_price
 	
 	while current_price == start_price:

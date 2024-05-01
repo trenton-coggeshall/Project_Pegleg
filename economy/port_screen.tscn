@@ -312,6 +312,18 @@ offset_bottom = 183.0
 grow_horizontal = 2
 text = "Your Gold: "
 
+[node name="GoldChange" type="Label" parent="TransactionScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 510.0
+offset_top = 160.0
+offset_right = 595.0
+offset_bottom = 183.0
+grow_horizontal = 2
+text = "Gold Change: "
+
 [node name="PortGold" type="Label" parent="TransactionScreen"]
 layout_mode = 1
 anchors_preset = 1
