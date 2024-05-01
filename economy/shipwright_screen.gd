@@ -98,6 +98,7 @@ func _on_upgrade_button_pressed(upgrade_type_num, upgrade_num):
 	
 	Player.add_upgrade(upgrade_type, upgrade_list[upgrade_num])
 	Player.remove_gold(upgrade['cost'])
+	Player.current_port.gold += upgrade['cost']
 	check_player_upgrades()
 
 
@@ -107,6 +108,7 @@ func _on_repair_button_pressed():
 		return
 	
 	Player.remove_gold(repair_cost)
+	Player.current_port.gold += repair_cost
 	Signals.player_full_healed.emit()
 	
 	repair_cost = 0
