@@ -125,7 +125,6 @@ func initialize():
 
 
 func get_refund(good, quantity):
-	print("Refund" + str(quantity))
 	var total = 0
 	
 	for i in range(quantity):
@@ -135,7 +134,6 @@ func get_refund(good, quantity):
 
 
 func buy_back(good, quantity):
-	print("Buy back" + str(quantity))
 	var total = 0
 	
 	for i in range(quantity):
