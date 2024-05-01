@@ -124,6 +124,31 @@ func initialize():
 		set_price(good)
 
 
+func get_next_buy_price_quant(good):
+	var count = 0
+	var start_price = prices[good][0]
+	print(start_price)
+	var current_price = start_price
+	
+	while current_price == start_price:
+		count += 1
+		current_price = price_check(good, goods[good] - count)[0]
+	
+	return count
+
+
+func get_next_sell_price_quant(good):
+	var count = 0
+	var start_price = prices[good][1]
+	var current_price = start_price
+	
+	while current_price == start_price:
+		count += 1
+		current_price = price_check(good, goods[good] + count)[1]
+	
+	return count
+
+
 func calculate_purchase(good, quantity):
 	var cost = 0
 	var current_price = prices[good][0]

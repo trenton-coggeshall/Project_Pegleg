@@ -48,3 +48,23 @@ func _on_buy_10_button_pressed():
 
 func _on_sell_10_button_pressed():
 	transaction_screen.make_sale(id, 10)
+
+
+func _on_buy_max_button_pressed():
+	var count = Player.current_port.get_next_buy_price_quant(id)
+	count = min(count, Player.inv_limit - Player.inv_occupied)
+	
+	if Player.current_port.calculate_purchase(id, count) > Player.gold:
+		count = floor(Player.gold / Player.current_port.prices[id][0])
+	
+	transaction_screen.make_purchase(id, count)
+
+
+func _on_sell_max_button_pressed():
+	var count = Player.current_port.get_next_sell_price_quant(id)
+	count = min(count, Player.inventory[id])
+	
+	if Player.current_port.calculate_sale(id, count) > Player.current_port.gold:
+		count = floor(Player.current_port.gold / Player.current_port.prices[id][1])
+	
+	transaction_screen.make_sale(id, count)

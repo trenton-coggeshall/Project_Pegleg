@@ -66,7 +66,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 
+[connection signal="pressed" from="ButtonContainer/BuyMaxButton" to="." method="_on_buy_max_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/Buy10Button" to="." method="_on_buy_10_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/Buy1Button" to="." method="_on_buy_1_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/Sell1Button" to="." method="_on_sell_1_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/Sell10Button" to="." method="_on_sell_10_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/SellMaxButton" to="." method="_on_sell_max_button_pressed"]
