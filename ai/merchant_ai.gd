@@ -9,6 +9,7 @@ var making_deal = false
 var returning = false
 var current_good = null
 var sell_port = null
+var max_gold = 1500
 
 
 # Called when the node enters the scene tree for the first time.
@@ -35,7 +36,7 @@ func handle_destination():
 		elif ai_ship.current_port.name == sell_port:
 			make_sale()
 			
-			if ai_ship.gold > 1500 and buying:
+			if ai_ship.gold >= max_gold and buying:
 				returning = true
 				if ai_ship.current_port != home_port:
 					ai_ship.path = ai_ship.current_port.get_port_path(home_port.name)

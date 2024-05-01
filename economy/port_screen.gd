@@ -21,7 +21,7 @@ func _process(_delta):
 
 func show_port_screen():
 	port_text.text = Player.current_port.name
-	faction_text.text = Player.current_port.faction
+	faction_text.text = "Owned by: " +  Player.current_port.faction
 	show()
 	get_tree().paused = true
 
