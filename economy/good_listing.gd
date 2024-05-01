@@ -66,5 +66,6 @@ func _on_sell_max_button_pressed():
 	
 	if Player.current_port.calculate_sale(id, count) > Player.current_port.gold:
 		count = floor(Player.current_port.gold / Player.current_port.prices[id][1])
+		
 	
 	transaction_screen.make_sale(id, count)

@@ -147,9 +147,12 @@ func get_next_buy_price_quant(good):
 	var start_price = prices[good][0]
 	var current_price = start_price
 	
-	while current_price == start_price:
-		count += 1
-		current_price = price_check(good, goods[good] - count)[0]
+	if start_price < EconomyGlobals.base_prices[good] * EconomyGlobals.price_limit_coef:
+		while current_price == start_price:
+			count += 1
+			current_price = price_check(good, goods[good] - count)[0]
+	else:
+		count = Player.current_port.goods[good]
 	
 	return count
 
@@ -159,9 +162,12 @@ func get_next_sell_price_quant(good):
 	var start_price = prices[good][1]
 	var current_price = start_price
 	
-	while current_price == start_price:
-		count += 1
-		current_price = price_check(good, goods[good] + count)[1]
+	if start_price > 1:
+		while current_price == start_price:
+			count += 1
+			current_price = price_check(good, goods[good] + count)[1]
+	else:
+		count = Player.inventory[good]
 	
 	return count
 
