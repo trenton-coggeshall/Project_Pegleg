@@ -56,9 +56,10 @@ func update_gold(value):
 func set_username(value):
 	usernameLabel.text = value
 	
-func player_damaged(value):
+func player_damaged(value, crew_damage):
 	if Player.health > 0:
 		Player.health -= value
+		Player.remove_crew(crew_damage)
 		if Player.health == 0:
 			Signals.end_combat.emit()
 	
