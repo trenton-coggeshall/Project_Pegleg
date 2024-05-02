@@ -12,6 +12,7 @@ var sunk = false
 var sink_rate = 0.8
 
 var damage = 5
+var crew_damage = 2
 
 func initialize(ship_velocity):
 	velocity = ship_velocity
@@ -36,7 +37,7 @@ func _on_body_entered(body):
 		body.get_parent().take_damage(damage)
 		print("Enemy hit. Damage: " + str(damage) + ". New health: " + str(body.get_parent().health))
 	elif body.name == "CombatPlayer":
-		Signals.player_damaged.emit(damage)
+		Signals.player_damaged.emit(damage, randi_range(0, crew_damage))
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
