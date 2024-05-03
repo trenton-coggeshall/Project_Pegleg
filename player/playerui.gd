@@ -30,6 +30,7 @@ func _ready():
 	Signals.player_damaged.connect(player_damaged)
 	Signals.player_healed.connect(player_healed)
 	Signals.player_full_healed.connect(player_full_healed)
+	Signals.player_update_max_health.connect(player_update_max_health)
 	
 	settingsWindow.get_node("CloseButton").pressed.connect(_on_settings_button_pressed)
 	settingsWindow.get_node("QuitButton").pressed.connect(quit_game)
@@ -75,6 +76,10 @@ func player_healed(value):
 func player_full_healed():
 	Player.health = Player.max_health
 	tween_health()
+
+func player_update_max_health():
+	healthBar.max_value = Player.max_health
+	damageBar.max_value = Player.max_health
 
 func tween_health():
 	var tween = create_tween()

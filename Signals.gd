@@ -14,6 +14,7 @@ signal username_changed(value)
 signal player_damaged(value, crew_loss)
 signal player_healed(value)
 signal player_full_healed()
+signal player_update_max_health()
 signal player_left_port()
 
 signal updateReloadTimer(value)
