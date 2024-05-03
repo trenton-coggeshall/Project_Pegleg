@@ -4,6 +4,7 @@ extends Node
 #| Player stats |
 #+--------------+
 
+var base_health = 100
 var max_health = 100
 var health = 100
 var gold = 500
@@ -65,6 +66,10 @@ func add_upgrade(type, upgrade_name):
 	
 	for m in modifier_keys:
 		modifiers[m] += upgrade['stat_changes'][m]
+		if m == 'health':
+			max_health = base_health + modifiers['health']
+			Signals.player_update_max_health.emit()
+			Signals.player_healed.emit(max_health)
 
 
 func add_crew(amt):
