@@ -48,7 +48,7 @@ func show_win_screen(enemyShip):
 		goods[key] = randi_range(1, 10)
 	
 	
-	inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
+	inventory_text.text = "Remaining inventory room: " + str(Player.get_inventory_space())
 	loot_gold_text.text = "Gold: " + str(gold) + "\n"
 	button_food.text = "Food: " + str(goods[EconomyGlobals.GoodType.FOOD]) + "\n"
 	button_fabric.text = "Fabric: " + str(goods[EconomyGlobals.GoodType.FABRIC]) + "\n"
@@ -73,12 +73,12 @@ func _on_button_leave_pressed():
 
 
 func _on_button_good_pressed(good_type):
-	var good_change = min(goods[good_type], Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
+	var good_change = min(goods[good_type], Player.get_inventory_space())
 	Player.inventory[good_type] += good_change
 	Player.inv_occupied += good_change
 	buttons[good_type].disabled = true
-	inventory_text.text = "Remaining inventory room: " + str(Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'])
-	if Player.inv_limit - Player.inv_occupied + Player.modifiers['cargo'] <= 0:
+	inventory_text.text = "Remaining inventory room: " + str(Player.get_inventory_space())
+	if Player.get_inventory_space() <= 0:
 		disable_buttons()
 
 

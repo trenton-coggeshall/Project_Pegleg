@@ -52,7 +52,7 @@ func _on_sell_10_button_pressed():
 
 func _on_buy_max_button_pressed():
 	var count = Player.current_port.get_next_buy_price_quant(id)
-	count = min(count, Player.inv_limit + Player.modifiers['cargo'] - Player.inv_occupied)
+	count = min(count, Player.get_inventory_space())
 	
 	if Player.current_port.calculate_purchase(id, count) > Player.gold:
 		count = floor(Player.gold / Player.current_port.prices[id][0])

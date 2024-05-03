@@ -4,16 +4,12 @@ extends Node
 #| Player stats |
 #+--------------+
 
-var base_health = 100
 var max_health = 100
 var health = 100
 var gold = 500
 var inventory : Dictionary
-var inv_limit = 30
 var inv_occupied = 0
 var crew_count = 60
-var crew_max = 80
-var crew_optimal = 60
 var crew_modifier
 var current_port = null
 var in_combat = false
@@ -21,6 +17,19 @@ var in_combat = false
 #+-----------------+
 #| Player Upgrades |
 #+-----------------+
+
+var stats = {
+	'max_speed': 0,
+	'acceleration' : 0,
+	'max_furled_speed' : 0,
+	'furled_acceleration' : 0,
+	'turn_speed' : 0,
+	'base_health' : 0,
+	'inv_limit' : 0,
+	'crew_max' : 0,
+	'crew_optimal' : 0,
+	'sprite' : null
+	}
 
 var upgrades = {
 	"health" : [],
@@ -67,15 +76,15 @@ func add_upgrade(type, upgrade_name):
 	for m in modifier_keys:
 		modifiers[m] += upgrade['stat_changes'][m]
 		if m == 'health':
-			max_health = base_health + modifiers['health']
+			max_health = Player.stats['base_health'] + modifiers['health']
 			Signals.player_update_max_health.emit()
 			Signals.player_healed.emit(max_health)
 
 
 func add_crew(amt):
 	crew_count += amt
-	if crew_count > crew_max:
-		crew_count = crew_max
+	if crew_count > Player.stats['crew_max']:
+		crew_count = Player.stats['crew_max']
 	crew_check()
 
 
@@ -87,7 +96,11 @@ func remove_crew(amt):
 
 
 func crew_check():
-	if crew_count < crew_optimal:
-		crew_modifier = max(float(crew_count) / float(crew_optimal), 0.1)
+	if crew_count < Player.stats['crew_optimal']:
+		crew_modifier = max(float(crew_count) / float(Player.stats['crew_optimal']), 0.1)
 	else:
 		crew_modifier = 1
+
+
+func get_inventory_space():
+	return stats['inv_limit'] + modifiers['cargo'] - inv_occupied
