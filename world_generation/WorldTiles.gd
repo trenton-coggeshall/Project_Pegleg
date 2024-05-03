@@ -117,7 +117,7 @@ func initialize():
 	find_port_routes()
 	
 	for port in ports.values():
-		port.spawn_ship()
+		port.spawn_merchant()
 	
 	#ports[0].spawn_ship()
 

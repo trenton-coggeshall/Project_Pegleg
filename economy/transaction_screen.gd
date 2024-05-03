@@ -70,14 +70,6 @@ func make_purchase(good, quantity):
 		Player.current_port.goods[good] -= quantity + buy_back_quantity
 		Player.current_port.set_price(good)
 		good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
-		
-	#if Player.current_port.execute_purchase(good, quantity, total):
-		#Player.remove_gold(total)
-		#Player.inventory[good] += quantity
-		#Player.inv_occupied += quantity
-		#good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
-		#$PortGold.text = 'Port gold: ' + str(Player.current_port.gold) + 'g'
-		#$PlayerGold.text = 'Your gold: ' + str(Player.gold) + 'g'
 
 
 func make_sale(good, quantity):
@@ -100,14 +92,6 @@ func make_sale(good, quantity):
 	Player.current_port.goods[good] += quantity + refund_quantity
 	Player.current_port.set_price(good)
 	good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
-	
-	#if Player.current_port.execute_sale(good, quantity, total):
-		#Player.add_gold(total)
-		#Player.inventory[good] -= quantity
-		#Player.inv_occupied -= quantity
-		#good_listings[good].set_price_quantity(Player.current_port.prices[good], Player.current_port.goods[good], Player.inventory[good])
-		#$PortGold.text = 'Port gold: ' + str(Player.current_port.gold) + 'g'
-		#$PlayerGold.text = 'Your gold: ' + str(Player.gold) + 'g'
 
 
 func _on_back_button_pressed():
