@@ -60,7 +60,7 @@ const UPGRADE_LIST =  {
 			"display_name": 'Faster Sails I',
 			"details" : '',
 			"prerequisite" : [],
-			"stat_changes" : {'speed' : 200},
+			"stat_changes" : {'speed' : 5000},
 			"cost" : 500
 		},
 		"speed_up_2" : {
@@ -68,7 +68,7 @@ const UPGRADE_LIST =  {
 			"display_name": 'Faster Sails II',
 			"details" : 'Gotta go fast!',
 			"prerequisite" : ["speed_up_1"],
-			"stat_changes" : {'speed' : 200},
+			"stat_changes" : {'speed' : 5000},
 			"cost" : 1000
 		},
 		"speed_up_3" : {
@@ -76,7 +76,7 @@ const UPGRADE_LIST =  {
 			"display_name": 'Faster Sails III',
 			"details" : 'Gotta go fast!',
 			"prerequisite" : ["speed_up_2"],
-			"stat_changes" : {'speed' : 200},
+			"stat_changes" : {'speed' : 5000},
 			"cost" : 2000
 		},
 	},
