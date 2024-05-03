@@ -28,6 +28,11 @@ var consumption_rate = 10
 
 var upgrade_types = []
 
+var merchant_ship
+
+var merchant_respawn_delay = 120
+var merchant_respawn_timer = 0.0
+
 
 func _ready():
 	EconomyGlobals.port_prices[name] = prices
@@ -38,6 +43,7 @@ func _process(delta):
 	handle_production(delta)
 	handle_consumption(delta)
 	handle_crew_hires(delta)
+	handle_ships(delta)
 
 
 func handle_production(delta):
@@ -77,6 +83,14 @@ func handle_crew_hires(delta):
 		crew_cost = randi_range(1, 5)
 
 
+func handle_ships(delta):
+	if not merchant_ship:
+		merchant_respawn_timer += delta
+		if merchant_respawn_timer >= merchant_respawn_delay:
+			spawn_merchant()
+			merchant_respawn_timer = 0
+
+
 func get_faction():
 	return faction
 
@@ -85,16 +99,17 @@ func set_faction(value):
 	faction = value;
 
 
-func spawn_ship():
+func spawn_merchant():
 	var merchant = MERCHANT_AI.instantiate()
-	merchant.name = str(shipNames[0])
 	shipNames.remove_at(0)
 	get_parent().get_parent().add_child(merchant)
+	merchant.ai_ship.name = str(shipNames[0])	
 	merchant.global_position = global_position
 	merchant.home_port = self
 	merchant.ai_ship.current_port = self
 	merchant.ai_ship.path = random_path()
 	merchant.ai_ship.faction = self.faction
+	merchant_ship = merchant
 
 
 # Returns the price of a good at a certain quantity
