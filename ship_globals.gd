@@ -22,8 +22,8 @@ var ship_stats = {
 		'max_furled_speed' : 25000,
 		'furled_acceleration' : 5000,
 		'turn_speed' : 2.5,
-		'base_health' : 100,
-		'inv_limit' : 30,
+		'base_health' : 150,
+		'inv_limit' : 25,
 		'crew_max' : 100,
 		'crew_optimal' : 80,
 		'sprite' : MILITARY_SHIP_IMAGE

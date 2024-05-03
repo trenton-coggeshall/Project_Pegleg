@@ -9,19 +9,17 @@ script/source = "extends CharacterBody2D
 
 @onready var enemy = $\"../CombatEnemyTemplate\"
 @onready var cannon_controller = $CannonController
+@onready var ship_sprite = $Sprite2D
 
 #+------------------+
 #| Ship stat values |
 #+------------------+
 
 # Speed
-const max_speed = 17500
-const acceleration = 5000
-const anchor_acceleration = 50000
-const max_furled_speed = 10000
-const furled_acceleration = 5000
-const turn_speed = 3
 const anchorspeed = 0
+const anchor_acceleration = 50000
+const combat_speed = 0.5
+
 
 # Status
 var anchored = false
@@ -54,7 +52,7 @@ func _physics_process(delta):
 	Signals.speed_changed.emit(floor(current_speed/1000.0))
 
 func handle_rotation(delta):
-	var turn_delta = Input.get_axis('left', 'right') * (turn_speed + Player.modifiers['steering']) * delta
+	var turn_delta = Input.get_axis('left', 'right') * (Player.stats['turn_speed'] + Player.modifiers['steering']) * delta
 	rotate(turn_delta)
 
 
@@ -62,15 +60,15 @@ func handle_sails(delta):
 	if furled:
 		if Input.is_action_just_pressed('up'):
 			furled = false
-		current_speed = move_toward(current_speed, max_furled_speed, furled_acceleration * delta)
+		current_speed = move_toward(current_speed, Player.stats['max_furled_speed'], Player.stats['furled_acceleration'] * combat_speed * delta)
 	else:
 		if Input.is_action_just_pressed('down'):
 			furled = true
-		current_speed = move_toward(current_speed, max_speed + Player.modifiers['speed'], acceleration * delta)
+		current_speed = move_toward(current_speed, Player.stats['max_speed'] + Player.modifiers['speed'], Player.stats['acceleration'] * combat_speed * delta)
 		
 	if anchored: current_speed = move_toward(current_speed, 0, anchor_acceleration * delta)
 	
-	velocity = -transform.y * current_speed * delta
+	velocity = -transform.y * current_speed * combat_speed * delta
 
 
 func handle_anchor():
