@@ -38,6 +38,7 @@ mouse_filter = 2
 texture = ExtResource("1_8gykc")
 
 [node name="HomeScreen" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 345.0
 offset_top = 229.0
@@ -369,7 +370,6 @@ grow_vertical = 0
 text = "Back"
 
 [node name="ShipwrightScreen" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_left = 328.0
 offset_top = 189.0
@@ -419,6 +419,7 @@ horizontal_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="ShipwrightScreen/TabContainer/Upgrade and Repair"]
 layout_mode = 2
 theme_override_constants/separation = 100
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ShipwrightScreen/TabContainer/Upgrade and Repair/HBoxContainer"]
 layout_mode = 2
