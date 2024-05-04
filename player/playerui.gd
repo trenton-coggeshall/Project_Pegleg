@@ -11,7 +11,8 @@ extends Control
 @export var settingsWindow:Panel
 
 @export var reloadTimerBar:TextureProgressBar
-var cannonPips
+var cannonRows
+var cannonPips = []
 
 var worldGenScene = preload("res://world_generation/world_gen.tscn")
 
@@ -36,7 +37,10 @@ func _ready():
 	settingsWindow.get_node("QuitButton").pressed.connect(quit_game)
 	settingsWindow.get_node("MainMenuButton").pressed.connect(to_main_menu)
 	
-	cannonPips = reloadTimerBar.get_children()
+	cannonRows = reloadTimerBar.get_children()
+	
+	for row in cannonRows:
+		cannonPips.append_array(row.get_children())
 
 #+------------------+
 #| Signal Functions |

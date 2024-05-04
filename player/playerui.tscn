@@ -198,49 +198,112 @@ texture_progress = ExtResource("12_xlcvh")
 tint_under = Color(0.321569, 0.152941, 0.0823529, 1)
 tint_over = Color(0.539196, 0.285897, 0.131535, 1)
 
-[node name="Cannonball1" type="TextureRect" parent="CanvasLayer/ReloadTimerBar"]
-layout_mode = 0
-offset_left = -4.0
-offset_top = 240.0
-offset_right = 236.0
-offset_bottom = 480.0
-scale = Vector2(0.2, 0.2)
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ReloadTimerBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 120.0
+offset_right = 1111.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.172243, 0.172243)
+alignment = 1
+
+[node name="Cannonball1" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
-[node name="Cannonball2" type="TextureRect" parent="CanvasLayer/ReloadTimerBar"]
-layout_mode = 0
-offset_left = 46.0
-offset_top = 240.0
-offset_right = 286.0
-offset_bottom = 480.0
-scale = Vector2(0.2, 0.2)
+[node name="Cannonball2" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
-[node name="Cannonball3" type="TextureRect" parent="CanvasLayer/ReloadTimerBar"]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 240.0
-offset_right = 336.0
-offset_bottom = 480.0
-scale = Vector2(0.2, 0.2)
+[node name="Cannonball3" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
-[node name="Cannonball4" type="TextureRect" parent="CanvasLayer/ReloadTimerBar"]
-layout_mode = 0
-offset_left = 146.0
-offset_top = 240.0
-offset_right = 386.0
-offset_bottom = 480.0
-scale = Vector2(0.2, 0.2)
+[node name="Cannonball4" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
-[node name="Cannonball5" type="TextureRect" parent="CanvasLayer/ReloadTimerBar"]
-layout_mode = 0
-offset_left = 196.0
-offset_top = 240.0
-offset_right = 436.0
-offset_bottom = 480.0
-scale = Vector2(0.2, 0.2)
+[node name="Cannonball5" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/ReloadTimerBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 157.5
+offset_right = 1111.0
+offset_bottom = 397.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.172243, 0.172243)
+alignment = 1
+
+[node name="Cannonball1" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball2" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball3" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball4" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball5" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/ReloadTimerBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 195.0
+offset_right = 1111.0
+offset_bottom = 435.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.172243, 0.172243)
+alignment = 1
+
+[node name="Cannonball1" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball2" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball3" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball4" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("12_xlcvh")
+
+[node name="Cannonball5" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="CombatEndScreenWon" parent="CanvasLayer" instance=ExtResource("13_fun7a")]
