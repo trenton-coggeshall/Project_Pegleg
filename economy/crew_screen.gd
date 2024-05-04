@@ -15,7 +15,7 @@ func show_crew_screen():
 	crew_count = Player.current_port.hireable_crew
 	
 	crew_slider.max_value = crew_count
-	crew_slider.value = min(crew_slider.max_value, Player.crew_max - Player.crew_count)
+	crew_slider.value = min(crew_slider.max_value, Player.stats['crew_max'] - Player.crew_count)
 	crew_check()
 	show()
 
@@ -26,14 +26,14 @@ func crew_check():
 	else:
 		crew_text.text = "No one is looking for work right now."
 	
-	crew_text.text += "\n\nYou currently have a crew of " + str(Player.crew_count) + " out of a possible " + str(Player.crew_max) + "."
+	crew_text.text += "\n\nYou currently have a crew of " + str(Player.crew_count) + " out of a possible " + str(Player.stats['crew_max']) + "."
 
 
 func _on_crew_slider_value_changed(value):
 	hire_count_text.text = str(value)
 	cost_text.text = "Cost: " + str(value * cost) + "g"
 	
-	if value * cost > Player.gold or value > Player.crew_max - Player.crew_count:
+	if value * cost > Player.gold or value > Player.stats['crew_max'] - Player.crew_count:
 		hire_button.disabled = true
 	else:
 		hire_button.disabled = false

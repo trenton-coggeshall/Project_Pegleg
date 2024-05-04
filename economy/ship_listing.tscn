@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyb61o8kngj0i"]
+
+[ext_resource type="Script" path="res://economy/ship_listing.gd" id="1_hs5i3"]
+[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vy5fo"]
+
+[node name="ShipListing" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hs5i3")
+
+[node name="ShipLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Standard"
+horizontal_alignment = 1
+
+[node name="ShipImage" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_vy5fo")
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="SpeedText" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Speed: 35"
+
+[node name="CargoText" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Cargo Space: 30"
+
+[node name="HullText" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Hull Strength: 100"
+
+[node name="CrewText" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Crew Capacity: 80"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="PriceText" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+text = "Price: 5000g"
+
+[node name="BuyButton" type="Button" parent="."]
+layout_mode = 2
+text = "Buy"
+
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

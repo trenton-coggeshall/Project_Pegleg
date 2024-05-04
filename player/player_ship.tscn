@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://qjxvca13e7ka"]
+[gd_scene load_steps=7 format=3 uid="uid://qjxvca13e7ka"]
 
-[ext_resource type="PackedScene" uid="uid://y3yoed01w4a7" path="res://world_generation/cannonball.tscn" id="1_7u48p"]
 [ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_vnj8m"]
 [ext_resource type="Texture2D" uid="uid://cfti1r2pwy2wb" path="res://Assets/Images/Icons/anchor_icon.png" id="3_uh856"]
 [ext_resource type="Script" path="res://player/Camera2D.gd" id="4_3hkxc"]
@@ -12,19 +11,16 @@ script/source = "extends CharacterBody2D
 @onready var port_screen = $\"../CanvasLayer/port_screen\"
 @onready var combat_scene = $\"../CombatScene\"
 @onready var detection_radius = $Detection_Radius
+@onready var ship_sprite = $ShipSprite
 
 #+------------------+
 #| Ship stat values |
 #+------------------+
 
 # Speed
-const max_speed = 35000
-const acceleration = 10000
-const anchor_acceleration = 50000
-const max_furled_speed = 25000
-const furled_acceleration = 5000
-const turn_speed = 3
 const anchorspeed = 0
+const anchor_acceleration = 50000
+
 
 # Status
 var anchored = false
@@ -33,16 +29,10 @@ var current_speed = 0
 var near_port = false
 var current_port = null
 
-#+-------------+
-#| Combat info |
-#+-------------+
-@export var Cannonball:PackedScene
-var cannons:Array
-
 
 func _ready():
 	Signals.show_ui.emit()
-	cannons = get_tree().get_nodes_in_group(\"Player_cannons\")
+	Signals.player_ship_changed.connect(ship_changed)
 
 
 func _physics_process(delta):
@@ -60,7 +50,7 @@ func _physics_process(delta):
 
 
 func handle_rotation(delta):
-	var turn_delta = Input.get_axis('left', 'right') * (turn_speed + Player.modifiers['steering']) * delta
+	var turn_delta = Input.get_axis('left', 'right') * (Player.stats['turn_speed'] + Player.modifiers['steering']) * delta
 	rotate(turn_delta)
 
 
@@ -69,11 +59,11 @@ func handle_sails(delta):
 	if furled:
 		if Input.is_action_just_pressed('up'):
 			furled = false
-		current_speed = move_toward(current_speed, max_furled_speed, furled_acceleration * delta)
+		current_speed = move_toward(current_speed, Player.stats['max_furled_speed'], Player.stats['furled_acceleration'] * delta)
 	else:
 		if Input.is_action_just_pressed('down'):
 			furled = true
-		current_speed = move_toward(current_speed, (max_speed + Player.modifiers['speed']) * Player.crew_modifier, acceleration * delta)
+		current_speed = move_toward(current_speed, (Player.stats['max_speed'] + Player.modifiers['speed']) * Player.crew_modifier, Player.stats['acceleration'] * delta)
 		
 	if anchored: current_speed = move_toward(current_speed, 0, anchor_acceleration * delta)
 	
@@ -110,6 +100,10 @@ func handle_interact():
 func set_near_port(is_near, port):
 	near_port = is_near
 	Player.current_port = port
+
+
+func ship_changed():
+	ship_sprite.texture = Player.stats['sprite']
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]
@@ -121,13 +115,12 @@ height = 80.0
 [node name="PlayerShip" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 5
 script = SubResource("GDScript_5pico")
-Cannonball = ExtResource("1_7u48p")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShipSprite" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)
 texture = ExtResource("1_vnj8m")
 
-[node name="Anchor" type="Sprite2D" parent="Sprite2D"]
+[node name="Anchor" type="Sprite2D" parent="ShipSprite"]
 visible = false
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("3_uh856")

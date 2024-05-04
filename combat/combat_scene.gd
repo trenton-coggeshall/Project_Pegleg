@@ -29,6 +29,7 @@ func _process(_delta):
 func start_combat(enemy):
 	Player.in_combat = true
 	ai_node = enemy
+	combat_player.ship_sprite.texture = Player.stats['sprite']
 	combat_camera.make_current()
 	Signals.showReloadTimer.emit()
 

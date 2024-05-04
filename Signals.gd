@@ -16,6 +16,7 @@ signal player_healed(value)
 signal player_full_healed()
 signal player_update_max_health()
 signal player_left_port()
+signal player_ship_changed()
 
 signal updateReloadTimer(value)
 signal hideReloadTimer()
