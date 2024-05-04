@@ -26,6 +26,7 @@ var stats = {
 	'turn_speed' : 0,
 	'base_health' : 0,
 	'inv_limit' : 0,
+	'base_cannons' : 0,
 	'crew_max' : 0,
 	'crew_optimal' : 0,
 	'sprite' : null
