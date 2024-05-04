@@ -215,22 +215,27 @@ scale = Vector2(0.172243, 0.172243)
 alignment = 1
 
 [node name="Cannonball1" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball2" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball3" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball4" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball5" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
@@ -251,22 +256,27 @@ scale = Vector2(0.172243, 0.172243)
 alignment = 1
 
 [node name="Cannonball1" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball2" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball3" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball4" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball5" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer2"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
@@ -287,22 +297,27 @@ scale = Vector2(0.172243, 0.172243)
 alignment = 1
 
 [node name="Cannonball1" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball2" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball3" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball4" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 
 [node name="Cannonball5" type="TextureRect" parent="CanvasLayer/ReloadTimerBar/HBoxContainer3"]
+visible = false
 layout_mode = 2
 texture = ExtResource("12_xlcvh")
 

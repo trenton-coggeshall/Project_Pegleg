@@ -93,8 +93,7 @@ func fire():
 	#var original_angle = cannons[0].rotation
 	#if abs(angle) > PI/4:
 		#angle = original_angle
-	
-	
+
 	for i in shots:
 		#cannons[i].rotation = angle
 		var projectile = Cannonball.instantiate()
