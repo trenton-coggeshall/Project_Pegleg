@@ -21,7 +21,7 @@ extends Control
 @onready var repair_cost_label = $"TabContainer/Upgrade and Repair/RepairCost"
 @onready var repair_button = $"TabContainer/Upgrade and Repair/RepairButton"
 
-@onready var ships = $TabContainer/ScrollContainer/Ships
+@onready var ships = $TabContainer/Ships/Ships
 
 const SHIP_LISTING = preload("res://economy/ship_listing.tscn")
 

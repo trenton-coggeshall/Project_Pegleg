@@ -26,6 +26,7 @@ var stats = {
 	'turn_speed' : 0,
 	'base_health' : 0,
 	'inv_limit' : 0,
+	'base_cannons' : 0,
 	'crew_max' : 0,
 	'crew_optimal' : 0,
 	'sprite' : null
@@ -113,6 +114,9 @@ func get_inventory_space():
 
 func set_ship(ship_name):
 	stats = ShipGlobals.ship_stats[ship_name]
+	max_health = stats['base_health'] + modifiers['health']
 	current_ship = ship_name
+	Signals.player_update_max_health.emit()
+	Signals.player_healed.emit(max_health)	
 	Signals.player_ship_changed.emit()
 	

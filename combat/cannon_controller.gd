@@ -5,8 +5,8 @@ extends Node2D
 @export var Cannonball:PackedScene
 
 
-var cannon_count = 5
-var loaded_cannons
+var cannon_count = 0
+var loaded_cannons = 0
 var cannons_right:Array
 var cannons_left:Array
 
@@ -22,6 +22,28 @@ var cannonball_speed = 1200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	handle_reloading(delta)
+
+
+func set_cannons(count):
+	if count == cannon_count:
+		return
+	
+	for i in cannon_count:
+		cannons_left[i].queue_free()
+		cannons_right[i].queue_free()
+	cannons_left.clear()
+	cannons_right.clear()
+	
+	#Have to wait a frame or the freed cannons will get added back to the arrays
+	await get_tree().process_frame
+	
+	cannon_count = count
 	var cannon_offset = 60.0 / cannon_count
 	var y_pos = -(cannon_offset * cannon_count / 2)
 	
@@ -48,11 +70,6 @@ func _ready():
 	loaded_cannons = cannon_count
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	handle_reloading(delta)
-
-
 func fire():
 	var cannons:Array
 	
@@ -71,13 +88,11 @@ func fire():
 	cannons.shuffle()
 	var shot_delay = 0
 	firing = true
-	var angle = get_fire_angle(cannons) - parent.rotation
 	
-	
-	var original_angle = cannons[0].rotation
-	
-	if abs(angle) > PI/4:
-		angle = original_angle
+	#var angle = get_fire_angle(cannons) - parent.rotation
+	#var original_angle = cannons[0].rotation
+	#if abs(angle) > PI/4:
+		#angle = original_angle
 	
 	
 	for i in shots:

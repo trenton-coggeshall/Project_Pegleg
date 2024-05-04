@@ -30,6 +30,8 @@ func start_combat(enemy):
 	Player.in_combat = true
 	ai_node = enemy
 	combat_player.ship_sprite.texture = Player.stats['sprite']
+	combat_player.cannon_controller.set_cannons(Player.stats['base_cannons'])
+	combat_enemy_ship.get_parent().cannon_controller.set_cannons(5)
 	combat_camera.make_current()
 	Signals.showReloadTimer.emit()
 
