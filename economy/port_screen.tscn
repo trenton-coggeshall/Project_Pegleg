@@ -490,11 +490,11 @@ text = "Upgrade1"
 [node name="Upgrade2Price3" type="Label" parent="ShipwrightScreen/TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer2/HBoxContainer3"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ShipwrightScreen/TabContainer"]
+[node name="Ships" type="ScrollContainer" parent="ShipwrightScreen/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Ships" type="VBoxContainer" parent="ShipwrightScreen/TabContainer/ScrollContainer"]
+[node name="Ships" type="VBoxContainer" parent="ShipwrightScreen/TabContainer/Ships"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
