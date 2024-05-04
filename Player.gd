@@ -6,7 +6,7 @@ extends Node
 
 var max_health = 100
 var health = 100
-var gold = 500
+var gold = 5000
 var inventory : Dictionary
 var inv_occupied = 0
 var crew_count = 60
@@ -37,6 +37,7 @@ var upgrades = {
 	"speed" : [],
 	"steering" : [],
 }
+
 var modifiers = {
 	"health" : 0,
 	"cargo" : 0,
@@ -44,9 +45,13 @@ var modifiers = {
 	"steering" : 0,
 }
 
+var ships_owned = ['standard']
+var current_ship = 'standard'
+
 var wanted
 
 func _ready():
+	set_ship(ships_owned[0])
 	for good in EconomyGlobals.GoodType.values():
 		inventory[good] = 0 
 	Signals.gold_changed.emit(gold)
@@ -104,3 +109,10 @@ func crew_check():
 
 func get_inventory_space():
 	return stats['inv_limit'] + modifiers['cargo'] - inv_occupied
+
+
+func set_ship(ship_name):
+	stats = ShipGlobals.ship_stats[ship_name]
+	current_ship = ship_name
+	Signals.player_ship_changed.emit()
+	

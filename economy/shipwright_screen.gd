@@ -2,28 +2,42 @@ extends Control
 
 @onready var home_screen = $"../HomeScreen"
 
-@onready var upgrade_1_buttons = [$OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer/Upgrade1Button1,
-								  $OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Upgrade1Button2,
-								  $OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Upgrade1Button3]
+@onready var upgrade_1_buttons = [$"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer/HBoxContainer/Upgrade1Button1",
+								  $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer/HBoxContainer2/Upgrade1Button2",
+								  $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer/HBoxContainer3/Upgrade1Button3"]
 
-@onready var upgrade_1_prices = [$OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer/Upgrade1Price1,
-								 $OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Upgrade1Price2,
-								 $OptionContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Upgrade1Price3]
+@onready var upgrade_1_prices = [$"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer/HBoxContainer/Upgrade1Price1",
+								 $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer/HBoxContainer2/Upgrade1Price2",
+								 $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer/HBoxContainer3/Upgrade1Price3"]
 
-@onready var upgrade_2_buttons = [$OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Upgrade2Button1,
-								  $OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Upgrade2Button2,
-								  $OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/Upgrade2Button3]
+@onready var upgrade_2_buttons = [$"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer2/HBoxContainer/Upgrade2Button1",
+								  $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer2/HBoxContainer2/Upgrade2Button2",
+								  $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer2/HBoxContainer3/Upgrade2Button3"]
 
-@onready var upgrade_2_prices = [$OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer/Upgrade2Price1,
-								 $OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Upgrade2Price2,
-								 $OptionContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/Upgrade2Price3]
+@onready var upgrade_2_prices = [$"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer2/HBoxContainer/Upgrade2Price1",
+								 $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer2/HBoxContainer2/Upgrade2Price2",
+								 $"TabContainer/Upgrade and Repair/HBoxContainer/VBoxContainer2/HBoxContainer3/Upgrade2Price3"]
 
-@onready var repair_cost_label = $OptionContainer/RepairCost
-@onready var repair_button = $OptionContainer/RepairButton
+@onready var repair_cost_label = $"TabContainer/Upgrade and Repair/RepairCost"
+@onready var repair_button = $"TabContainer/Upgrade and Repair/RepairButton"
+
+@onready var ships = $TabContainer/ScrollContainer/Ships
+
+const SHIP_LISTING = preload("res://economy/ship_listing.tscn")
+
+var ship_listings : Dictionary
 
 var upgrades_1 : Array
 var upgrades_2 : Array
 var repair_cost : int
+
+
+func _ready():
+	var ship_keys = ShipGlobals.ship_stats.keys()
+	for ship in ship_keys:
+		ship_listings[ship] = SHIP_LISTING.instantiate()
+		ships.add_child(ship_listings[ship])
+		ship_listings[ship].initialize(ship)
 
 
 func show_shipwright_screen():
