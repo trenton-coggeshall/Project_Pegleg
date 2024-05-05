@@ -35,13 +35,10 @@ func set_cannons(count):
 		return
 	
 	for i in cannon_count:
-		cannons_left[i].queue_free()
-		cannons_right[i].queue_free()
+		cannons_left[i].free()
+		cannons_right[i].free()
 	cannons_left.clear()
 	cannons_right.clear()
-	
-	#Have to wait a frame or the freed cannons will get added back to the arrays
-	await get_tree().process_frame
 	
 	cannon_count = count
 	var cannon_offset = 60.0 / cannon_count
@@ -63,7 +60,7 @@ func set_cannons(count):
 		
 		y_pos += cannon_offset
 		
-	
+	print(cannons_right_group.get_children())
 	cannons_right = cannons_right_group.get_children()
 	cannons_left = cannons_left_group.get_children()
 	
