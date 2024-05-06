@@ -15,7 +15,6 @@ extends Control
 var buttons
 
 var won = true
-var rng = RandomNumberGenerator.new()
 
 var gold = 0
 
@@ -39,8 +38,6 @@ func show_win_screen(enemyShip):
 	get_tree().paused = true
 	
 	show()
-	
-	rng.randomize()
 	
 	gold = enemyShip.gold
 	

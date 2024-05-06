@@ -2,8 +2,6 @@ extends Control
 
 @onready var map_texture = $MapTexture
 @onready var altitude_seed_text = $Seeds/AltitudeSeedText
-@onready var temp_seed_text = $Seeds/TempSeedText
-@onready var moisture_seed_text = $Seeds/MoistureSeedText
 @onready var play_button = $PlayButton
 @onready var generate_button = $GenerateButton
 @onready var world_size_options = $WorldSizeOptions
@@ -127,12 +125,13 @@ func place_ports():
 
 
 func _on_generate_button_pressed():
+	seed(int(altitude_seed_text.text))
 	generate_button.disabled = true
 	WorldGlobals.ports.clear()
 	img = Image.create(map_width, map_height, false, Image.FORMAT_RGBA8)
-	moisture.seed = int(moisture_seed_text.text)
-	temperature.seed = int(temp_seed_text.text)
 	altitude.seed = int(altitude_seed_text.text)
+	moisture.seed = randi()
+	temperature.seed = randi()
 	altitude.frequency = 0.005
 	
 	generate_map()
