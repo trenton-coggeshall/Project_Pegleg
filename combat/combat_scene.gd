@@ -32,16 +32,19 @@ func start_combat(enemy):
 	combat_player.ship_sprite.texture = Player.stats['sprite']
 	combat_player.cannon_controller.set_cannons(Player.stats['base_cannons'])
 	combat_enemy_ship.get_parent().cannon_controller.set_cannons(5)
+	combat_enemy_ship.get_parent().ship_sprite.modulate = Color(FactionGlobals.faction_colors[ai_node.faction])
 	combat_camera.make_current()
 	Signals.showReloadTimer.emit()
 
 func end_combat():
 	Player.in_combat = false
 	if combat_enemy_ship.get_parent().health <= 0:
+		FactionGlobals.reputation[ai_node.faction] -= 10
 		ai_node.destroy_ship()
 		Signals.show_end_screen_win.emit(ai_node)
 	
 	if Player.health <= 0:
+		FactionGlobals.reputation[ai_node.faction] -= 5
 		Signals.player_healed.emit(10)
 		Signals.show_end_screen_lose.emit()
 	

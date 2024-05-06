@@ -27,6 +27,7 @@ ShipGlobals="*res://ship_globals.gd"
 Player="*res://Player.gd"
 UpgradeGlobals="*res://player/upgrade_globals.gd"
 Names="*res://Names.gd"
+FactionGlobals="*res://faction_globals.gd"
 
 [display]
 

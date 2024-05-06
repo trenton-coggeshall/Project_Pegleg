@@ -9,6 +9,7 @@ extends Node2D
 @onready var detect_radius = $Actual_Ship/Detection_Radius
 @onready var node_radius = $Pathfinding_Node/Node_Radius
 @onready var collision_shape_2d = $Actual_Ship/CollisionShape2D
+@onready var ship_sprite = $Actual_Ship/Sprite2D
 
 # Status
 var anchored = false
