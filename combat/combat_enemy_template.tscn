@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c8ontq3hxop3j"]
 
 [ext_resource type="Script" path="res://combat/combat_enemy_template.gd" id="1_orlu5"]
-[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="2_b3k5j"]
+[ext_resource type="Texture2D" uid="uid://ds4ca0rsev4uy" path="res://ai_ship.png" id="2_3wtjd"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="3_nbjmj"]
 [ext_resource type="PackedScene" uid="uid://coa286iw0bqab" path="res://combat/cannon_controller.tscn" id="5_c2erk"]
 [ext_resource type="Texture2D" uid="uid://6kq13j2y4s6d" path="res://Assets/Images/Progress Bars/healthprog2.png" id="5_urjie"]
@@ -27,7 +27,7 @@ rotation = -1.5708
 [node name="Sprite2D" type="Sprite2D" parent="Actual_Ship"]
 modulate = Color(1, 0.356863, 0.352941, 1)
 scale = Vector2(5, 5)
-texture = ExtResource("2_b3k5j")
+texture = ExtResource("2_3wtjd")
 
 [node name="Anchor" type="Sprite2D" parent="Actual_Ship/Sprite2D"]
 visible = false

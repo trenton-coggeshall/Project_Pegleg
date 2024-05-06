@@ -121,7 +121,33 @@ offset_top = 120.0
 offset_right = 576.0
 offset_bottom = 143.0
 grow_horizontal = 2
-text = "Tavern"
+text = "Governor"
+
+[node name="ForgiveText" type="Label" parent="GovernorScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 520.0
+offset_top = 175.0
+offset_right = 593.0
+offset_bottom = 198.0
+grow_horizontal = 2
+text = "You scoundrel! I will consider forgiving you... for a price."
+horizontal_alignment = 1
+
+[node name="CostText" type="Label" parent="GovernorScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 342.0
+offset_top = 308.0
+offset_right = 772.0
+offset_bottom = 331.0
+grow_horizontal = 2
+text = "1000g"
+horizontal_alignment = 1
 
 [node name="OptionContainer" type="VBoxContainer" parent="GovernorScreen"]
 layout_mode = 1
@@ -130,12 +156,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 529.5
-offset_top = 271.0
-offset_right = 582.5
-offset_bottom = 337.0
+offset_left = 496.0
+offset_top = 316.0
+offset_right = 616.0
+offset_bottom = 382.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ReputationButton" type="Button" parent="GovernorScreen/OptionContainer"]
+layout_mode = 2
+text = "Fix Reputation"
 
 [node name="BackButton" type="Button" parent="GovernorScreen/OptionContainer"]
 layout_mode = 2
@@ -511,6 +541,7 @@ text = "Back"
 [connection signal="pressed" from="HomeScreen/OptionContainer/TradeButton" to="." method="_on_trade_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/ShipwrightButton" to="." method="_on_shipwright_button_pressed"]
 [connection signal="pressed" from="HomeScreen/OptionContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="GovernorScreen/OptionContainer/ReputationButton" to="GovernorScreen" method="_on_reputation_button_pressed"]
 [connection signal="pressed" from="GovernorScreen/OptionContainer/BackButton" to="GovernorScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="TavernScreen/OptionContainer/HireButton" to="TavernScreen" method="_on_hire_button_pressed"]
 [connection signal="pressed" from="TavernScreen/OptionContainer/BackButton" to="TavernScreen" method="_on_back_button_pressed"]

@@ -3,6 +3,7 @@ extends Node2D
 @onready var combat_scene = get_parent()
 @onready var combat_player = $"../CombatPlayer"
 @onready var actual_ship = $Actual_Ship
+@onready var ship_sprite = $Actual_Ship/Sprite2D
 
 @onready var cannon_controller = $Actual_Ship/CannonController
 @onready var healthBar = $HealthBar

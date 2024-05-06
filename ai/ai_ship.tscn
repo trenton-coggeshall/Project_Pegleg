@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dw1v2xxh1xb4f"]
 
-[ext_resource type="Texture2D" uid="uid://dprxj3gm6ao68" path="res://ship.png" id="1_h6fvy"]
 [ext_resource type="Script" path="res://ai/ai_ship.gd" id="1_t4vct"]
+[ext_resource type="Texture2D" uid="uid://ds4ca0rsev4uy" path="res://ai_ship.png" id="2_akuao"]
 [ext_resource type="Texture2D" uid="uid://dwrj41hho13h" path="res://Assets/Images/anchor.png" id="2_ojbtm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40ts"]
@@ -27,7 +27,7 @@ collision_mask = 4
 modulate = Color(1, 0.356863, 0.352941, 1)
 rotation = 1.5708
 scale = Vector2(5, 5)
-texture = ExtResource("1_h6fvy")
+texture = ExtResource("2_akuao")
 
 [node name="Anchor" type="Sprite2D" parent="Actual_Ship/Sprite2D"]
 visible = false

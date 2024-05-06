@@ -97,18 +97,19 @@ func get_faction():
 
 func set_faction(value):
 	faction = value;
-
+	$Port_Flag.modulate = Color(FactionGlobals.faction_colors[value])
 
 func spawn_merchant():
 	var merchant = MERCHANT_AI.instantiate()
 	shipNames.remove_at(0)
 	get_parent().get_parent().add_child(merchant)
-	merchant.ai_ship.name = str(shipNames[0])	
+	merchant.ai_ship.name = str(shipNames[0])
 	merchant.global_position = global_position
 	merchant.home_port = self
 	merchant.ai_ship.current_port = self
 	merchant.ai_ship.path = random_path()
-	merchant.ai_ship.faction = self.faction
+	merchant.ai_ship.faction = faction
+	merchant.ai_ship.ship_sprite.modulate = Color(FactionGlobals.faction_colors[faction])
 	merchant_ship = merchant
 
 

@@ -7,12 +7,6 @@ const PORT = preload("res://world_generation/port.tscn")
 @onready var border_tiles = $border_tiles
 
 @onready var portNames:Array = Names.port_names
-var factions = ["Crimson Corsairs", "Emerald Enclave", "Sapphire Navigators"]
-var factionColors = {
-	"Crimson Corsairs" = "#d82452",
-	"Emerald Enclave" = "#2fb26e",
-	"Sapphire Navigators" = "#547ee7"
-}
 
 var ports : Dictionary
 
@@ -83,9 +77,8 @@ func initialize():
 		var closest_ports = []
 		
 		# Choose and assign a random faction from the faction list
-		var thisFaction = factions[randi_range(0, factions.size()-1)]
+		var thisFaction = FactionGlobals.factions[randi_range(0, FactionGlobals.factions.size()-1)]
 		port.set_faction(thisFaction)
-		port.get_node("Port_Flag").modulate = Color(factionColors[thisFaction])
 		#print("Faction: " + str(port.get_faction()))
 		
 		for subport in ports.values():
@@ -107,7 +100,6 @@ func initialize():
 		
 		for i in range (closest_ports.size()):
 			closest_ports[i][0].set_faction(thisFaction)
-			closest_ports[i][0].get_node("Port_Flag").modulate = Color(factionColors[thisFaction])
 		"""
 		print("Closest ports: ")
 		for i in range(closest_ports.size()):

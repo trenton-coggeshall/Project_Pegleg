@@ -60,7 +60,6 @@ func set_cannons(count):
 		
 		y_pos += cannon_offset
 		
-	print(cannons_right_group.get_children())
 	cannons_right = cannons_right_group.get_children()
 	cannons_left = cannons_left_group.get_children()
 	
