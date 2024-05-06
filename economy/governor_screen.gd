@@ -18,8 +18,7 @@ func show_governor_screen():
 		forgive_text.text = 'You scoundrel! I will forgive you... For a price.'
 		forgive_cost = abs(FactionGlobals.reputation[Player.current_port.faction]) * 50
 		cost_text.text = str(forgive_cost) + 'g'
-		if Player.gold >= forgive_cost:
-			reputation_button.disabled = false
+		reputation_button.disabled = Player.gold < forgive_cost
 	else:
 		forgive_text.text = 'How can I help you?'
 		cost_text.text = ''
@@ -36,3 +35,6 @@ func _on_reputation_button_pressed():
 	reputation_button.disabled = true
 	Player.remove_gold(forgive_cost)
 	Player.current_port.gold += forgive_cost
+	cost_text.text = ''
+	forgive_text.text = 'Be careful. I may not be so forgiving next time!'
+	FactionGlobals.reputation[Player.current_port.faction] = 0
