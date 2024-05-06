@@ -12,5 +12,5 @@ var faction_colors = {
 var reputation = {
 	"Crimson Corsairs" : 0,
 	"Emerald Enclave" : 0,
-	"Sapphire Navigators" : -10
+	"Sapphire Navigators" : 0
 }
