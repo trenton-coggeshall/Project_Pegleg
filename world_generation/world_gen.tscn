@@ -20,9 +20,8 @@ anchor_bottom = 0.214506
 text = "Generate World"
 metadata/_edit_use_anchors_ = true
 
-[node name="Seeds" type="Node" parent="."]
-
-[node name="AltitudeLabel" type="Label" parent="Seeds"]
+[node name="AltitudeLabel" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.318576
 anchor_top = 0.570988
@@ -32,7 +31,8 @@ text = "Seed"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="AltitudeSeedText" type="TextEdit" parent="Seeds"]
+[node name="AltitudeSeedText" type="TextEdit" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.431424
 anchor_top = 0.560185
@@ -40,61 +40,72 @@ anchor_right = 0.578993
 anchor_bottom = 0.617284
 metadata/_edit_use_anchors_ = true
 
-[node name="GenerateButton" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.457465
-anchor_top = 0.78858
-anchor_right = 0.53125
-anchor_bottom = 0.83642
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -198.0
+offset_right = 43.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonContainer"]
+layout_mode = 2
+
+[node name="GenerateButton" type="Button" parent="ButtonContainer/VBoxContainer"]
+layout_mode = 2
 focus_mode = 0
 text = "Generate!"
 metadata/_edit_use_anchors_ = true
 
-[node name="PlayButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.457465
-anchor_top = 0.850309
-anchor_right = 0.53125
-anchor_bottom = 0.898149
+[node name="PlayButton" type="Button" parent="ButtonContainer/VBoxContainer"]
+layout_mode = 2
 focus_mode = 0
 disabled = true
 text = "Play!"
 metadata/_edit_use_anchors_ = true
 
-[node name="MapTexture" type="TextureRect" parent="."]
-layout_mode = 0
-anchor_left = 0.356771
-anchor_top = 0.237654
-anchor_right = 0.643229
-anchor_bottom = 0.512346
-expand_mode = 1
-stretch_mode = 4
-flip_v = true
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 2
+anchor_top = 0.0803571
+anchor_bottom = 0.0803571
+offset_left = 854.0
+offset_top = 845.0
+offset_right = 939.0
+offset_bottom = 876.0
+focus_mode = 0
+text = "Back"
 metadata/_edit_use_anchors_ = true
 
-[node name="WorldSizeLabel" type="Label" parent="."]
+[node name="OptionsContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.269965
-anchor_top = 0.794753
-anchor_right = 0.376736
-anchor_bottom = 0.830247
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -362.0
+offset_right = 97.0
+offset_bottom = -331.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="WorldSize" type="HBoxContainer" parent="OptionsContainer"]
+layout_mode = 2
+
+[node name="WorldSizeLabel" type="Label" parent="OptionsContainer/WorldSize"]
+layout_mode = 2
 text = "World Size"
 metadata/_edit_use_anchors_ = true
 
-[node name="WorldSizeOptions" type="OptionButton" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.391059
-anchor_top = 0.839506
-anchor_right = 0.391059
-anchor_bottom = 0.839506
-offset_left = -54.5
-offset_top = -31.0
-offset_right = 54.5
-grow_horizontal = 2
-grow_vertical = 0
+[node name="WorldSizeOptions" type="OptionButton" parent="OptionsContainer/WorldSize"]
+layout_mode = 2
 focus_mode = 0
 item_count = 4
 selected = 0
@@ -108,6 +119,29 @@ popup/item_3/text = "Large"
 popup/item_3/id = 3
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="GenerateButton" to="." method="_on_generate_button_pressed"]
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="item_selected" from="WorldSizeOptions" to="." method="_on_world_size_options_item_selected"]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -144.0
+offset_right = 20.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MapTexture" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+flip_v = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ButtonContainer/VBoxContainer/GenerateButton" to="." method="_on_generate_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="item_selected" from="OptionsContainer/WorldSize/WorldSizeOptions" to="." method="_on_world_size_options_item_selected"]

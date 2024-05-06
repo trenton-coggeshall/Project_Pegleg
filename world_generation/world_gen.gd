@@ -1,10 +1,11 @@
 extends Control
 
-@onready var map_texture = $MapTexture
-@onready var altitude_seed_text = $Seeds/AltitudeSeedText
-@onready var play_button = $PlayButton
-@onready var generate_button = $GenerateButton
-@onready var world_size_options = $WorldSizeOptions
+@onready var map_texture = $CenterContainer/MapTexture
+@onready var altitude_seed_text = $AltitudeSeedText
+@onready var play_button = $ButtonContainer/VBoxContainer/PlayButton
+@onready var generate_button = $ButtonContainer/VBoxContainer/GenerateButton
+@onready var world_size_options = $OptionsContainer/WorldSize/WorldSizeOptions
+@onready var home_screen = $"../HomeScreen"
 
 const ChunkData = preload("res://world_generation/chunk_data.gd")
 
@@ -165,3 +166,8 @@ func _on_world_size_options_item_selected(index):
 	
 	WorldGlobals.map_width = map_width
 	WorldGlobals.map_height = map_height
+
+
+func _on_back_button_pressed():
+	hide()
+	home_screen.show()
