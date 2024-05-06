@@ -28,28 +28,7 @@ anchor_left = 0.318576
 anchor_top = 0.570988
 anchor_right = 0.425347
 anchor_bottom = 0.606481
-text = "Altitude Seed"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="TempLabel" type="Label" parent="Seeds"]
-anchors_preset = -1
-anchor_left = 0.318576
-anchor_top = 0.640432
-anchor_right = 0.425347
-anchor_bottom = 0.675926
-text = "Temp Seed"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="MoistureLabel" type="Label" parent="Seeds"]
-anchors_preset = -1
-anchor_left = 0.318576
-anchor_top = 0.70679
-anchor_right = 0.425347
-anchor_bottom = 0.742284
-offset_top = -3.05176e-05
-text = "Moisture Seed"
+text = "Seed"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -59,24 +38,6 @@ anchor_left = 0.431424
 anchor_top = 0.560185
 anchor_right = 0.578993
 anchor_bottom = 0.617284
-metadata/_edit_use_anchors_ = true
-
-[node name="TempSeedText" type="TextEdit" parent="Seeds"]
-anchors_preset = -1
-anchor_left = 0.431424
-anchor_top = 0.628086
-anchor_right = 0.578993
-anchor_bottom = 0.685185
-offset_top = -3.05176e-05
-metadata/_edit_use_anchors_ = true
-
-[node name="MoistureSeedText" type="TextEdit" parent="Seeds"]
-anchors_preset = -1
-anchor_left = 0.431424
-anchor_top = 0.695988
-anchor_right = 0.578993
-anchor_bottom = 0.753086
-offset_bottom = -3.05176e-05
 metadata/_edit_use_anchors_ = true
 
 [node name="GenerateButton" type="Button" parent="."]
@@ -99,16 +60,6 @@ anchor_bottom = 0.898149
 focus_mode = 0
 disabled = true
 text = "Play!"
-metadata/_edit_use_anchors_ = true
-
-[node name="TestWorldButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.457465
-anchor_top = 0.939815
-anchor_right = 0.536458
-anchor_bottom = 0.987655
-text = "Test World"
 metadata/_edit_use_anchors_ = true
 
 [node name="MapTexture" type="TextureRect" parent="."]
@@ -159,5 +110,4 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="GenerateButton" to="." method="_on_generate_button_pressed"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="TestWorldButton" to="." method="_on_test_world_button_pressed"]
 [connection signal="item_selected" from="WorldSizeOptions" to="." method="_on_world_size_options_item_selected"]

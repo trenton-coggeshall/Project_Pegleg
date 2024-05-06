@@ -57,8 +57,8 @@ func initialize():
 		var port = PORT.instantiate()
 		port.position = loc * 16
 		
-		var rng = RandomNumberGenerator.new()
-		var rand = rng.randi_range(0, portNames.size()-1)
+
+		var rand = randi_range(0, portNames.size()-1)
 		port.name = portNames[rand]
 		portNames.remove_at(rand)
 		ports[port.name] = port
@@ -83,7 +83,7 @@ func initialize():
 		var closest_ports = []
 		
 		# Choose and assign a random faction from the faction list
-		var thisFaction = factions[RandomNumberGenerator.new().randi_range(0, factions.size()-1)]
+		var thisFaction = factions[randi_range(0, factions.size()-1)]
 		port.set_faction(thisFaction)
 		port.get_node("Port_Flag").modulate = Color(factionColors[thisFaction])
 		#print("Faction: " + str(port.get_faction()))
