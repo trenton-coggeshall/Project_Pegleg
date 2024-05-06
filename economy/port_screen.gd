@@ -52,7 +52,7 @@ func _on_tavern_button_pressed():
 
 
 func _on_governor_button_pressed():
-	governor_screen.show()
+	governor_screen.show_governor_screen()
 	home_screen.hide()
 
 
