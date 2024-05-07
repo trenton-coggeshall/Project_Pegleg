@@ -106,6 +106,7 @@ func initialize():
 		
 		if len(closest_ports) > 0:
 			port.spawn_military()
+			port.spawns_military = true
 			
 	
 	for port in ports.values():

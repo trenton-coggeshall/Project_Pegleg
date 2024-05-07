@@ -34,9 +34,10 @@ var merchant_respawn_delay = 120
 var merchant_respawn_timer = 0.0
 
 var sister_ports = []
-var sistest = []
 var spawns_military = false
 var military_ship
+var military_respawn_delay = 120
+var military_respawn_timer = 0.0
 
 
 func _ready():
@@ -94,6 +95,12 @@ func handle_ships(delta):
 		if merchant_respawn_timer >= merchant_respawn_delay:
 			spawn_merchant()
 			merchant_respawn_timer = 0
+	
+	if spawns_military and not military_ship:
+		military_respawn_timer += delta
+		if military_respawn_timer >= military_respawn_delay:
+			spawn_military()
+			military_respawn_timer = 0
 
 
 func get_faction():
