@@ -33,6 +33,10 @@ var merchant_ship
 var merchant_respawn_delay = 120
 var merchant_respawn_timer = 0.0
 
+var sister_ports = []
+var spawns_military = false
+var military_ship
+
 
 func _ready():
 	EconomyGlobals.port_prices[name] = prices
@@ -101,9 +105,9 @@ func set_faction(value):
 
 func spawn_merchant():
 	var merchant = MERCHANT_AI.instantiate()
-	shipNames.remove_at(0)
 	get_parent().get_parent().add_child(merchant)
 	merchant.ai_ship.name = str(shipNames[0])
+	shipNames.remove_at(0)
 	merchant.global_position = global_position
 	merchant.home_port = self
 	merchant.ai_ship.current_port = self
@@ -111,6 +115,23 @@ func spawn_merchant():
 	merchant.ai_ship.faction = faction
 	merchant.ai_ship.ship_sprite.modulate = Color(FactionGlobals.faction_colors[faction])
 	merchant_ship = merchant
+
+
+func spawn_military():
+	var military = MILITARY_AI.instantiate()
+	get_parent().get_parent().add_child(military)
+	military.ai_ship.name = str(shipNames[0])
+	shipNames.remove_at(0)
+	military.global_position = global_position
+	military.ports.append_array(sister_ports)
+	military.ports.append(name)
+	military.ai_ship.current_port = self
+	military.ai_ship.path = paths[military.ports[0]]
+	military.ai_ship.faction = faction
+	military.ai_ship.ship_sprite.modulate = Color(FactionGlobals.faction_colors[faction])
+	
+	military_ship = military
+	
 
 
 # Returns the price of a good at a certain quantity

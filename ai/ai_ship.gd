@@ -29,7 +29,7 @@ var inv_occupied = 0
 
 var faction
 
-var destination
+var destination = null
 @export var path : Array
 var path_index = 0
 
@@ -74,7 +74,8 @@ func destroy_ship():
 
 
 func _on_detection_radius_body_entered(body):
-	if body.is_in_group("Player") and len(path) > 0:
+	if body.is_in_group("Player") and FactionGlobals.reputation[faction] < 0 and len(path) > 0 and destination == null:
+		print("I'm gonna get you")
 		destination = path[-1]
 		target = body
 
@@ -82,6 +83,7 @@ func _on_detection_radius_body_exited(body):
 	if body.is_in_group("Player") and destination:
 		target = null
 		path = path_finder.find_path(pathnode.global_position, destination)
+		destination = null
 		path_index = 0
 
 

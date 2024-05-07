@@ -49,7 +49,6 @@ var modifiers = {
 var ships_owned = ['standard']
 var current_ship = 'standard'
 
-var wanted
 
 func _ready():
 	set_ship(ships_owned[0])

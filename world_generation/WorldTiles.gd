@@ -67,7 +67,9 @@ func initialize():
 		add_child(port)
 		
 	portNames.clear()
-
+	
+	find_port_routes()
+	
 	# Choose a port, assign a faction to it and its X closest neighbors
 	for port in ports.values():
 		if port.get_faction() != "none": continue
@@ -91,6 +93,7 @@ func initialize():
 			
 			if closest_ports.size() < closest_num:
 				closest_ports.append([subport, distance])
+				port.sister_ports.append(subport.name)
 				continue
 			for i in range(closest_ports.size()):
 				var p = closest_ports[i]
@@ -100,13 +103,10 @@ func initialize():
 		
 		for i in range (closest_ports.size()):
 			closest_ports[i][0].set_faction(thisFaction)
-		"""
-		print("Closest ports: ")
-		for i in range(closest_ports.size()):
-			print(closest_ports[i][0].name + " - " + str(closest_ports[i][1]) + " - " + closest_ports[i][0].get_faction())
-		"""
-	
-	find_port_routes()
+		
+		if len(closest_ports) > 0:
+			port.spawn_military()
+			
 	
 	for port in ports.values():
 		port.spawn_merchant()
