@@ -108,8 +108,8 @@ func initialize():
 			port.spawn_military()
 			
 	
-	#for port in ports.values():
-		#port.spawn_merchant()
+	for port in ports.values():
+		port.spawn_merchant()
 	
 	#ports[0].spawn_ship()
 
