@@ -11,7 +11,7 @@ var target = null
 var next_port
 
 func _ready():
-	pass
+	ai_ship.stats = ShipGlobals.ship_stats['military']
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

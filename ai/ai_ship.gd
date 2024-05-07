@@ -33,6 +33,8 @@ var destination = null
 @export var path : Array
 var path_index = 0
 
+var stats = {}
+
 func _ready():
 	for good in EconomyGlobals.GoodType.values():
 		inventory[good] = 0 
