@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ai/military_ai.gd" id="1_div0h"]
 [ext_resource type="PackedScene" uid="uid://dw1v2xxh1xb4f" path="res://ai/ai_ship.tscn" id="2_h83f0"]
-[ext_resource type="Texture2D" uid="uid://bvotrrgrp1n87" path="res://Assets/Images/military_ship_desat.png" id="3_oy5uw"]
+[ext_resource type="Texture2D" uid="uid://bvotrrgrp1n87" path="res://Assets/Images/military_ship_desat.png" id="3_fcjt2"]
 
 [node name="MilitaryAI" type="Node2D"]
 script = ExtResource("1_div0h")
@@ -10,6 +10,12 @@ script = ExtResource("1_div0h")
 [node name="AI_Ship" parent="." instance=ExtResource("2_h83f0")]
 
 [node name="Sprite2D" parent="AI_Ship/Actual_Ship" index="0"]
-texture = ExtResource("3_oy5uw")
+texture = ExtResource("3_fcjt2")
+
+[node name="CollisionShape2D" parent="AI_Ship/Actual_Ship/Detection_Radius" index="0"]
+scale = Vector2(60, 60)
+
+[connection signal="body_entered" from="AI_Ship/Actual_Ship/Detection_Radius" to="." method="_on_detection_radius_body_entered"]
+[connection signal="body_exited" from="AI_Ship/Actual_Ship/Detection_Radius" to="." method="_on_detection_radius_body_exited"]
 
 [editable path="AI_Ship"]

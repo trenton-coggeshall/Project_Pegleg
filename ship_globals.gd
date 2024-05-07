@@ -3,6 +3,10 @@ extends Node
 const SHIP_IMAGE = preload("res://ship.png")
 const MILITARY_SHIP_IMAGE = preload("res://Assets/Images/military_ship.png")
 
+const AI_SHIP_IMAGE = preload("res://ai_ship.png")
+const AI_MILITARY_SHIP_IMAGE = preload("res://Assets/Images/military_ship_desat.png")
+
+
 var ship_stats = {
 	'standard' : {
 		'max_speed': 35000,
@@ -16,6 +20,7 @@ var ship_stats = {
 		'crew_max' : 80,
 		'crew_optimal' : 60,
 		'sprite' : SHIP_IMAGE,
+		'ai_sprite' : AI_SHIP_IMAGE,
 		'price' : 0,
 		'name' : 'Standard'
 	},
@@ -31,6 +36,7 @@ var ship_stats = {
 		'crew_max' : 100,
 		'crew_optimal' : 80,
 		'sprite' : MILITARY_SHIP_IMAGE,
+		'ai_sprite' : AI_MILITARY_SHIP_IMAGE,
 		'price' : 3000,
 		'name' : 'Military'
 	},

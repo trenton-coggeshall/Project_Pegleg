@@ -21,7 +21,6 @@ func _ready():
 	
 	player_ship.position = tiles.map_to_local(WorldGlobals.ports[0])
 	avg = EconomyGlobals.average_prices()
-
 	
 	#for i in range(len(WorldGlobals.ports)):
 		#var ai_ship = AI_SHIP.instantiate()

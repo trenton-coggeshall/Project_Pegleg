@@ -14,11 +14,13 @@ var max_gold = 1500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	ai_ship.stats = ShipGlobals.ship_stats['standard']
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if Player.in_combat: return
+	
 	handle_destination()
 
 
