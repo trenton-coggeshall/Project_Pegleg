@@ -26,7 +26,7 @@ func _process(_delta):
 	if target: # Player in detection radius AND is hostile
 		ai_ship.path = ai_ship.path_finder.find_path(ai_ship.pathnode.global_position, target.global_position)
 		
-		if ai_ship.actual_ship.global_position.distance_to(target.global_position) < 50:
+		if ai_ship.actual_ship.global_position.distance_to(target.global_position) < 125:
 			combat_scene.start_combat(ai_ship)
 		
 	elif len(ai_ship.path) == 0 and ai_ship.current_port != null:

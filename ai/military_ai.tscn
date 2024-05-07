@@ -12,6 +12,9 @@ script = ExtResource("1_div0h")
 [node name="Sprite2D" parent="AI_Ship/Actual_Ship" index="0"]
 texture = ExtResource("3_fcjt2")
 
+[node name="CollisionShape2D" parent="AI_Ship/Actual_Ship/Detection_Radius" index="0"]
+scale = Vector2(60, 60)
+
 [connection signal="body_entered" from="AI_Ship/Actual_Ship/Detection_Radius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="AI_Ship/Actual_Ship/Detection_Radius" to="." method="_on_detection_radius_body_exited"]
 
