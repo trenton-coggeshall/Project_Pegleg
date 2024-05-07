@@ -93,7 +93,6 @@ func initialize():
 			
 			if closest_ports.size() < closest_num:
 				closest_ports.append([subport, distance])
-				port.sister_ports.append(subport.name)
 				continue
 			for i in range(closest_ports.size()):
 				var p = closest_ports[i]
@@ -103,13 +102,14 @@ func initialize():
 		
 		for i in range (closest_ports.size()):
 			closest_ports[i][0].set_faction(thisFaction)
+			port.sister_ports.append(closest_ports[i][0].name)
 		
 		if len(closest_ports) > 0:
 			port.spawn_military()
 			
 	
-	for port in ports.values():
-		port.spawn_merchant()
+	#for port in ports.values():
+		#port.spawn_merchant()
 	
 	#ports[0].spawn_ship()
 

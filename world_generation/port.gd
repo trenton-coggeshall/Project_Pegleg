@@ -34,6 +34,7 @@ var merchant_respawn_delay = 120
 var merchant_respawn_timer = 0.0
 
 var sister_ports = []
+var sistest = []
 var spawns_military = false
 var military_ship
 
@@ -118,6 +119,9 @@ func spawn_merchant():
 
 
 func spawn_military():
+	#print("My faction: " + faction + '\n' + "Sister factions: " + '\n' + str(sistest[0]) + ' ' + str(sistest[1]) + ' ' + str(sistest[2]))
+	
+	
 	var military = MILITARY_AI.instantiate()
 	get_parent().get_parent().add_child(military)
 	military.ai_ship.name = str(shipNames[0])
