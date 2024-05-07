@@ -131,6 +131,7 @@ func spawn_military():
 	military.ports.append(name)
 	military.ai_ship.current_port = self
 	military.ai_ship.path = paths[military.ports[0]]
+	military.next_port = military.ai_ship.path[-1]
 	military.ai_ship.faction = faction
 	military.ai_ship.ship_sprite.modulate = Color(FactionGlobals.faction_colors[faction])
 	

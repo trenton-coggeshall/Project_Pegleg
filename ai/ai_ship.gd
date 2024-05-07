@@ -73,20 +73,6 @@ func destroy_ship():
 	get_parent().queue_free()
 
 
-func _on_detection_radius_body_entered(body):
-	if body.is_in_group("Player") and FactionGlobals.reputation[faction] < 0 and len(path) > 0 and destination == null:
-		print("I'm gonna get you")
-		destination = path[-1]
-		target = body
-
-func _on_detection_radius_body_exited(body):
-	if body.is_in_group("Player") and destination:
-		target = null
-		path = path_finder.find_path(pathnode.global_position, destination)
-		destination = null
-		path_index = 0
-
-
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	collision_shape_2d.disabled = false
 
