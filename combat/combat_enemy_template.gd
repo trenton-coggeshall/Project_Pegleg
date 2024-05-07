@@ -13,11 +13,8 @@ extends Node2D
 #@onready var cannonRight = $Actual_Ship/Cannons/cannonRight
 #@onready var cannonLeft = $Actual_Ship/Cannons/cannonLeft
 
+const combat_speed = 0.5
 var ship_range = 600
-var max_speed = 17500
-var acceleration = 5000
-var steer_speed = 3
-var max_health = 50
 var health = 50
 
 var current_speed = 0
@@ -30,13 +27,11 @@ var side
 
 var target_dir
 
+var stats = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	cannon_controller.target = combat_player
-	healthBar.max_value = max_health
-	damageBar.max_value = max_health
-	
-	tween_health()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,9 +46,9 @@ func _physics_process(delta):
 
 
 func handle_sailing(delta):
-	current_speed += acceleration * delta
-	if current_speed > max_speed:
-		current_speed = max_speed
+	current_speed += stats['acceleration'] * combat_speed * delta
+	if current_speed > stats['max_speed'] * combat_speed:
+		current_speed = stats['max_speed'] * combat_speed
 	
 	if actual_ship.global_position.distance_to(combat_player.global_position) > ship_range:
 		target_dir = actual_ship.global_position.direction_to(combat_player.global_position)
@@ -69,7 +64,7 @@ func handle_sailing(delta):
 	else:
 		steer_dir = -1
 	
-	var turn_delta = steer_dir * steer_speed * delta
+	var turn_delta = steer_dir * stats['turn_speed'] * delta
 	actual_ship.rotate(turn_delta)
 	actual_ship.velocity = -actual_ship.transform.y * current_speed * delta
 
@@ -107,5 +102,14 @@ func take_damage(damage):
 		tween_health()
 		if health == 0:
 			Signals.end_combat.emit()
-			health = max_health
-			tween_health()
+
+
+func set_stats(stat):
+	stats = stat
+	ship_sprite.texture = stats['ai_sprite']
+	healthBar.max_value = stats['base_health']
+	damageBar.max_value = stats['base_health']
+	damageBar.value = stats['base_health']
+	health = stats['base_health']
+	tween_health()
+	cannon_controller.set_cannons(stats['base_cannons'])

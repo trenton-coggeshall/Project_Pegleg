@@ -31,8 +31,7 @@ func start_combat(enemy):
 	ai_node = enemy
 	combat_player.ship_sprite.texture = Player.stats['sprite']
 	combat_player.cannon_controller.set_cannons(Player.stats['base_cannons'])
-	combat_enemy_ship.get_parent().cannon_controller.set_cannons(5)
-	combat_enemy_ship.get_parent().ship_sprite.texture = enemy.stats['ai_sprite']
+	combat_enemy_ship.get_parent().set_stats(enemy.stats)
 	combat_enemy_ship.get_parent().ship_sprite.modulate = Color(FactionGlobals.faction_colors[ai_node.faction])
 	combat_camera.make_current()
 	Signals.showReloadTimer.emit()

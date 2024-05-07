@@ -16,6 +16,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if Player.in_combat: return
+	
 	var bodies = detection_radius.get_overlapping_bodies()
 	target = null
 	for body in bodies:
