@@ -35,7 +35,6 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.name == "Actual_Ship":
 		body.get_parent().take_damage(damage)
-		print("Enemy hit. Damage: " + str(damage) + ". New health: " + str(body.get_parent().health))
 	elif body.name == "CombatPlayer":
 		Signals.player_damaged.emit(damage, randi_range(0, crew_damage))
 	queue_free()
