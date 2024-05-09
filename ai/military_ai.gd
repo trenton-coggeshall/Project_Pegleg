@@ -21,7 +21,7 @@ func _process(_delta):
 	var bodies = detection_radius.get_overlapping_bodies()
 	target = null
 	for body in bodies:
-		if body.is_in_group("Player") and FactionGlobals.reputation[ai_ship.faction] < 0:
+		if body.is_in_group("Player") and FactionGlobals.reputation[ai_ship.faction] < -20:
 			target = body
 			break
 	
