@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://cuxwd0df8q1fx"]
 
-[ext_resource type="Script" path="res://Player/playerui.gd" id="1_imq6e"]
+[ext_resource type="Script" path="res://player/playerui.gd" id="1_imq6e"]
 [ext_resource type="Texture2D" uid="uid://d1tkv0ct4q5cq" path="res://Assets/Images/testsprites.png" id="2_pmj14"]
 [ext_resource type="Texture2D" uid="uid://bcc4tti4kgnnd" path="res://Assets/Images/Icons/coin.png" id="3_3ubaa"]
 [ext_resource type="FontFile" uid="uid://cwmq4inr7mebx" path="res://Assets/Fonts/rainyhearts.ttf" id="3_ajvr5"]
