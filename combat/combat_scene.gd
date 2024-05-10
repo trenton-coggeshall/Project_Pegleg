@@ -35,6 +35,8 @@ func start_combat(enemy):
 	combat_enemy_ship.get_parent().ship_sprite.modulate = Color(FactionGlobals.faction_colors[ai_node.faction])
 	combat_camera.make_current()
 	Signals.showReloadTimer.emit()
+	DiscordSDK.details = ("In a naval duel with the " + enemy.name)
+	DiscordSDK.refresh()
 
 func end_combat():
 	Player.in_combat = false
@@ -52,3 +54,5 @@ func end_combat():
 	$CombatPlayer.position = player_start
 	$CombatEnemyTemplate/Actual_Ship.position = ai_start_ship
 	Signals.hideReloadTimer.emit()
+	DiscordSDK.details = ("Sailing the high seas")
+	DiscordSDK.refresh()
