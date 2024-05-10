@@ -47,6 +47,7 @@ func end_combat():
 		FactionGlobals.reputation[ai_node.faction] -= 5
 		Signals.player_healed.emit(10)
 		Signals.show_end_screen_lose.emit()
+		Signals.player_died.emit()
 	
 	normal_camera.make_current()
 	$CombatPlayer.position = player_start

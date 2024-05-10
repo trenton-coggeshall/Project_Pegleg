@@ -33,6 +33,7 @@ var current_port = null
 func _ready():
 	Signals.show_ui.emit()
 	Signals.player_ship_changed.connect(ship_changed)
+	Signals.player_died.connect(player_died)
 
 
 func _physics_process(delta):
@@ -104,6 +105,10 @@ func set_near_port(is_near, port):
 
 func ship_changed():
 	ship_sprite.texture = Player.stats['sprite']
+
+
+func player_died():
+	position = WorldGlobals.ports[randi() % len(WorldGlobals.ports)] * 16
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru18s"]
