@@ -27,8 +27,8 @@ var stats = {
 	'base_health' : 0,
 	'inv_limit' : 0,
 	'base_cannons' : 0,
-	'crew_max' : 0,
-	'crew_optimal' : 0,
+	'crew_max' : 80,
+	'crew_optimal' : 60,
 	'sprite' : null
 	}
 
@@ -118,4 +118,5 @@ func set_ship(ship_name):
 	Signals.player_update_max_health.emit()
 	Signals.player_healed.emit(max_health)	
 	Signals.player_ship_changed.emit()
+	Signals.player_update_max_crew.emit()
 	

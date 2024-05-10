@@ -47,6 +47,7 @@ func _on_back_button_pressed():
 func _on_hire_button_pressed():
 	var count = crew_slider.value
 	Player.add_crew(count)
+	Signals.player_crew_gained.emit()
 	Player.remove_gold(count * cost)
 	crew_count -= count
 	Player.current_port.hireable_crew -= count

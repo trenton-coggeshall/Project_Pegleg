@@ -6,6 +6,9 @@ extends Control
 
 @export var healthBar:TextureProgressBar
 @export var damageBar:TextureProgressBar
+@export var crewBar:TextureProgressBar
+@export var crewDamageBar:TextureProgressBar
+@export var crewOptimalPip:TextureRect
 
 @export var settingsButton:Button
 @export var settingsWindow:Panel
@@ -32,6 +35,9 @@ func _ready():
 	Signals.player_healed.connect(player_healed)
 	Signals.player_full_healed.connect(player_full_healed)
 	Signals.player_update_max_health.connect(player_update_max_health)
+	
+	Signals.player_crew_gained.connect(tween_crew)
+	Signals.player_update_max_crew.connect(player_update_max_crew)
 	
 	settingsWindow.get_node("CloseButton").pressed.connect(_on_settings_button_pressed)
 	settingsWindow.get_node("QuitButton").pressed.connect(quit_game)
@@ -69,6 +75,7 @@ func player_damaged(value, crew_damage):
 			Signals.end_combat.emit()
 	
 	tween_health()
+	tween_crew()
 
 func player_healed(value):
 	Player.health += value
@@ -85,10 +92,26 @@ func player_update_max_health():
 	healthBar.max_value = Player.max_health
 	damageBar.max_value = Player.max_health
 
+func player_update_max_crew():
+	var maxCrew = Player.stats['crew_max']
+	crewBar.max_value = maxCrew
+	crewDamageBar.max_value = maxCrew
+	
+	var optimalCrew = Player.stats['crew_optimal']
+	var optimalPercent = float(optimalCrew) / float(maxCrew)
+	crewOptimalPip.position = Vector2(2.215 + (optimalPercent * (45.875 - 2.215)), 1)
+	print("optimalPercent: " + str(optimalPercent))
+	print("optimalPosition: " + str(crewOptimalPip.position))
+
 func tween_health():
 	var tween = create_tween()
 	tween.tween_property(healthBar, "value", Player.health, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(damageBar, "value", Player.health, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+func tween_crew():
+	var tween = create_tween()
+	tween.tween_property(crewBar, "value", Player.crew_count, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(crewDamageBar, "value", Player.crew_count, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_settings_button_pressed():
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cuxwd0df8q1fx"]
+[gd_scene load_steps=18 format=3 uid="uid://cuxwd0df8q1fx"]
 
 [ext_resource type="Script" path="res://Player/playerui.gd" id="1_imq6e"]
 [ext_resource type="Texture2D" uid="uid://d1tkv0ct4q5cq" path="res://Assets/Images/testsprites.png" id="2_pmj14"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://6kq13j2y4s6d" path="res://Assets/Images/Progress Bars/healthprog2.png" id="7_7dlcc"]
 [ext_resource type="Texture2D" uid="uid://nl4h6ub6vhqo" path="res://Assets/Images/Progress Bars/healthred.png" id="8_4748d"]
 [ext_resource type="PackedScene" uid="uid://blcn84hidsyyp" path="res://player/player_settings.tscn" id="9_ciqn1"]
+[ext_resource type="Texture2D" uid="uid://crithvc4046ny" path="res://Assets/Images/Progress Bars/optimal_crew.png" id="9_qi505"]
 [ext_resource type="Texture2D" uid="uid://dwli5b456jld3" path="res://Assets/Images/Progress Bars/crewprog2.png" id="9_wc73y"]
 [ext_resource type="Texture2D" uid="uid://dj0rdsanbn5lt" path="res://Assets/Images/cannonball_background.png" id="10_l2806"]
 [ext_resource type="Texture2D" uid="uid://dweff8uxgnoua" path="res://Assets/Images/cannonball_better_frame.png" id="11_awygx"]
@@ -25,7 +26,7 @@ font_size = 50
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Control2" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "goldLabel", "healthBar", "damageBar", "settingsButton", "settingsWindow", "reloadTimerBar")]
+[node name="Control2" type="Control" node_paths=PackedStringArray("speedLabel", "usernameLabel", "goldLabel", "healthBar", "damageBar", "crewBar", "crewDamageBar", "crewOptimalPip", "settingsButton", "settingsWindow", "reloadTimerBar")]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -38,6 +39,9 @@ usernameLabel = NodePath("CanvasLayer/UserInfoPatch/HealthLabel")
 goldLabel = NodePath("CanvasLayer/UserInfoPatch/GoldLabel")
 healthBar = NodePath("CanvasLayer/UserInfoPatch/HealthBar")
 damageBar = NodePath("CanvasLayer/UserInfoPatch/HealthBar/DamageBar")
+crewBar = NodePath("CanvasLayer/UserInfoPatch/CrewBar")
+crewDamageBar = NodePath("CanvasLayer/UserInfoPatch/CrewBar/DamageBar")
+crewOptimalPip = NodePath("CanvasLayer/UserInfoPatch/CrewBar/OptimalPip")
 settingsButton = NodePath("CanvasLayer/SettingsButton")
 settingsWindow = NodePath("CanvasLayer/settingsWindow")
 reloadTimerBar = NodePath("CanvasLayer/ReloadTimerBar")
@@ -171,6 +175,14 @@ offset_bottom = 6.99998
 max_value = 80.0
 value = 60.0
 texture_progress = ExtResource("8_4748d")
+
+[node name="OptimalPip" type="TextureRect" parent="CanvasLayer/UserInfoPatch/CrewBar"]
+layout_mode = 0
+offset_left = 35.7188
+offset_top = 1.0
+offset_right = 37.7188
+offset_bottom = 6.0
+texture = ExtResource("9_qi505")
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 2
