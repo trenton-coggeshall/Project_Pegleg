@@ -158,6 +158,22 @@ stretch_mode = 5
 flip_v = true
 metadata/_edit_use_anchors_ = true
 
+[node name="RandomButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 158.0
+offset_top = 72.0
+offset_right = 231.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Random"
+
 [connection signal="pressed" from="ButtonContainer/VBoxContainer/GenerateButton" to="." method="_on_generate_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="item_selected" from="OptionsContainer/WorldSize/WorldSizeOptions" to="." method="_on_world_size_options_item_selected"]
+[connection signal="pressed" from="RandomButton" to="." method="_on_random_button_pressed"]

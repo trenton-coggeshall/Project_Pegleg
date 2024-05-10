@@ -35,6 +35,7 @@ func _ready():
 	Signals.hide_ui.emit()
 	WorldGlobals.map_width = map_width
 	WorldGlobals.map_height = map_height
+	altitude_seed_text.text = str(randi())
 
 
 func generate_map():
@@ -171,3 +172,7 @@ func _on_world_size_options_item_selected(index):
 func _on_back_button_pressed():
 	hide()
 	home_screen.show()
+
+
+func _on_random_button_pressed():
+	altitude_seed_text.text = str(randi())

@@ -72,7 +72,7 @@ text = "Play"
 [node name="OptionsButton" type="Button" parent="HomeScreen/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Options"
+text = "Controls"
 
 [node name="ExitButton" type="Button" parent="HomeScreen/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -99,55 +99,53 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_rlogm")
 
-[node name="OptionsContainer" type="VBoxContainer" parent="SettingsScreen"]
+[node name="ColorRect" type="ColorRect" parent="SettingsScreen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -156.5
-offset_top = -25.0
-offset_right = 156.5
-offset_bottom = 25.0
+offset_left = -140.0
+offset_top = -135.0
+offset_right = 140.0
+offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="MusicVolume" type="HBoxContainer" parent="SettingsScreen/OptionsContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="SettingsScreen/OptionsContainer/MusicVolume"]
-layout_mode = 2
-text = "Music Volume"
-
-[node name="MusicSlider" type="HSlider" parent="SettingsScreen/OptionsContainer/MusicVolume"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="SFXVolume" type="HBoxContainer" parent="SettingsScreen/OptionsContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="SettingsScreen/OptionsContainer/SFXVolume"]
-layout_mode = 2
-text = "SFX Volume"
-
-[node name="SFXSlider" type="HSlider" parent="SettingsScreen/OptionsContainer/SFXVolume"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
+color = Color(0, 0, 0, 0.580392)
 
 [node name="BackButton" type="Button" parent="SettingsScreen"]
 layout_mode = 0
-offset_top = 224.0
-offset_right = 8.0
-offset_bottom = 232.0
+offset_left = -9.0
+offset_top = 92.0
+offset_right = 36.0
+offset_bottom = 123.0
 text = "Back"
+
+[node name="Label" type="Label" parent="SettingsScreen"]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -79.0
+offset_right = 50.0
+offset_bottom = -56.0
+text = "Controls"
+
+[node name="Label2" type="Label" parent="SettingsScreen"]
+layout_mode = 0
+offset_left = -102.0
+offset_top = -36.0
+offset_right = 144.0
+offset_bottom = 65.0
+text = "A/D: Turn left and right
+W/S: Change speed
+Spacebar: Interact/Fire cannons
+Z: Anchor"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="HomeScreen/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="HomeScreen/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="HomeScreen/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="WorldGenScreen/BackButton" to="WorldGenScreen" method="_on_back_button_pressed"]
-[connection signal="value_changed" from="SettingsScreen/OptionsContainer/MusicVolume/MusicSlider" to="SettingsScreen" method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="SettingsScreen/OptionsContainer/SFXVolume/SFXSlider" to="SettingsScreen" method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="SettingsScreen/BackButton" to="SettingsScreen" method="_on_back_button_pressed"]
 
 [editable path="WorldGenScreen"]

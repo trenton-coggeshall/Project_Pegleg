@@ -6,7 +6,7 @@ extends Node
 
 var max_health = 100
 var health = 100
-var gold = 5000
+var gold = 100
 var inventory : Dictionary
 var inv_occupied = 0
 var crew_count = 60
@@ -56,6 +56,11 @@ func _ready():
 		inventory[good] = 0 
 	Signals.gold_changed.emit(gold)
 	crew_check()
+
+
+func _process(_delta):
+	if Input.is_action_just_pressed('secret'):
+		add_gold(1000)
 
 
 func add_gold(amt):
