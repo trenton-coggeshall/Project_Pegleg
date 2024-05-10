@@ -13,6 +13,7 @@ signal username_changed(value)
 
 signal player_damaged(value, crew_loss)
 signal player_healed(value)
+signal player_set_health(value)
 signal player_full_healed()
 signal player_crew_gained()
 signal player_update_max_health()

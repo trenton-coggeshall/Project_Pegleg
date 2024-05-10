@@ -34,6 +34,7 @@ func _ready():
 	Signals.player_damaged.connect(player_damaged)
 	Signals.player_healed.connect(player_healed)
 	Signals.player_full_healed.connect(player_full_healed)
+	Signals.player_set_health.connect(player_set_health)
 	Signals.player_update_max_health.connect(player_update_max_health)
 	
 	Signals.player_crew_gained.connect(tween_crew)
@@ -88,6 +89,12 @@ func player_full_healed():
 	Player.health = Player.max_health
 	tween_health()
 
+
+func player_set_health(value):
+	Player.health = value
+	tween_health()
+
+
 func player_update_max_health():
 	healthBar.max_value = Player.max_health
 	damageBar.max_value = Player.max_health
@@ -100,8 +107,6 @@ func player_update_max_crew():
 	var optimalCrew = Player.stats['crew_optimal']
 	var optimalPercent = float(optimalCrew) / float(maxCrew)
 	crewOptimalPip.position = Vector2(2.215 + (optimalPercent * (45.875 - 2.215)), 1)
-	print("optimalPercent: " + str(optimalPercent))
-	print("optimalPosition: " + str(crewOptimalPip.position))
 
 func tween_health():
 	var tween = create_tween()

@@ -107,9 +107,9 @@ func take_damage(damage):
 func set_stats(stat):
 	stats = stat
 	ship_sprite.texture = stats['ai_sprite']
-	healthBar.max_value = stats['base_health']
-	damageBar.max_value = stats['base_health']
-	damageBar.value = stats['base_health']
-	health = stats['base_health']
+	healthBar.max_value = stats['base_health'] * 0.5
+	damageBar.max_value = stats['base_health'] * 0.5
+	damageBar.value = stats['base_health'] * 0.5
+	health = stats['base_health'] * 0.5
 	tween_health()
 	cannon_controller.set_cannons(stats['base_cannons'])

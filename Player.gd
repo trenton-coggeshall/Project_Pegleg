@@ -112,11 +112,18 @@ func get_inventory_space():
 
 
 func set_ship(ship_name):
+	var health_percent = 1
+	
+	if stats['base_health'] + modifiers['health'] > 0:
+		health_percent = float(health) / float(stats['base_health'] + modifiers['health'])
+	
 	stats = ShipGlobals.ship_stats[ship_name]
 	max_health = stats['base_health'] + modifiers['health']
 	current_ship = ship_name
+	
+	
 	Signals.player_update_max_health.emit()
-	Signals.player_healed.emit(max_health)	
+	Signals.player_set_health.emit(max_health * health_percent)
 	Signals.player_ship_changed.emit()
 	Signals.player_update_max_crew.emit()
 	

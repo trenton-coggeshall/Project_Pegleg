@@ -38,6 +38,7 @@ mouse_filter = 2
 texture = ExtResource("1_8gykc")
 
 [node name="HomeScreen" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 345.0
 offset_top = 229.0
@@ -211,6 +212,7 @@ layout_mode = 2
 text = "Hire Crew"
 
 [node name="JobsButton" type="Button" parent="TavernScreen/OptionContainer"]
+visible = false
 layout_mode = 2
 text = "Browse Jobs"
 
@@ -399,7 +401,6 @@ grow_vertical = 0
 text = "Back"
 
 [node name="ShipwrightScreen" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_left = 328.0
 offset_top = 189.0

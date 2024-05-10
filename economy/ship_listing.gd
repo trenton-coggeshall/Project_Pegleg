@@ -19,6 +19,10 @@ func _ready():
 	Signals.player_ship_changed.connect(check_button)
 
 
+func _process(delta):
+	check_button()
+
+
 func initialize(key):
 	ship_key = key
 	
