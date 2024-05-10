@@ -19,6 +19,7 @@ signal player_update_max_health()
 signal player_update_max_crew()
 signal player_left_port()
 signal player_ship_changed()
+signal player_died()
 
 signal updateReloadTimer(value)
 signal hideReloadTimer()
